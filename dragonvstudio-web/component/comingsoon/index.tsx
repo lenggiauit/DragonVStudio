@@ -1,4 +1,5 @@
 'use client'
+import logo from './Logo.png'
 const ComingSoon: React.FC = () => {
   return (
     <>
@@ -19,7 +20,7 @@ const ComingSoon: React.FC = () => {
                 className='flex justify-center mx-auto mb-12'
               >
                 <img
-                  src='/static/logo.png'
+                  src={logo.src}
                   alt='dragonvstudio.com'
                   style={{ width: 125 }}
                 />
