@@ -85,8 +85,8 @@ const ComingSoon: React.FC = () => {
             </div>
 
             <p className='opacity-75 text-white text-center pt-20'>
-              ©<script>document.write(new Date().getFullYear())</script>
-              Design with <i className='fa-solid fa-heart text-red-500'></i>
+              ©2024 Design with
+              <i className='fa-solid fa-heart text-red-500'></i>
               <a href='#'> by lenggiauit@gmail.com.</a>
             </p>
           </div>
