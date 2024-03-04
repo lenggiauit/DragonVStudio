@@ -1,4 +1,5 @@
 'use client'
+import logo from '../../public/assets/images/logo.png'
 const ComingSoon: React.FC = () => {
   return (
     <>
@@ -18,11 +19,7 @@ const ComingSoon: React.FC = () => {
                 href='https://dragonvstudio.com/'
                 className='flex justify-center mx-auto mb-12'
               >
-                <img
-                  src='assets/images/logo.png'
-                  alt='logo'
-                  style={{ width: 125 }}
-                />
+                <img src={logo.src} alt='logo' style={{ width: 125 }} />
               </a>
               <h3 className='text-xl mb-5 font-medium text-gray-200'>
                 Our Dragon V Studio Site is
