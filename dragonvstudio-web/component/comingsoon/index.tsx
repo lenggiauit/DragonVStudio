@@ -14,7 +14,10 @@ const ComingSoon: React.FC = () => {
         <div className='relative'>
           <div>
             <div className='text-center mt-12'>
-              <a href='#' className='flex justify-center mx-auto mb-12'>
+              <a
+                href='https://dragonvstudio.com/'
+                className='flex justify-center mx-auto mb-12'
+              >
                 <img
                   src='assets/images/logo.png'
                   alt='logo'
