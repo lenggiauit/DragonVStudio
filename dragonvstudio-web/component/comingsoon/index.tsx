@@ -111,6 +111,13 @@ const ComingSoon: React.FC = () => {
             >
               <i className='fa-brands fa-youtube'></i>
             </a>
+            <a
+              target='_blank'
+              href='https://www.facebook.com/profile.php?id=61556774649918'
+              className='-rotate-90 text-xl text-white hover:text-blue-600 transition-all'
+            >
+              <i className='fa-brands fa-facebook'></i>
+            </a>
           </div>
         </div>
       </section>
