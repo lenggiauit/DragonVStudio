@@ -19,7 +19,7 @@ const ComingSoon: React.FC = () => {
                 className='flex justify-center mx-auto mb-12'
               >
                 <img
-                  src='/assets/images/logo.png'
+                  src='/static/logo.png'
                   alt='dragonvstudio.com'
                   style={{ width: 125 }}
                 />
