@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
-import './globals.css'
+import Script from 'next/script'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -31,7 +31,7 @@ export default function RootLayout({
         ></link>
       </head>
       <body className='bg-slate-100 tracking-wide'>{children}</body>
-      <script src='assets/js/theme.js'></script>
+      <Script src='assets/js/theme.js'></Script>
     </html>
   )
 }
