@@ -11,10 +11,6 @@ type Props = {
 var root: Root
 const ShowModal: React.FC<Props> = ({ options }) => {
   const removeModalComponent = (): void => {
-    // const target = document.getElementById(pmModalDialogId)
-    // if (target) {
-    //   unmountComponentAtNode(target)
-    // }
     root?.unmount()
   }
   const onCloseHandler: React.MouseEventHandler<HTMLButtonElement> = () => {
@@ -77,14 +73,12 @@ type PropTypes = {
 const showDialogModal = (options: PropTypes) => {
   let divTarget = document.getElementById(pmModalDialogId)
   if (divTarget) {
-    //render(<ShowModal options={options} />, divTarget)
     root = createRoot(divTarget)
     root.render(<ShowModal options={options} />)
   } else {
     divTarget = document.createElement('div')
     divTarget.id = pmModalDialogId
     document.body.appendChild(divTarget)
-    //render(<ShowModal options={options} />, divTarget)
     root = createRoot(divTarget)
     root.render(<ShowModal options={options} />)
   }

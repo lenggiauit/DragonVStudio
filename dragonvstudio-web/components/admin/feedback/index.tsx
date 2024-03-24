@@ -118,7 +118,7 @@ const AdminFeedbackList: React.FC = (): ReactElement => {
             </div>
             {FeedbackList.length > 0 &&
               FeedbackList.map((p) => (
-                <div className='col-md-12'>
+                <div key={v4()} className='col-md-12'>
                   <div className='row admin-post-item border border-white'>
                     <div className='col-2 text-left'>{p.user.email}</div>
                     <div className='col-1 text-left'>{p.rating}</div>

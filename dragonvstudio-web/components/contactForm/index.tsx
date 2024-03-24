@@ -170,7 +170,7 @@ export const ContactForm: React.FC = () => {
               <div className='text-center'>
                 <p className='form-text'>
                   <ENTranslation>
-                    We'll get back to you in 1-2 business days.
+                    We will get back to you in 1-2 business days.
                   </ENTranslation>
                   <VNTranslation>
                     Chúng tôi sẽ liên hệ lại với bạn sau 1-2 ngày làm việc.

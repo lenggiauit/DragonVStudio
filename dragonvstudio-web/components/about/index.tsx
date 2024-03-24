@@ -13,7 +13,7 @@ const About: React.FC = () => {
             <div className='col-lg-4 position-relative'>
               <img
                 style={{ width: '100%' }}
-                src='./assets/images/NaStories-about.png'
+                src='./assets/images/Logo.png'
                 alt='DragonSeeker'
               />
               <div className='numbers year'>
@@ -48,48 +48,7 @@ const About: React.FC = () => {
                   <ENTranslation>About Dragon V Studio</ENTranslation>
                   <VNTranslation>Về Dragon V Studio</VNTranslation>
                 </h2>
-                <div className='desc'>
-                  <ENTranslation>
-                    <p>
-                      Because Na's expertise is in IT Business Analyst and
-                      Product Owner, you will see a lot of content revolving
-                      around these two career fields. If you are also in the
-                      industry or are looking for related opportunities, I hope
-                      Na has can accompany you.
-                    </p>
-                    <p>
-                      Currently, Na is studying abroad in Canada to pursue new
-                      experiences in a foreign country, so there will be many
-                      things Na wants to tell you from the perspective of an
-                      "older" international student, if you are also curious.
-                      Remember to visit Na often.
-                    </p>
-                    <p>
-                      Now, we invite you to take a tour to explore the useful
-                      content that Na sends you!
-                    </p>
-                  </ENTranslation>
-                  <VNTranslation>
-                    <p>
-                      Vì chuyên môn của Na là về IT Business Analyst và Product
-                      Owner, nên bạn sẽ thấy khá nhiều nội dung xoay quanh hai
-                      mảng nghề nghiệp này, nếu bạn cũng là dân trong ngành hoặc
-                      đang tìm kiếm cơ hội liên quan thì mong là Na có thể đồng
-                      hành cùng bạn nhé.
-                    </p>
-                    <p>
-                      Hiện tại, Na đang du học tại Canada để theo đuổi những
-                      trải nghiệm mới nơi xứ người, nên sẽ có rất nhiều điều Na
-                      muốn kể cho bạn nghe dưới góc nhìn của một du học sinh
-                      “nhiều tuổi”, nếu bạn cũng tò mò thì nhớ ghé thăm Na
-                      thường xuyên nha.
-                    </p>
-                    <p>
-                      Còn bây giờ thì mời bạn tham quan một vòng để khám phá
-                      những nội dung hữu ích mà Na gửi đến bạn nhé!
-                    </p>
-                  </VNTranslation>
-                </div>
+                <div className='desc'></div>
               </div>
             </div>
           </div>
