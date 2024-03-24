@@ -18,16 +18,14 @@ const Home: NextPage = async () => {
 
   return (
     <AppProvider session={session}>
-      <Navigation />
-
-      {/* home static */}
+      {/* <Navigation /> */}
       <section className='no-padding'>
         <HomeVideo />
       </section>
       <section className='mt-10'>
         <ServerLocations />
       </section>
-      <Footer />
+      {/* <Footer /> */}
       <ScrollToTop />
     </AppProvider>
   )
