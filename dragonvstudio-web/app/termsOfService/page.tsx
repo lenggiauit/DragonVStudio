@@ -1,4 +1,3 @@
-'use client'
 import React, { ReactElement } from 'react'
 import Footer from '../../components/footer'
 import Layout from '../../components/layout'
@@ -19,7 +18,7 @@ export async function generateMetadata(
     title: 'Dragon V Studio',
     description: 'Terms of service - Dragon V Studio',
     openGraph: {
-      images: appSetting.SiteUrl + '/assets/images/ChiVan.jpg',
+      images: appSetting.SiteUrl + '/assets/images/Logo.png',
       title: 'Dragon V Studio',
       description: 'Terms of service - Dragon V Studio',
       url: appSetting.SiteUrl + '/termsOfService',
