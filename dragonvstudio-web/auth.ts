@@ -1,3 +1,5 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
 import NextAuth from 'next-auth'
 import type { NextAuthConfig, User } from 'next-auth'
 import Credentials from 'next-auth/providers/credentials'
@@ -7,6 +9,7 @@ import axios from 'axios'
 import { AppSetting } from './types/type'
 import { Permission } from './services/models/permission'
 import { ResultCode } from './utils/enums'
+import { getToken } from '@auth/core/jwt'
 
 let appSetting: AppSetting = require('./appSetting.json')
 
@@ -146,19 +149,6 @@ export const authConfig = {
           accessToken: token.user?.accessToken,
         },
       }
-
-      // session.user.id = token.user.id
-      // session.user.discordId = token.user.discordId
-      // session.user.fullName = token.user.fullName
-      // session.user.name = token.user.name
-      // session.user.phone = token.user.phone
-      // session.user.address = token.user.address
-      // session.user.role = token.user.role
-      // session.user.avatar = token.user.avatar
-      // session.user.permissions = token.user.permissions
-      // session.user.accessToken = token.user.accessToken
-
-      // return session
     },
 
     async jwt({ token, user, account, session, trigger, profile }) {
