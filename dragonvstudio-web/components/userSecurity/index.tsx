@@ -141,7 +141,7 @@ const UserSecurity: React.FC = () => {
                     </div>
                     <div className='col-md-8 text-start mt-3'>
                       <h5>Discord</h5>
-                      <p>Connected to {currentUser?.discordId}</p>
+                      <p>Connected to {currentUser?.discordName}</p>
                     </div>
                     <div className='col-md-2 mt-1'>
                       <a href='#' className='btn btn-primary btn-sm disabled'>

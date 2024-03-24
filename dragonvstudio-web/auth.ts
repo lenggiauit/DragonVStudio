@@ -109,19 +109,37 @@ export const authConfig = {
       return true
     },
 
-    async session({ session, token, user, trigger }) {
-      session.user.id = token.user.id
-      session.user.discordId = token.user.discordId
-      session.user.fullName = token.user.fullName
-      session.user.name = token.user.name
-      session.user.phone = token.user.phone
-      session.user.address = token.user.address
-      session.user.role = token.user.role
-      session.user.avatar = token.user.avatar
-      session.user.permissions = token.user.permissions
-      session.user.accessToken = token.user.accessToken
+    async session({ session, token }) {
+      return {
+        ...session,
+        user: {
+          ...session.user,
+          id: token.user.id,
+          discordId: token.user.discordId,
+          discordName: token.user.discordName,
+          fullName: token.user.fullName,
+          name: token.user.name,
+          phone: token.user.phone,
+          address: token.user.address,
+          role: token.user.role,
+          avatar: token.user.avatar,
+          permissions: token.user.permissions,
+          accessToken: token.user.accessToken,
+        },
+      }
 
-      return session
+      // session.user.id = token.user.id
+      // session.user.discordId = token.user.discordId
+      // session.user.fullName = token.user.fullName
+      // session.user.name = token.user.name
+      // session.user.phone = token.user.phone
+      // session.user.address = token.user.address
+      // session.user.role = token.user.role
+      // session.user.avatar = token.user.avatar
+      // session.user.permissions = token.user.permissions
+      // session.user.accessToken = token.user.accessToken
+
+      // return session
     },
 
     async jwt({ token, user, account, session, trigger, profile }) {
