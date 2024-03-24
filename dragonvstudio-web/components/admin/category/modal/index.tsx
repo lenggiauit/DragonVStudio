@@ -21,7 +21,7 @@ import * as uuid from 'uuid'
 import { useCreateEditCategoryMutation } from '../../../../services/admin'
 //@ts-ignore
 import { SliderPicker } from 'react-color'
-import { getLoggedUser } from '../../../../utils/functions'
+import { useSession } from 'next-auth/react'
 
 let appSetting: AppSetting = require('../../../../appSetting.json')
 
@@ -39,6 +39,7 @@ type Props = {
 }
 
 const AddEditCategoryModal: React.FC<Props> = ({ dataModel, onClose }) => {
+  const { data: session, status } = useSession()
   const { locale } = useAppContext()
   const formikProps = useFormikContext()
   const [category, setCategory] = useState<Category | undefined>(dataModel)
@@ -77,7 +78,7 @@ const AddEditCategoryModal: React.FC<Props> = ({ dataModel, onClose }) => {
           (name) => {
             if (name) {
               return new Promise((resolve, reject) => {
-                const currentUser = getLoggedUser()
+                const currentUser = session?.user
                 const headers: HeadersInit = {
                   'Content-Type': 'application/json',
                   'X-Request-Id': uuid.v4().toString(),
