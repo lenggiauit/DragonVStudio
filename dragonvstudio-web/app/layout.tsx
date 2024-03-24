@@ -1,37 +1,46 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
-import Script from 'next/script'
-
-const inter = Inter({ subsets: ['latin'] })
-
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+// import 'bootstrap/dist/css/bootstrap.min.css'
+import { auth } from '../auth'
+import { GoogleOAuthProvider } from '@react-oauth/google'
+import './globals.css'
+import './style.css'
+import './global_icons.css'
+import './custom.scss'
+import { AppProvider } from '@/contexts/appContext'
 export const metadata: Metadata = {
   title: 'Dragon V Studio',
-  description: 'Dragon V Studio - Games mod servers',
+  description:
+    'Dragon V Studio - Game Mode Servers. Discord: https://discord.gg/dragonvstudio |  Youtube: https://www.youtube.com/@DragonVStudio',
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  const session = await auth()
   return (
     <html lang='en'>
       <head>
-        <link rel='shortcut icon' href='assets/images/favicon.ico' />
+        <link rel='icon' href='/assets/favicon.ico' />
         <link
-          href='assets/css/style.min.css'
+          href='https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap'
           rel='stylesheet'
-          type='text/css'
-        />
-
-        <link
-          href='assets/css/icons.min.css'
-          rel='stylesheet'
-          type='text/css'
         ></link>
       </head>
-      <body className='bg-slate-100 tracking-wide'>{children}</body>
-      <Script src='assets/js/theme.js'></Script>
+      <body className='dark-scheme'>
+        <GoogleOAuthProvider clientId='1009275167759-a0hqdnlf9isv1qe2b1h48iioeaomiud9.apps.googleusercontent.com'>
+          <AppProvider session={session}>{children}</AppProvider>
+        </GoogleOAuthProvider>
+        <ToastContainer
+          newestOnTop
+          hideProgressBar
+          position='bottom-right'
+          autoClose={2000}
+        />
+      </body>
     </html>
   )
 }

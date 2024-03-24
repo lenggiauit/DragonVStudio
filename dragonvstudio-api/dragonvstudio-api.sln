@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32630.192
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "dragonvstudio-api", "dragonvstudio-api.csproj", "{2F1D8159-B145-41E4-B26E-A6EA4B5792FD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2F1D8159-B145-41E4-B26E-A6EA4B5792FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F1D8159-B145-41E4-B26E-A6EA4B5792FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F1D8159-B145-41E4-B26E-A6EA4B5792FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F1D8159-B145-41E4-B26E-A6EA4B5792FD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FAE082E8-98EF-493F-A6DD-713C6B2DA7BD}
+	EndGlobalSection
+EndGlobal

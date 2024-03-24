@@ -1,33 +1,36 @@
-import Image from 'next/image'
-import styles from './page.module.css'
-import ComingSoon from '@/component/comingsoon'
-import { Metadata, ResolvingMetadata } from 'next'
+import { auth } from '../auth'
+import type { NextPage } from 'next'
+import Navigation from '@/components/navigation'
+import Footer from '@/components/footer'
+import { AppProvider } from '@/contexts/appContext'
 
-type Props = {
-  params: { id: string }
-  searchParams: { [key: string]: string | string[] | undefined }
-}
+import HomeVideo from '@/components/homeVideo'
 
-export async function generateMetadata(
-  { params, searchParams }: Props,
-  parent: ResolvingMetadata
-): Promise<Metadata> {
-  return {
-    title: 'Dragon V Studio',
-    description: 'Dragon V Studio - Games mod servers',
-    openGraph: {
-      images: 'assets/images/logo.png',
-      title: 'Dragon V Studio',
-      description: 'Dragon V Studio - Games mod servers',
-      url: 'https://dragonvstudio.com/',
-    },
+import ServerLocations from '@/components/serverLocation'
+import ScrollToTop from '@/components/scrollToTop'
+
+const Home: NextPage = async () => {
+  const session = await auth()
+  if (session?.user) {
+    console.log(session?.user.role)
+  } else {
   }
-}
 
-export default function Home() {
   return (
-    <>
-      <ComingSoon />
-    </>
+    <AppProvider session={session}>
+      <Navigation />
+
+      {/* home static */}
+      <section className='no-padding'>
+        <HomeVideo />
+      </section>
+      <section className='mt-10'>
+        <ServerLocations />
+      </section>
+      <Footer />
+      <ScrollToTop />
+    </AppProvider>
   )
 }
+
+export default Home

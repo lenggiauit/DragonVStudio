@@ -1,0 +1,26 @@
+.admin-post-header{
+    
+    background-color: white;
+    text-align: center;
+}
+.admin-post-item{
+    background-color: white;
+    cursor: pointer;
+}
+.admin-post-img {
+    padding-left: 0px !important;
+}
+ 
+.rti--container{
+    color: #999 !important;
+    background-color: #fff !important;
+    background-clip: padding-box !important;
+    border: 1px solid #eaeff4 !important;
+    border-radius: 2px !important;
+}
+.rti--input, .rti--input::placeholder, .rti--input::-ms-input-placeholder{
+    color: #ccc !important;
+    font-size: .9375rem !important;
+}
+ 
+ 
