@@ -1,6 +1,5 @@
 'use client'
 import React, { ReactElement } from 'react'
-import { render, unmountComponentAtNode } from 'react-dom'
 import { Translation } from '../translation'
 import { Root, createRoot } from 'react-dom/client'
 

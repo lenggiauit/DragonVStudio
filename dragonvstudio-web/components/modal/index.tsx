@@ -11,11 +11,6 @@ var root: Root
 const ConfirmModal: React.FC<Props> = ({ options }) => {
   const removeModalComponent = (): void => {
     root.unmount()
-    // const target = document.getElementById(pmModalDialogId)
-    // if (target && root != null) {
-
-    //   //unmountComponentAtNode(target)
-    // }
   }
   const onCloseHandler: React.MouseEventHandler<HTMLButtonElement> = () => {
     removeModalComponent()
@@ -99,7 +94,6 @@ const showConfirmModal = (options: PropTypes) => {
     divTarget = document.createElement('div')
     divTarget.id = pmModalDialogId
     document.body.appendChild(divTarget)
-    //render(<ConfirmModal options={options} />, divTarget)
     root = createRoot(divTarget)
     root.render(<ConfirmModal options={options} />)
   }
