@@ -196,7 +196,7 @@ namespace DragonVStudio.API.Controllers
         [HttpGet("RegisterWithDiscord")]
         public RedirectResult RegisterWithDiscord()
         { 
-            string url = string.Format( _appSettings.DiscordAuthenticationUrl, _appSettings.DiscordClientId, _appSettings.DiscordAuthenticationRedirectUrl);
+            string url = string.Format( _appSettings.DiscordAuthenticationUrl, _appSettings.DiscordClientId, _appSettings.DiscordAuthenticationRedirectUrl, "");
             return Redirect(url);
         }
 

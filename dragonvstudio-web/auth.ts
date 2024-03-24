@@ -26,6 +26,25 @@ declare module 'next-auth' {
     } & Omit<User, 'id'>
   }
 }
+
+declare module '@auth/core/jwt' {
+  /** Returned by the `jwt` callback and `getToken`, when using JWT sessions */
+  interface JWT {
+    user: {
+      id: string
+      discordId: string
+      discordName: string
+      accessToken: string
+      avatar: string
+      role: string
+      phone: string
+      address: string
+      fullName: string
+      permissions: Permission[]
+    }
+  }
+}
+
 declare module '@auth/core/adapters' {
   interface AdapterUser {
     // Add your additional properties here:
@@ -109,7 +128,7 @@ export const authConfig = {
       return true
     },
 
-    async session({ session, token }) {
+    async session({ session, token, user }) {
       return {
         ...session,
         user: {
