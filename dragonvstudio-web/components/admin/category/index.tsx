@@ -13,9 +13,11 @@ import { Category } from '../../../services/models/admin/category'
 import { useGetCategoryMutation } from '../../../services/admin'
 import CategoryItem from './item'
 import AddCategoryButton from './addButton'
+import { useSession } from 'next-auth/react'
 const appSetting: AppSetting = require('../../../appSetting.json')
 
 const CategorysList: React.FC = () => {
+  const { data: session, status } = useSession()
   const [isShowModal, setIsShowModal] = useState<boolean>(false)
   // get list
   const [getCategoryList, getCategoryStatus] = useGetCategoryMutation()
@@ -124,7 +126,8 @@ const CategorysList: React.FC = () => {
               </li>
             </ul>
             <div className='row gap-y gap-2' data-shuffle='list'>
-              {hasPermission(PermissionKeys.CreateEditCategory) &&
+              {session?.user != null &&
+                hasPermission(session, PermissionKeys.CreateEditCategory) &&
                 !isArchived && <AddCategoryButton onAdded={onCloseHandler} />}
               {categoryList.map((p) => (
                 <CategoryItem
