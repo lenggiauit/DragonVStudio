@@ -1,5 +1,3 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-nocheck
 'use client'
 import React, { ReactElement, useCallback, useEffect, useState } from 'react'
 import { v4 } from 'uuid'
@@ -8,16 +6,10 @@ import { dictionaryList } from '../../../locales'
 import {
   useDeleteFeedbackMutation,
   useGetFeedbackListMutation,
-  useGetUserListMutation,
   useUpdateFeedbackStatusMutation,
 } from '../../../services/admin'
-import { useGetEventBookingAvaiableDateQuery } from '../../../services/event'
-import { User } from '../../../services/models/user'
 import { FeedbackResource } from '../../../services/resources/feedbackResource'
-
-import { UserResource } from '../../../services/resources/userResource'
 import { AppSetting, MetaData, Paging } from '../../../types/type'
-import { ResultCode } from '../../../utils/enums'
 import showConfirmModal from '../../modal'
 import showDialogModal from '../../modal/showModal'
 import Pagination from '../../pagination'
