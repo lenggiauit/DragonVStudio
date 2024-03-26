@@ -14,7 +14,7 @@ const AdminGameItems: React.FC = (): ReactElement => {
               <ENTranslation>Items: {gameUrl}</ENTranslation>
             </h4>
           </div>
-          <div className='card-body'></div>
+          <div className='card-body'>asdasdasd</div>
         </div>
       </div>
     </>
