@@ -2,11 +2,15 @@
 using Microsoft.VisualBasic;
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.CodeAnalysis;
 
 namespace DragonVStudio.API.Domain.Entities
 {
-    public class Games : BaseEntity
+    public class GameServer : BaseEntity
     {
+        [MaxLength(250)]
+        public string GameUrl { get; set; }
+
         [MaxLength(250)]
         public string Name { get; set; }
 
@@ -29,17 +33,16 @@ namespace DragonVStudio.API.Domain.Entities
         [MaxLength(250)]
         public string Icon { get; set; }
 
+        [AllowNull]
         public DateTime OpenDate { get; set; }
 
-        public DateTime CloseDate { get; set; }
-
-        [MaxLength(250)]
-        public string Url { get; set; }
+        [AllowNull]
+        public DateTime CloseDate { get; set; } 
 
         [MaxLength(250)]
         public string DiscordUrl { get; set; }
 
-        public GameServerStatus ServerStatus { get; set; }
+        public string ServerStatus { get; set; }
         public bool IsActive { get; set; }
     }
 }

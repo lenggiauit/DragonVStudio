@@ -19,6 +19,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.IO;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.EntityFrameworkCore;
+using DragonVStudio.API.Domain.GameEntities;
 
 namespace DragonVStudio_API
 {
@@ -50,11 +51,18 @@ namespace DragonVStudio_API
             //});
 
             // AppSetting
-            var appSettingsSection = Configuration.GetSection("AppSettings");
-
-            // configure jwt authentication
+            var appSettingsSection = Configuration.GetSection("AppSettings"); 
             var appSettings = appSettingsSection.Get<AppSettings>();
             services.Configure<AppSettings>(appSettingsSection);
+
+            // Game settings
+            var maBGameSettingsSection = Configuration.GetSection("MaBGameSettings");
+            var maBGameSettings = maBGameSettingsSection.Get<MaBGameSettings>();
+            services.Configure<MaBGameSettings>(maBGameSettingsSection);
+
+
+         
+            
 
             services.AddCustomSwagger();
             services.AddControllers();
@@ -70,6 +78,13 @@ namespace DragonVStudio_API
                 option.UseMySql(Configuration.GetConnectionString("DragonVStudio"), ServerVersion.AutoDetect(Configuration.GetConnectionString("DragonVStudio")));
                 option.EnableSensitiveDataLogging();
             });
+
+            services.AddDbContext<MountAndBladeContext>(option =>
+            {
+                option.UseMySql(Configuration.GetConnectionString("MountAndBlade"), ServerVersion.AutoDetect(Configuration.GetConnectionString("MountAndBlade")));
+                option.EnableSensitiveDataLogging();
+            });
+
             services.AddAutoMapper(typeof(Startup));
             // SignalR
             services.AddCors(options => options.AddPolicy("CorsPolicy", builder =>
@@ -99,7 +114,15 @@ namespace DragonVStudio_API
             services.AddScoped<IChatRepository, ChatRepository>();
             services.AddScoped<IRefRepository, RefRepository>();
             services.AddScoped<IBlogRepository, BlogRepository>();
-            services.AddScoped<IAdminRepository, AdminRepository>(); 
+            services.AddScoped<IAdminRepository, AdminRepository>();
+
+            // games
+            services.AddScoped<IAdminGameServerService, AdminGameServerService>();
+            services.AddScoped<IAdminGameServerRepository, AdminGameServerRepository>();
+            //
+
+            services.AddScoped<IAdminGameMaBService, AdminGameMaBService>();
+            services.AddScoped<IAdminGameMaBRepository, AdminGameMaBRepository>();
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             // File Service

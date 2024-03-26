@@ -1,0 +1,29 @@
+﻿using DragonVStudio.API.Domain.GameEntities;
+using System.ComponentModel.DataAnnotations;
+
+namespace DragonVStudio.API.Resources.Game
+{
+    public class PlayerResource
+    {
+        public int Id { get; set; } 
+        public string PlayerId { get; set; } 
+        public string DiscordId { get; set; } 
+        public string Name { get; set; } 
+        public int Money { get; set; } 
+        public int BankAmount { get; set; } 
+        public string Horse { get; set; } 
+        public string HorseHarness { get; set; } 
+        public string Equipment_0 { get; set; } 
+        public string Equipment_1 { get; set; } 
+        public string Equipment_2 { get; set; } 
+        public string Equipment_3 { get; set; } 
+        public string Armor_Head { get; set; } 
+        public string Armor_Body { get; set; } 
+        public string Armor_Leg { get; set; } 
+        public string Armor_Gloves { get; set; } 
+        public string Armor_Cape { get; set; } 
+        public string Class { get; set; } 
+        public string CustomName { get; set; } 
+        public FactionResource Faction { get; set; }
+    }
+}

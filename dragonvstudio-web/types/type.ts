@@ -16,11 +16,18 @@ export type ApiResponse<T> = {
   resultCode: ResultCode
   messages: any
   resource: T
+  total: number
 }
 
 export type ApiRequest<T> = {
   metaData?: MetaData
   payload: T
+}
+
+export type ApiGameRequest<T> = {
+  metaData?: MetaData
+  payload: T
+  gameUrl: any
 }
 
 export type Paging = {
@@ -39,6 +46,6 @@ export type LoginFormValues = {
   password: string
 }
 
-// export interface CurrentUserState {
-//   currentUser: User
-// }
+export type FormKeyword = {
+  keywords: string
+}

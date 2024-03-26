@@ -30,6 +30,21 @@ VALUES
            , true
 		   , true
            , SYSDATE());
+           
+INSERT INTO `dragonvstudio`.`role`
+(`Id`,
+`Name`,
+`Description`,
+`IsActive`,
+`IsSystemRole`, 
+`CreatedDate`)
+VALUES
+( UUID()
+           ,'Member'
+           ,'Member role has some permissions'
+           , true
+		   , true
+           , SYSDATE());           
 		    
  
 

@@ -39,9 +39,11 @@ namespace DragonVStudio.API.Domain.Entities
 
         public virtual DbSet<Feedback> Feedback { get; set; }
 
-        public virtual DbSet<Games> Games { get; set; }
+        public virtual DbSet<GameServer> GameServer { get; set; }
         public virtual DbSet<GameItems> GameItems { get; set; }
         public virtual DbSet<UserGameItems> UserGameItems { get; set; }
+
+        public virtual DbSet<BattleEventPlayer> BattleEventPlayer { get; set; } 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -179,7 +181,7 @@ namespace DragonVStudio.API.Domain.Entities
 
             });
 
-            modelBuilder.Entity<Games>(entity =>
+            modelBuilder.Entity<GameServer>(entity =>
             {
                 entity.Property(e => e.Id).ValueGeneratedNever();
 

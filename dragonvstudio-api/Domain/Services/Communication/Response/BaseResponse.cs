@@ -10,7 +10,8 @@ namespace DragonVStudio.API.Domain.Services.Communication.Response
     { 
         public ResultCode ResultCode { get; private set; }
         public string Messages { get; private set; }
-        public T Resource { get; private set; }
+        public T Resource { get; private set; } 
+        public int Total { get; set; }  
 
         public BaseResponse(T resource)
         { 
@@ -18,10 +19,24 @@ namespace DragonVStudio.API.Domain.Services.Communication.Response
             Resource = resource;
             ResultCode = ResultCode.Success;
         }
+        public BaseResponse(T resource, int total)
+        {
+            Messages = string.Empty;
+            Resource = resource;
+            Total = total;
+            ResultCode = ResultCode.Success;
+        }
         public BaseResponse((T resource, ResultCode resultCode) param)
         {
             Messages = string.Empty;
             Resource = param.resource;
+            ResultCode = param.resultCode;
+        }
+        public BaseResponse((T resource, int total, ResultCode resultCode) param)
+        {
+            Messages = string.Empty;
+            Resource = param.resource;
+            Total = param.total;
             ResultCode = param.resultCode;
         }
         public BaseResponse(T resource, ResultCode resultCode)
@@ -47,6 +62,6 @@ namespace DragonVStudio.API.Domain.Services.Communication.Response
             Messages = string.Empty;
             Resource = default;
             ResultCode = resultCode;
-        }
+        } 
     }
 }

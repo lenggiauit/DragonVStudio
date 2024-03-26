@@ -1,0 +1,24 @@
+import { Faction } from './faction'
+
+export type Player = {
+  id: any
+  playerId: any
+  discordId: any
+  name: any
+  money: any
+  bankAmount: any
+  horse: any
+  horseHarness: any
+  equipment_0: any
+  equipment_1: any
+  equipment_2: any
+  equipment_3: any
+  armor_Head: any
+  armor_Body: any
+  armor_Leg: any
+  armor_Gloves: any
+  armor_Cape: any
+  class: any
+  customName: any
+  faction: Faction
+}

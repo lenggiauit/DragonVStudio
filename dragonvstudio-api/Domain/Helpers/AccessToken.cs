@@ -18,7 +18,7 @@ namespace DragonVStudio.API.Domain.Helpers
 		{
 			UserToken userdata = new UserToken();
 			userdata.Id = user.Id;
-			//userdata.Permissions = user.Permissions.Select( p => new PermissionToken() { Code = p.Code }).ToList();
+			userdata.Permissions = user.Permissions.Select( p => new PermissionToken() { Code = p.Code }).ToList();
 			userdata.Email = user.Email;
 			 
 			var tokenHandler = new JwtSecurityTokenHandler();

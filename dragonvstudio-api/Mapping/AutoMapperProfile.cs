@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
 using DragonVStudio.API.Domain.Entities;
+using DragonVStudio.API.Domain.GameEntities;
 using DragonVStudio.API.Domain.Models;
 using DragonVStudio.API.Resources;
+using DragonVStudio.API.Resources.Game;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,6 +37,16 @@ namespace DragonVStudio.API.Mapping
             //
             CreateMap<FileSharing, FileSharingResource > ();
             CreateMap<Feedback, FeedbackListResource>();
+
+            // Game
+            CreateMap<Faction, FactionResource>();  
+            CreateMap<Player, PlayerResource>();  
+            CreateMap<Player, PlayerEventResource>();
+            CreateMap<Log, LogResource>(); 
+            CreateMap<GameServer, GameServerResource>();
+            CreateMap<BattleEventPlayer, PlayerEventResource>();
+
+
 
         }
     }

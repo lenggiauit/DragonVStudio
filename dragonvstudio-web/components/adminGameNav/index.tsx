@@ -1,36 +1,11 @@
 'use client'
-import { ErrorMessage, Field, Form, Formik, FormikHelpers } from 'formik'
-import { v4 } from 'uuid'
 import { useAppContext } from '../../contexts/appContext'
-import { dictionaryList } from '../../locales'
 import { ENTranslation, Translation, VNTranslation } from '../translation'
-import * as Yup from 'yup'
-import * as uuid from 'uuid'
 import { AppSetting } from '../../types/type'
-import { ResultCode } from '../../utils/enums'
-import LoginModal from '../loginModal'
-import { useEffect, useRef, useState } from 'react'
-import {
-  useGetEventBookingAvaiableDateQuery,
-  useAddEditPrivateTalkMutation,
-} from '../../services/event'
-import calcTime from '../../utils/time'
-import dateFormat from 'dateformat'
-import showConfirmModal from '../modal'
-import showDialogModal from '../modal/showModal'
-import { NIL as NIL_UUID } from 'uuid'
-import PageLoading from '../pageLoading'
+import { useState } from 'react'
+
 import { useSession } from 'next-auth/react'
-import { UpdateProfileRequest } from '@/services/communication/request/updateProfileRequest'
 import { GlobalKeys } from '@/utils/constants'
-import {
-  useUserUpdateAvatarMutation,
-  useUserUpdateProfileMutation,
-} from '@/services/account'
-import { useUploadImageMutation } from '@/services/fileService'
-import { User } from '@/services/models/user'
-import { toast } from 'react-toastify'
-import { logout } from '@/utils/functions'
 import { useParams, usePathname } from 'next/navigation'
 
 let appSetting: AppSetting = require('../../appSetting.json')
@@ -38,10 +13,6 @@ const AdminGameNav: React.FC = () => {
   const { locale } = useAppContext()
   const { data: session, status } = useSession()
   const pathName = usePathname()
-  const currentUser = session?.user
-  const [currentAvatar, setcurrentAvatar] = useState<string>(
-    currentUser?.image ?? GlobalKeys.NoAvatarUrl
-  )
   const { gameUrl } = useParams()
 
   return (
@@ -53,18 +24,6 @@ const AdminGameNav: React.FC = () => {
         >
           <div className='card flex-grow-1 mb-5'>
             <div className='card-body'>
-              <div className='d-none d-lg-block text-center mb-5'>
-                <div className='avatar avatar-xxl avatar-circle mb-3'>
-                  <img
-                    className='avatar-img'
-                    src={session?.user.avatar!}
-                    alt='avatar'
-                  />
-                </div>
-
-                <h4 className='card-title mb-0'>{session?.user.name}</h4>
-              </div>
-
               <span className='text-cap'>
                 <VNTranslation>Trò chơi</VNTranslation>
                 <ENTranslation>Game</ENTranslation>
@@ -93,9 +52,51 @@ const AdminGameNav: React.FC = () => {
                     }`}
                     href={`/admin/${gameUrl}/players`}
                   >
-                    <i className='bi bi-people-fill nav-icon'></i>
+                    <i className='bi bi-person-x nav-icon'></i>
                     <VNTranslation>Người chơi</VNTranslation>
                     <ENTranslation>Player</ENTranslation>
+                  </a>
+                </li>
+                <li className='nav-item'>
+                  <a
+                    className={`nav-link ${
+                      pathName.indexOf(`/admin/${gameUrl}/playerItems`) != -1
+                        ? 'active'
+                        : ''
+                    }`}
+                    href={`/admin/${gameUrl}/playerItems`}
+                  >
+                    <i className='bi bi-bucket nav-icon'></i>
+                    Player Items
+                  </a>
+                </li>
+
+                <li className='nav-item'>
+                  <a
+                    className={`nav-link ${
+                      pathName.indexOf(`/admin/${gameUrl}/bannedplayers`) != -1
+                        ? 'active'
+                        : ''
+                    }`}
+                    href={`/admin/${gameUrl}/bannedplayers`}
+                  >
+                    <i className='bi bi-people-fill nav-icon'></i>
+                    Banned player
+                  </a>
+                </li>
+
+                <li className='nav-item'>
+                  <a
+                    className={`nav-link ${
+                      pathName.indexOf(`/admin/${gameUrl}/logs`) != -1
+                        ? 'active'
+                        : ''
+                    }`}
+                    href={`/admin/${gameUrl}/logs`}
+                  >
+                    <i className='bi bi-list-stars nav-icon'></i>
+                    <VNTranslation>Logs</VNTranslation>
+                    <ENTranslation>Logs</ENTranslation>
                   </a>
                 </li>
 
@@ -111,6 +112,21 @@ const AdminGameNav: React.FC = () => {
                     <i className='bi bi-list-stars nav-icon'></i>
                     <VNTranslation>Vật phẩm</VNTranslation>
                     <ENTranslation>Items</ENTranslation>
+                  </a>
+                </li>
+
+                <li className='nav-item'>
+                  <a
+                    className={`nav-link ${
+                      pathName.indexOf(`/admin/${gameUrl}/battleEvent`) != -1
+                        ? 'active'
+                        : ''
+                    }`}
+                    href={`/admin/${gameUrl}/battleEvent`}
+                  >
+                    <i className='bi bi-list-stars nav-icon'></i>
+                    <VNTranslation>Sự kiện chiến tranh</VNTranslation>
+                    <ENTranslation>Event Battle</ENTranslation>
                   </a>
                 </li>
               </ul>

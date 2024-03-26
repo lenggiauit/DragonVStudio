@@ -1,0 +1,33 @@
+INSERT INTO `dragonvstudio`.`gameserver`
+(`Id`,
+`Name`,
+`Description`,
+`Season`,
+`Version`,
+`Pictures`,
+`BGPicture`,
+`BGVideo`,
+`Icon`,
+`OpenDate`,
+`CloseDate`,
+`GameUrl`,
+`DiscordUrl`,
+`ServerStatus`,
+`IsActive`
+ )
+VALUES
+(UUID(),
+'Mount And Blade II: Bannerlord',
+'Mount And Blade II: Bannerlord',
+1,
+'v1',
+'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRA4JmE0-ZLUgXCroTtQQ1uBtuxca9RvoJM-oQ51zeKo7X3VucE',
+'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRA4JmE0-ZLUgXCroTtQQ1uBtuxca9RvoJM-oQ51zeKo7X3VucE',
+'https://www.youtube.com/watch?v=mrDiXOq7N7w',
+'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRA4JmE0-ZLUgXCroTtQQ1uBtuxca9RvoJM-oQ51zeKo7X3VucE',
+'2024-03-01',
+'2026-03-01',
+'mount-blade-bannerlord',
+'https://discord.gg/dragonvstudio',
+'Available',
+1);

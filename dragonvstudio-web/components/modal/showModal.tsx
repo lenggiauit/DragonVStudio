@@ -22,15 +22,19 @@ const ShowModal: React.FC<Props> = ({ options }) => {
         className='modal fade show '
         style={{ display: 'block' }}
         role='dialog'
-        aria-labelledby='exampleModalLabel'
         aria-modal='true'
       >
-        <div className='modal-dialog  modal-dialog-centered' role='document'>
+        <div
+          className={`modal-dialog ${
+            options.size === undefined ? '' : options.size
+          } modal-dialog-scrollable modal-dialog-centered`}
+          role='document'
+        >
           <div className='modal-content'>
             {options.title && (
               <>
                 <div className='modal-header'>
-                  <h5 className='modal-title' id='exampleModalLabel'>
+                  <h5 className='modal-title text-dark' id='exampleModalLabel'>
                     {options.title}
                   </h5>
                   <button
@@ -44,7 +48,9 @@ const ShowModal: React.FC<Props> = ({ options }) => {
               </>
             )}
             <div className='modal-body pb-2'>
-              <p className='m-0'>{options.message}</p>
+              <p className='m-0 text-wrap text-break' style={{ width: '100%' }}>
+                {options.message}
+              </p>
             </div>
             <div className='modal-footer border-0'>
               <button
@@ -66,6 +72,7 @@ const ShowModal: React.FC<Props> = ({ options }) => {
 type PropTypes = {
   title?: any
   message: any
+  size?: any
   onClose?: () => void
 }
 

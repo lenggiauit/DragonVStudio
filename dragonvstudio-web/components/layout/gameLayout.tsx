@@ -23,39 +23,28 @@ const AdminGameLayout: React.FC<Props> = ({ children }): ReactElement => {
             backgroundImage: 'url(/assets/svg/wave-pattern-light.svg)',
           }}
         >
-          <div className='container content-space-t-2 overflow-hidden content-space-t-lg-3 content-space-b-2 position-relative zi-2'>
+          <div className='container content-space-t-2 overflow-hidden content-space-t-lg-3 content-space-b-2 position-relative '>
             <div className='row align-items-center'>
               <div className='col'>
                 <div className='d-none d-lg-block'>
                   <h1 className='h2 text-white'>
-                    <VNTranslation>Thông tin cá nhân</VNTranslation>
-                    <ENTranslation> Personal info</ENTranslation>
+                    <ENTranslation> Game Server Info</ENTranslation>
                   </h1>
                 </div>
-
-                <nav aria-label='breadcrumb'>
-                  <ol className='breadcrumb breadcrumb-light mb-0'>
-                    <li className='breadcrumb-item'>
-                      <VNTranslation>Tài khoản</VNTranslation>
-                      <ENTranslation>Account</ENTranslation>
-                    </li>
-                    <li className='breadcrumb-item active' aria-current='page'>
-                      <VNTranslation>Thông tin cá nhân</VNTranslation>
-                      <ENTranslation> Personal info</ENTranslation>
-                    </li>
-                  </ol>
-                </nav>
               </div>
             </div>
           </div>
         </div>
 
-        <div className='container content-space-1 content-space-t-lg-0 content-space-b-lg-2 mt-lg-n10'>
+        <div
+          className=' px-10 content-space-1 content-space-t-lg-0 content-space-b-lg-2 mt-lg-n10'
+          style={{ zIndex: 99 }}
+        >
           <div className='row'>
-            <div className='col-lg-3'>
+            <div className='col-md-3'>
               <AdminGameNav />
             </div>
-            <div className='col-lg-9'>{children}</div>
+            <div className='col-md-9'>{children}</div>
           </div>
         </div>
 
