@@ -23,6 +23,8 @@ import { Player } from './models/adminGame/player'
 import { Log } from './models/adminGame/log'
 import { GameServer } from './models/adminGame/gameServerStatus'
 import { EventPlayer } from './models/adminGame/eventPlayer'
+import { BannedPlayer } from './models/adminGame/bannedPlayer'
+import { GameItem } from './models/adminGame/gameItem'
 
 let appSetting: AppSetting = require('../appSetting.json')
 
@@ -82,6 +84,20 @@ export const MountAndBladeGameService = createApi({
       },
     }),
 
+    GetPlayersHasItem: builder.mutation<
+      ApiResponse<Player[]>,
+      ApiGameRequest<{ keywords: any }>
+    >({
+      query: (payload) => ({
+        url: 'AdminGameMaB/GetPlayersHasItem',
+        method: 'post',
+        body: payload,
+      }),
+      transformResponse(response: ApiResponse<Player[]>) {
+        return response
+      },
+    }),
+
     GetPlayerLogs: builder.mutation<
       ApiResponse<Log[]>,
       ApiGameRequest<{ keywords: any; actionType: any; createdAt: any }>
@@ -112,10 +128,37 @@ export const MountAndBladeGameService = createApi({
 
     AssignTeamsToBattleEvent: builder.mutation<
       ApiResponse<ResultCode>,
-      ApiGameRequest<{ players: EventPlayer[] }>
+      ApiGameRequest<{ players: EventPlayer[]; equipmentId: any }>
     >({
       query: (payload) => ({
         url: 'AdminGameMaB/AssignTeamsToBattleEvent',
+        method: 'post',
+        body: payload,
+      }),
+      transformResponse(response: ApiResponse<ResultCode>) {
+        return response
+      },
+    }),
+    AssignPlayerToPrison: builder.mutation<
+      ApiResponse<ResultCode>,
+      ApiGameRequest<{ playerId: any }>
+    >({
+      query: (payload) => ({
+        url: 'AdminGameMaB/AssignPlayerToPrison',
+        method: 'post',
+        body: payload,
+      }),
+      transformResponse(response: ApiResponse<ResultCode>) {
+        return response
+      },
+    }),
+
+    AssignPlayerBackToPreviousRoleAndfaction: builder.mutation<
+      ApiResponse<ResultCode>,
+      ApiGameRequest<{ keywords: any }>
+    >({
+      query: (payload) => ({
+        url: 'AdminGameMaB/AssignPlayerBackToPreviousRoleAndfaction',
         method: 'post',
         body: payload,
       }),
@@ -137,6 +180,110 @@ export const MountAndBladeGameService = createApi({
         return response
       },
     }),
+    GetBannedPlayers: builder.mutation<
+      ApiResponse<BannedPlayer[]>,
+      ApiGameRequest<{ keywords: any }>
+    >({
+      query: (payload) => ({
+        url: 'AdminGameMaB/GetBannedPlayers',
+        method: 'post',
+        body: payload,
+      }),
+      transformResponse(response: ApiResponse<BannedPlayer[]>) {
+        return response
+      },
+    }),
+    BanPlayer: builder.mutation<
+      ApiResponse<ResultCode>,
+      ApiGameRequest<{
+        userId: any
+        playerId: any
+        discordId: any
+        name: any
+        reason: any
+        punishmentTime: any
+      }>
+    >({
+      query: (payload) => ({
+        url: 'AdminGameMaB/BanPlayer',
+        method: 'post',
+        body: payload,
+      }),
+      transformResponse(response: ApiResponse<ResultCode>) {
+        return response
+      },
+    }),
+    UnbanPlayer: builder.mutation<
+      ApiResponse<ResultCode>,
+      ApiGameRequest<{
+        userId: any
+        playerId: any
+      }>
+    >({
+      query: (payload) => ({
+        url: 'AdminGameMaB/UnbanPlayer',
+        method: 'post',
+        body: payload,
+      }),
+      transformResponse(response: ApiResponse<ResultCode>) {
+        return response
+      },
+    }),
+    GetGameItems: builder.mutation<
+      ApiResponse<GameItem[]>,
+      ApiGameRequest<{ keywords: any }>
+    >({
+      query: (payload) => ({
+        url: 'AdminGameMaB/GetGameItems',
+        method: 'post',
+        body: payload,
+      }),
+      transformResponse(response: ApiResponse<GameItem[]>) {
+        return response
+      },
+    }),
+
+    AddEditGameItem: builder.mutation<
+      ApiResponse<ResultCode>,
+      ApiGameRequest<{
+        id: any
+        name: any
+        code: any
+        class: any
+        type: any
+        description: any
+        images: any
+        stock: any
+        price: any
+        isActive: any
+        isFavorite: any
+      }>
+    >({
+      query: (payload) => ({
+        url: 'AdminGameMaB/AddEditGameItem',
+        method: 'post',
+        body: payload,
+      }),
+      transformResponse(response: ApiResponse<ResultCode>) {
+        return response
+      },
+    }),
+
+    DeleteGameItem: builder.mutation<
+      ApiResponse<ResultCode>,
+      ApiGameRequest<{
+        id: any
+      }>
+    >({
+      query: (payload) => ({
+        url: 'AdminGameMaB/DeleteGameItem',
+        method: 'post',
+        body: payload,
+      }),
+      transformResponse(response: ApiResponse<ResultCode>) {
+        return response
+      },
+    }),
   }),
 })
 
@@ -148,4 +295,13 @@ export const {
   useSavePlayersEventMutation,
   useGetSavedPlayersEventMutation,
   useAssignTeamsToBattleEventMutation,
+  useAssignPlayerBackToPreviousRoleAndfactionMutation,
+  useGetBannedPlayersMutation,
+  useBanPlayerMutation,
+  useAssignPlayerToPrisonMutation,
+  useUnbanPlayerMutation,
+  useGetGameItemsMutation,
+  useAddEditGameItemMutation,
+  useDeleteGameItemMutation,
+  useGetPlayersHasItemMutation,
 } = MountAndBladeGameService

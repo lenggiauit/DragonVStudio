@@ -1,4 +1,5 @@
 import { Faction } from './faction'
+import { GameItem } from './gameItem'
 
 export type Player = {
   id: any
@@ -21,4 +22,15 @@ export type Player = {
   class: any
   customName: any
   faction: Faction
+  userId: any
+  items: UserGameItems
+}
+
+export type UserGameItems = {
+  userId: any
+  playerId: any
+  gameItemId: any
+  receivedDate: any
+  expiredDate: any
+  itemInfo: GameItem
 }

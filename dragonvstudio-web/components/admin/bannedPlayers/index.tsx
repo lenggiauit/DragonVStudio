@@ -3,8 +3,8 @@ import { ReactElement, useEffect, useState } from 'react'
 import { ENTranslation, VNTranslation } from '../../translation'
 import { useParams } from 'next/navigation'
 import {
-  useAssignPlayerToPrisonMutation,
-  useGetPlayerListMutation,
+  useGetBannedPlayersMutation,
+  useUnbanPlayerMutation,
 } from '@/services/mountAndBladeGameService'
 import { AppSetting, FormKeyword, MetaData, Paging } from '@/types/type'
 import { Player } from '@/services/models/adminGame/player'
@@ -13,13 +13,17 @@ import DataTable, { TableColumn } from 'react-data-table-component'
 import * as Yup from 'yup'
 import { Field, Form, Formik, FormikHelpers } from 'formik'
 import PageLoading from '@/components/pageLoading'
-import BanPlayerModal from '../banPlayerModal'
+import { BannedPlayer } from '@/services/models/adminGame/bannedPlayer'
+import showDialogModal from '@/components/modal/showModal'
+import dayjs from 'dayjs'
 import showConfirmModal from '@/components/modal'
 import { ResultCode } from '@/utils/enums'
-import showDialogModal from '@/components/modal/showModal'
 import { toast } from 'react-toastify'
-const AdminGamePlayer: React.FC = (): ReactElement => {
+const AdminBannedPlayer: React.FC = (): ReactElement => {
   const { gameUrl } = useParams()
+
+  const [getBannedPlayer, getBannedPlayerStatus] = useGetBannedPlayersMutation()
+  const [UnbanPlayer, UnbanPlayerStatus] = useUnbanPlayerMutation()
 
   const [keyWords, setKeyWords] = useState<string | null>('')
   let initialFormKeyword: FormKeyword = {
@@ -39,13 +43,6 @@ const AdminGamePlayer: React.FC = (): ReactElement => {
     setKeyWords(values.keywords)
   }
 
-  // get list
-  const [getPlayerList, getPlayerListStatus] = useGetPlayerListMutation()
-
-  //
-  const [AssignPlayerToPrison, AssignPlayerToPrisonStatus] =
-    useAssignPlayerToPrisonMutation()
-
   const [metaData, setMetaData] = useState<MetaData>({
     paging: { index: 1, size: appSetting.PageSize },
   })
@@ -55,11 +52,7 @@ const AdminGamePlayer: React.FC = (): ReactElement => {
   })
   const [totalRows, setTotalRows] = useState<number>(0)
 
-  const [PlayerList, setPlayerList] = useState<Player[]>([])
-
-  const [selectedPlayer, setSelectedPlayer] = useState<Player | null>(null)
-
-  const [isShowBanModal, setIsShowBanModal] = useState<boolean>(false)
+  const [BannedPlayerList, setBannedPlayer] = useState<BannedPlayer[]>([])
 
   const pagingChangeEvent: any = (p: Paging) => {
     let mp: Paging = {
@@ -76,44 +69,43 @@ const AdminGamePlayer: React.FC = (): ReactElement => {
   }, [pagingData])
 
   useEffect(() => {
-    getPlayerList({
+    getBannedPlayer({
       payload: { keywords: keyWords },
       metaData: metaData,
       gameUrl: gameUrl,
     })
-  }, [metaData, keyWords])
+  }, [metaData, keyWords, UnbanPlayerStatus])
 
   useEffect(() => {
     if (
-      getPlayerListStatus.isSuccess &&
-      getPlayerListStatus.data.resource != null
+      getBannedPlayerStatus.isSuccess &&
+      getBannedPlayerStatus.data.resource != null
     ) {
-      let data = getPlayerListStatus.data.resource
-      setTotalRows(getPlayerListStatus.data.total)
-      setPlayerList(data)
+      let data = getBannedPlayerStatus.data.resource
+      setTotalRows(getBannedPlayerStatus.data.total)
+      setBannedPlayer(data)
     }
-  }, [getPlayerListStatus])
+  }, [getBannedPlayerStatus])
 
   useEffect(() => {
     if (
-      AssignPlayerToPrisonStatus.data &&
-      AssignPlayerToPrisonStatus.data.resultCode == ResultCode.Success
+      UnbanPlayerStatus.data &&
+      UnbanPlayerStatus.data.resultCode == ResultCode.Success
     ) {
-      toast.success('Assign Player To Prison Successfully!')
-    }
-    if (
-      AssignPlayerToPrisonStatus.isError ||
-      AssignPlayerToPrisonStatus.data?.resultCode == ResultCode.Error ||
-      AssignPlayerToPrisonStatus.data?.resultCode == ResultCode.Invalid ||
-      AssignPlayerToPrisonStatus.data?.resultCode == ResultCode.Unknown ||
-      AssignPlayerToPrisonStatus.data?.resultCode == ResultCode.UnAuthorized
+      toast.success('Unbanned!')
+    } else if (
+      UnbanPlayerStatus.isError ||
+      UnbanPlayerStatus.data?.resultCode == ResultCode.Error ||
+      UnbanPlayerStatus.data?.resultCode == ResultCode.Invalid ||
+      UnbanPlayerStatus.data?.resultCode == ResultCode.Unknown ||
+      UnbanPlayerStatus.data?.resultCode == ResultCode.UnAuthorized
     ) {
-      toast.error('Error, Please try again!')
+      toast.success('Error, Please try again!')
     }
-  }, [AssignPlayerToPrisonStatus])
+  }, [UnbanPlayerStatus])
 
   // Data grid columns
-  const columns: TableColumn<Player>[] = [
+  const columns: TableColumn<BannedPlayer>[] = [
     {
       id: 'playerId',
       name: 'PlayerId',
@@ -125,14 +117,7 @@ const AdminGamePlayer: React.FC = (): ReactElement => {
       id: 'name',
       name: 'Name',
       width: '165px',
-      cell: (row) => (
-        <div
-          className='cursor-pointer'
-          title={`Money: ${row.money} - BankAmount: ${row.bankAmount} - Horse: ${row.horse} - Equipment 1: ${row.equipment_0} - Equipment 2: ${row.equipment_1} - Equipment 3: ${row.equipment_2} - Equipment 4: ${row.equipment_3} - Armor Head: ${row.armor_Head} - Armor Body: ${row.armor_Body} - Armor Leg: ${row.armor_Leg} - Armor Gloves: ${row.armor_Gloves} - Armor Cape: ${row.armor_Cape} - Class: ${row.class} - Faction: ${row.faction?.name}`}
-        >
-          {row.name}
-        </div>
-      ),
+      selector: (row: any) => row.name,
       sortable: true,
     },
     {
@@ -143,62 +128,61 @@ const AdminGamePlayer: React.FC = (): ReactElement => {
       sortable: true,
     },
     {
-      id: 'money',
-      name: 'Money',
-      width: '130px',
-      selector: (row) => row.money,
+      id: 'punishmentTime',
+      name: 'PunishmentTime',
+      width: '200px',
+      selector: (row) =>
+        dayjs(row.punishmentTime).format('DD/MM/YYYY - hh:mm:ss A'),
       sortable: true,
     },
     {
-      id: 'bankAmount',
-      name: 'Bank Amount',
+      id: 'reason',
+      name: 'Reason',
       width: '130px',
-      selector: (row) => row.bankAmount,
+      cell: (row) => (
+        <>
+          <a
+            href='#'
+            onClick={(e) => {
+              e.preventDefault()
+              showDialogModal({
+                title: 'Reason',
+                message: row.reason,
+                size: 'modal-lg',
+                onClose: () => {},
+              })
+            }}
+          >
+            {row.reason}
+          </a>
+        </>
+      ),
+      selector: (row) => row.reason,
       sortable: true,
     },
 
     {
       id: 'actions',
       name: 'Actions',
-      width: '350px',
       cell: (row) => (
         <div className='align-items-center'>
-          <button type='button' className='btn btn-danger btn-sm'>
-            Kick
-          </button>
-          <button
-            type='button'
-            className='btn btn-danger btn-sm ms-2'
-            onClick={() => {
-              setSelectedPlayer(row)
-              setIsShowBanModal(true)
-            }}
-          >
-            Ban
-          </button>
           <button
             type='button'
             className='btn btn-danger btn-sm ms-2'
             onClick={() => {
               showConfirmModal({
-                message: `Confirm, Assign player: ${row.name} to Prison`,
+                message: `Confirm unban player: ${row.name}`,
                 onConfirm: () => {
-                  AssignPlayerToPrison({
-                    payload: { playerId: row.playerId },
+                  UnbanPlayer({
+                    payload: { playerId: row.playerId, userId: row.userId },
                     gameUrl: gameUrl,
                   })
                 },
               })
             }}
           >
-            Prison
+            Unban
           </button>
-          <a
-            href={`/admin/${gameUrl}/logs?keywords=${row.playerId}`}
-            className='btn btn-warning btn-sm ms-2'
-          >
-            Log
-          </a>
         </div>
       ),
       sortable: false,
@@ -207,31 +191,17 @@ const AdminGamePlayer: React.FC = (): ReactElement => {
 
   return (
     <>
-      <BanPlayerModal
-        isShow={isShowBanModal}
-        currentPlayer={selectedPlayer!}
-        onSubmit={(result) => {
-          if (result) {
-            toast.success('Banned Player!')
-            setIsShowBanModal(false)
-          } else {
-            toast.error('Error, please try again!')
-          }
-        }}
-        onClose={() => {
-          setIsShowBanModal(false)
-        }}
-      />
-      {(getPlayerListStatus.isLoading ||
-        AssignPlayerToPrisonStatus.isLoading) && <PageLoading />}
+      {(getBannedPlayerStatus.isLoading || UnbanPlayerStatus.isLoading) && (
+        <PageLoading />
+      )}
       <div className='d-grid gap-3 gap-lg-5 bg-white-text-dark position-relative'>
         <div className='card'>
           <div className='card-header border-bottom'>
             <div className='row'>
               <div className='col-lg-8'>
                 <h4 className='card-header-title text-dark'>
-                  <VNTranslation>Players</VNTranslation>
-                  <ENTranslation>Players</ENTranslation>
+                  <VNTranslation>Banned Player</VNTranslation>
+                  <ENTranslation>Banned Player</ENTranslation>
                 </h4>
               </div>
               <div className='col-lg-4'>
@@ -266,9 +236,9 @@ const AdminGamePlayer: React.FC = (): ReactElement => {
           </div>
           <div className='card-body'>
             <DataTable
-              title='Player List'
+              title='Banned Player List'
               columns={columns}
-              data={PlayerList}
+              data={BannedPlayerList}
               paginationTotalRows={totalRows}
               onChangePage={(index) => {
                 setPagingData((prevState) => ({
@@ -292,4 +262,4 @@ const AdminGamePlayer: React.FC = (): ReactElement => {
   )
 }
 
-export default AdminGamePlayer
+export default AdminBannedPlayer

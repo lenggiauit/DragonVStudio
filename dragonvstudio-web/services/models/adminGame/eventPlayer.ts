@@ -8,4 +8,6 @@ export type EventPlayer = {
   class: any
   factionIndex: any
   team: any
+  previousClass: any
+  previousFactionIndex: any
 }

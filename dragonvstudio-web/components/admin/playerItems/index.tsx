@@ -5,6 +5,7 @@ import { useParams } from 'next/navigation'
 import {
   useAssignPlayerToPrisonMutation,
   useGetPlayerListMutation,
+  useGetPlayersHasItemMutation,
 } from '@/services/mountAndBladeGameService'
 import { AppSetting, FormKeyword, MetaData, Paging } from '@/types/type'
 import { Player } from '@/services/models/adminGame/player'
@@ -18,8 +19,14 @@ import showConfirmModal from '@/components/modal'
 import { ResultCode } from '@/utils/enums'
 import showDialogModal from '@/components/modal/showModal'
 import { toast } from 'react-toastify'
-const AdminGamePlayer: React.FC = (): ReactElement => {
+import { useQuery } from '@/utils/functions'
+const AdminPlayerItem: React.FC = (): ReactElement => {
   const { gameUrl } = useParams()
+  let query = useQuery()
+
+  const [selectedPlayerId, setSelectedPlayerId] = useState<string | null>(
+    query.get('playerId')
+  )
 
   const [keyWords, setKeyWords] = useState<string | null>('')
   let initialFormKeyword: FormKeyword = {
@@ -40,11 +47,7 @@ const AdminGamePlayer: React.FC = (): ReactElement => {
   }
 
   // get list
-  const [getPlayerList, getPlayerListStatus] = useGetPlayerListMutation()
-
-  //
-  const [AssignPlayerToPrison, AssignPlayerToPrisonStatus] =
-    useAssignPlayerToPrisonMutation()
+  const [getPlayerList, getPlayerListStatus] = useGetPlayersHasItemMutation()
 
   const [metaData, setMetaData] = useState<MetaData>({
     paging: { index: 1, size: appSetting.PageSize },
@@ -56,8 +59,6 @@ const AdminGamePlayer: React.FC = (): ReactElement => {
   const [totalRows, setTotalRows] = useState<number>(0)
 
   const [PlayerList, setPlayerList] = useState<Player[]>([])
-
-  const [selectedPlayer, setSelectedPlayer] = useState<Player | null>(null)
 
   const [isShowBanModal, setIsShowBanModal] = useState<boolean>(false)
 
@@ -94,24 +95,6 @@ const AdminGamePlayer: React.FC = (): ReactElement => {
     }
   }, [getPlayerListStatus])
 
-  useEffect(() => {
-    if (
-      AssignPlayerToPrisonStatus.data &&
-      AssignPlayerToPrisonStatus.data.resultCode == ResultCode.Success
-    ) {
-      toast.success('Assign Player To Prison Successfully!')
-    }
-    if (
-      AssignPlayerToPrisonStatus.isError ||
-      AssignPlayerToPrisonStatus.data?.resultCode == ResultCode.Error ||
-      AssignPlayerToPrisonStatus.data?.resultCode == ResultCode.Invalid ||
-      AssignPlayerToPrisonStatus.data?.resultCode == ResultCode.Unknown ||
-      AssignPlayerToPrisonStatus.data?.resultCode == ResultCode.UnAuthorized
-    ) {
-      toast.error('Error, Please try again!')
-    }
-  }, [AssignPlayerToPrisonStatus])
-
   // Data grid columns
   const columns: TableColumn<Player>[] = [
     {
@@ -143,61 +126,16 @@ const AdminGamePlayer: React.FC = (): ReactElement => {
       sortable: true,
     },
     {
-      id: 'money',
-      name: 'Money',
-      width: '130px',
-      selector: (row) => row.money,
-      sortable: true,
-    },
-    {
-      id: 'bankAmount',
-      name: 'Bank Amount',
-      width: '130px',
-      selector: (row) => row.bankAmount,
-      sortable: true,
-    },
-
-    {
       id: 'actions',
       name: 'Actions',
-      width: '350px',
+      width: '150px',
       cell: (row) => (
         <div className='align-items-center'>
-          <button type='button' className='btn btn-danger btn-sm'>
-            Kick
-          </button>
-          <button
-            type='button'
-            className='btn btn-danger btn-sm ms-2'
-            onClick={() => {
-              setSelectedPlayer(row)
-              setIsShowBanModal(true)
-            }}
-          >
-            Ban
-          </button>
-          <button
-            type='button'
-            className='btn btn-danger btn-sm ms-2'
-            onClick={() => {
-              showConfirmModal({
-                message: `Confirm, Assign player: ${row.name} to Prison`,
-                onConfirm: () => {
-                  AssignPlayerToPrison({
-                    payload: { playerId: row.playerId },
-                    gameUrl: gameUrl,
-                  })
-                },
-              })
-            }}
-          >
-            Prison
-          </button>
           <a
-            href={`/admin/${gameUrl}/logs?keywords=${row.playerId}`}
+            href={`/admin/${gameUrl}/playerItems?playerId=${row.playerId}`}
             className='btn btn-warning btn-sm ms-2'
           >
-            Log
+            Item list
           </a>
         </div>
       ),
@@ -207,31 +145,15 @@ const AdminGamePlayer: React.FC = (): ReactElement => {
 
   return (
     <>
-      <BanPlayerModal
-        isShow={isShowBanModal}
-        currentPlayer={selectedPlayer!}
-        onSubmit={(result) => {
-          if (result) {
-            toast.success('Banned Player!')
-            setIsShowBanModal(false)
-          } else {
-            toast.error('Error, please try again!')
-          }
-        }}
-        onClose={() => {
-          setIsShowBanModal(false)
-        }}
-      />
-      {(getPlayerListStatus.isLoading ||
-        AssignPlayerToPrisonStatus.isLoading) && <PageLoading />}
+      {getPlayerListStatus.isLoading && <PageLoading />}
       <div className='d-grid gap-3 gap-lg-5 bg-white-text-dark position-relative'>
         <div className='card'>
           <div className='card-header border-bottom'>
             <div className='row'>
               <div className='col-lg-8'>
                 <h4 className='card-header-title text-dark'>
-                  <VNTranslation>Players</VNTranslation>
-                  <ENTranslation>Players</ENTranslation>
+                  <VNTranslation>Player Items</VNTranslation>
+                  <ENTranslation>Player Items</ENTranslation>
                 </h4>
               </div>
               <div className='col-lg-4'>
@@ -265,26 +187,28 @@ const AdminGamePlayer: React.FC = (): ReactElement => {
             </div>
           </div>
           <div className='card-body'>
-            <DataTable
-              title='Player List'
-              columns={columns}
-              data={PlayerList}
-              paginationTotalRows={totalRows}
-              onChangePage={(index) => {
-                setPagingData((prevState) => ({
-                  ...prevState,
-                  index: index,
-                }))
-              }}
-              onChangeRowsPerPage={(count) => {
-                setPagingData((prevState) => ({
-                  ...prevState,
-                  size: count,
-                }))
-              }}
-              paginationServer
-              pagination
-            />
+            {selectedPlayerId == null && (
+              <DataTable
+                title='Player List'
+                columns={columns}
+                data={PlayerList}
+                paginationTotalRows={totalRows}
+                onChangePage={(index) => {
+                  setPagingData((prevState) => ({
+                    ...prevState,
+                    index: index,
+                  }))
+                }}
+                onChangeRowsPerPage={(count) => {
+                  setPagingData((prevState) => ({
+                    ...prevState,
+                    size: count,
+                  }))
+                }}
+                paginationServer
+                pagination
+              />
+            )}
           </div>
         </div>
       </div>
@@ -292,4 +216,4 @@ const AdminGamePlayer: React.FC = (): ReactElement => {
   )
 }
 
-export default AdminGamePlayer
+export default AdminPlayerItem

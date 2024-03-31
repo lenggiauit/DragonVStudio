@@ -27,11 +27,24 @@ const AdminGameInfo: React.FC = (): ReactElement => {
             <h4 className='card-header-title text-dark'>
               {getGameInforStatus.data &&
                 getGameInforStatus.data.resultCode == ResultCode.Success && (
-                  <>Game Info: {getGameInforStatus.data?.resource?.Name} </>
+                  <>Game Info: {getGameInforStatus.data?.resource?.name} </>
                 )}
             </h4>
           </div>
-          <div className='card-body'></div>
+          <div className='card-body'>
+            <table className='table w-100'>
+              <tbody>
+                <tr>
+                  <th>Name</th>
+                  <td>{getGameInforStatus.data?.resource?.name} </td>
+                </tr>
+                <tr>
+                  <th>Season</th>
+                  <td>{getGameInforStatus.data?.resource?.season}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </>

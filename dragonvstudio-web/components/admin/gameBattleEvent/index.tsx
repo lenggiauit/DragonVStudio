@@ -3,6 +3,7 @@ import React, { ReactElement, useEffect, useState } from 'react'
 import { ENTranslation, VNTranslation } from '../../translation'
 import { useParams } from 'next/navigation'
 import {
+  useAssignPlayerBackToPreviousRoleAndfactionMutation,
   useAssignTeamsToBattleEventMutation,
   useGetPlayerListForEventMutation,
   useGetSavedPlayersEventMutation,
@@ -19,7 +20,6 @@ import * as Yup from 'yup'
 import MenuItem from '@mui/material/MenuItem'
 import Select, { SelectChangeEvent } from '@mui/material/Select'
 import OutlinedInput from '@mui/material/OutlinedInput'
-import { Theme, useTheme } from '@mui/material/styles'
 import ListItemText from '@mui/material/ListItemText'
 import Checkbox from '@mui/material/Checkbox'
 import { v4 } from 'uuid'
@@ -29,8 +29,11 @@ import { useAppContext } from '@/contexts/appContext'
 import DataTable, { TableColumn } from 'react-data-table-component'
 import showConfirmModal from '@/components/modal'
 import showDialogModal from '@/components/modal/showModal'
+import FormControl from '@mui/material/FormControl'
+import InputLabel from '@mui/material/InputLabel'
+import { toast } from 'react-toastify'
 
-const ITEM_HEIGHT = 48
+const ITEM_HEIGHT = 32
 const ITEM_PADDING_TOP = 8
 
 type FormAddPlayer = {
@@ -60,6 +63,13 @@ const AdminGameBattleEvent: React.FC = (): ReactElement => {
 
   const [AssignTeamsToBattleEvent, AssignTeamsToBattleEventStatus] =
     useAssignTeamsToBattleEventMutation()
+  //  assign back
+  const [
+    AssignPlayerBackToPreviousRoleAndfaction,
+    AssignPlayerBackToPreviousRoleAndfactionStatus,
+  ] = useAssignPlayerBackToPreviousRoleAndfactionMutation()
+
+  const [eventEquipment, setEventEquipment] = useState<string | null>('tier1')
 
   const [keyWords, setKeyWords] = useState<string | null>('')
   let initialForm: FormAddPlayer = {
@@ -157,16 +167,55 @@ const AdminGameBattleEvent: React.FC = (): ReactElement => {
   const handleAssignTeamsToBattleEvent = () => {
     AssignTeamsToBattleEvent({
       gameUrl: gameUrl,
-      payload: { players: selectedPlayers },
+      payload: { players: selectedPlayers, equipmentId: eventEquipment },
     })
   }
+
+  const handleAssignTeamsBackToPreviousRoleandFaction = () => {
+    AssignPlayerBackToPreviousRoleAndfaction({
+      gameUrl: gameUrl,
+      payload: { keywords: '' },
+    })
+  }
+
+  useEffect(() => {
+    if (
+      AssignPlayerBackToPreviousRoleAndfactionStatus.isSuccess &&
+      AssignPlayerBackToPreviousRoleAndfactionStatus.data.resultCode ==
+        ResultCode.Success
+    ) {
+      toast.success(
+        'Assign Player Back To Previous RoleA nd Faction Successfully!'
+      )
+    }
+    if (
+      AssignPlayerBackToPreviousRoleAndfactionStatus.isError ||
+      AssignPlayerBackToPreviousRoleAndfactionStatus.data?.resultCode ==
+        ResultCode.Error ||
+      AssignPlayerBackToPreviousRoleAndfactionStatus.data?.resultCode ==
+        ResultCode.UnAuthorized ||
+      AssignPlayerBackToPreviousRoleAndfactionStatus.data?.resultCode ==
+        ResultCode.Unknown
+    ) {
+      toast.error('Error, please try again!')
+    }
+  }, [AssignPlayerBackToPreviousRoleAndfactionStatus])
 
   useEffect(() => {
     if (
       SavePlayersEventStatus.isSuccess &&
       SavePlayersEventStatus.data.resultCode == ResultCode.Success
     ) {
-      showDialogModal({ message: 'Saved!' })
+      toast.success('Saved!')
+    }
+
+    if (
+      SavePlayersEventStatus.isError ||
+      SavePlayersEventStatus.data?.resultCode == ResultCode.Error ||
+      SavePlayersEventStatus.data?.resultCode == ResultCode.UnAuthorized ||
+      SavePlayersEventStatus.data?.resultCode == ResultCode.Unknown
+    ) {
+      toast.error('Error, please try again!')
     }
   }, [SavePlayersEventStatus])
 
@@ -175,7 +224,16 @@ const AdminGameBattleEvent: React.FC = (): ReactElement => {
       AssignTeamsToBattleEventStatus.isSuccess &&
       AssignTeamsToBattleEventStatus.data.resultCode == ResultCode.Success
     ) {
-      showDialogModal({ message: 'Assign Teams To Battle Event Successfully!' })
+      toast.success('Assign Teams To Battle Event Successfully!')
+    }
+    if (
+      AssignTeamsToBattleEventStatus.isError ||
+      AssignTeamsToBattleEventStatus.data?.resultCode == ResultCode.Error ||
+      AssignTeamsToBattleEventStatus.data?.resultCode ==
+        ResultCode.UnAuthorized ||
+      AssignTeamsToBattleEventStatus.data?.resultCode == ResultCode.Unknown
+    ) {
+      toast.error('Error, please try again!')
     }
   }, [AssignTeamsToBattleEventStatus])
 
@@ -220,6 +278,7 @@ const AdminGameBattleEvent: React.FC = (): ReactElement => {
       {(getPlayerListForEventStatus.isLoading ||
         getSavedPlayerListForEventStatus.isLoading ||
         AssignTeamsToBattleEventStatus.isLoading ||
+        AssignPlayerBackToPreviousRoleAndfactionStatus.isLoading ||
         SavePlayersEventStatus.isLoading) && <PageLoading />}
       <div className='d-grid gap-3 gap-lg-5 bg-white-text-dark position-relative'>
         <div className='card'>
@@ -252,6 +311,7 @@ const AdminGameBattleEvent: React.FC = (): ReactElement => {
                           input={<OutlinedInput label='Tag' />}
                           renderValue={(selected) => selected.join(', ')}
                           MenuProps={MenuProps}
+                          label='player'
                         >
                           {PlayerList.filter(
                             (p) =>
@@ -282,7 +342,7 @@ const AdminGameBattleEvent: React.FC = (): ReactElement => {
                           <MenuItem key='pe_manatarms' value='pe_manatarms'>
                             Man At Arms
                           </MenuItem>
-                          <MenuItem key='pe_lancer' value='pe_lancer'>
+                          {/* <MenuItem key='pe_lancer' value='pe_lancer'>
                             Lancer
                           </MenuItem>
                           <MenuItem
@@ -293,25 +353,25 @@ const AdminGameBattleEvent: React.FC = (): ReactElement => {
                           </MenuItem>
                           <MenuItem key='pe_militia' value='pe_militia'>
                             Militia
-                          </MenuItem>
+                          </MenuItem> */}
                           <MenuItem
                             key='pe_master_archer'
                             value='pe_master_archer'
                           >
                             Master Archer
                           </MenuItem>
-                          <MenuItem key='pe_archer' value='pe_archer'>
+                          {/* <MenuItem key='pe_archer' value='pe_archer'>
                             Archer
-                          </MenuItem>
+                          </MenuItem> */}
                           <MenuItem
                             key='pe_master_crossbowman'
                             value='pe_master_crossbowman'
                           >
                             Master Crossbowman
                           </MenuItem>
-                          <MenuItem key='pe_crossbowman' value='pe_crossbowman'>
+                          {/* <MenuItem key='pe_crossbowman' value='pe_crossbowman'>
                             Crossbowman
-                          </MenuItem>
+                          </MenuItem> */}
                         </Select>
 
                         <Select
@@ -365,10 +425,43 @@ const AdminGameBattleEvent: React.FC = (): ReactElement => {
               </div>
             </div>
 
+            <div className='row mt-4'>
+              <h5>Event Equipment</h5>
+              <div className='col-lg-12'>
+                <Select
+                  name='eventEquipment'
+                  defaultValue={eventEquipment}
+                  sx={{ width: '250px' }}
+                  onChange={(e) => {
+                    setEventEquipment(e.target.value)
+                  }}
+                >
+                  <MenuItem key='tier1' value='tier1'>
+                    Tier 1
+                  </MenuItem>
+                  <MenuItem key='tier2' value='tier2'>
+                    Tier 2
+                  </MenuItem>
+                  <MenuItem key='tier3' value='tier3'>
+                    Tier 3
+                  </MenuItem>
+                  <MenuItem key='tier4' value='tier4'>
+                    Tier 4
+                  </MenuItem>
+                  <MenuItem key='tier5' value='tier5'>
+                    Tier 5
+                  </MenuItem>
+                  <MenuItem key='tier6' value='tier6'>
+                    Tier 6
+                  </MenuItem>
+                </Select>
+              </div>
+            </div>
+
             <div className='row mt-10'>
               <div className='col-md-12 text-center'>
                 <a
-                  className='btn btn-primary'
+                  className='btn btn-primary mt-2'
                   onClick={() => {
                     showConfirmModal({
                       message: 'Confirm load event players from database!',
@@ -386,7 +479,7 @@ const AdminGameBattleEvent: React.FC = (): ReactElement => {
                 </a>
 
                 <a
-                  className='btn btn-primary ms-2'
+                  className='btn btn-primary ms-2 mt-2'
                   onClick={() => {
                     if (selectedPlayers.length > 0) {
                       showConfirmModal({
@@ -405,7 +498,7 @@ const AdminGameBattleEvent: React.FC = (): ReactElement => {
                 </a>
 
                 <a
-                  className='btn btn-danger ms-2'
+                  className='btn btn-danger ms-2 mt-2'
                   href='#'
                   onClick={() => {
                     showConfirmModal({
@@ -417,6 +510,22 @@ const AdminGameBattleEvent: React.FC = (): ReactElement => {
                   }}
                 >
                   Assign teams to Battle Event
+                </a>
+
+                <a
+                  className='btn btn-warning ms-2 mt-2'
+                  href='#'
+                  onClick={() => {
+                    showConfirmModal({
+                      message:
+                        'Confirm Assign teams back to previous Role and Faction!',
+                      onConfirm: () => {
+                        handleAssignTeamsBackToPreviousRoleandFaction()
+                      },
+                    })
+                  }}
+                >
+                  Assign teams back to previous Role and Faction
                 </a>
               </div>
             </div>

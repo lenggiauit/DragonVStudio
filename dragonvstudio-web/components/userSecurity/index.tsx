@@ -77,6 +77,15 @@ const UserSecurity: React.FC = () => {
     if (data && data.resultCode == ResultCode.Success) {
       toast.success(dictionaryList[locale]['UpdatedSuccessfully'])
     }
+    if (
+      error ||
+      data?.resultCode == ResultCode.Error ||
+      data?.resultCode == ResultCode.Invalid ||
+      data?.resultCode == ResultCode.Unknown ||
+      data?.resultCode == ResultCode.UnAuthorized
+    ) {
+      toast.error(dictionaryList[locale]['Error'])
+    }
   }, [data])
 
   return (

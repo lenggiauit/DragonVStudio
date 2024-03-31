@@ -72,8 +72,8 @@ const UserProfile: React.FC = () => {
   const validationSchema = () => {
     return Yup.object().shape({
       fullName: Yup.string().required(dictionaryList[locale]['RequiredField']),
-      phone: Yup.string().required(dictionaryList[locale]['RequiredField']),
-      address: Yup.string().required(dictionaryList[locale]['RequiredField']),
+      //phone: Yup.string().required(dictionaryList[locale]['RequiredField']),
+      //address: Yup.string().required(dictionaryList[locale]['RequiredField']),
       email: Yup.string()
         .required(dictionaryList[locale]['RequiredField'])
         .email('Email is invalid!')
@@ -158,15 +158,17 @@ const UserProfile: React.FC = () => {
 
   useEffect(() => {
     if (data && data.resultCode == ResultCode.Success) {
-      let updatedUser: User // = currentUser!
-
-      // updatedUser.fullName = payload.fullName
-      // updatedUser.email = payload.email
-      // updatedUser.phone = payload.phone
-      // updatedUser.address = payload.address
-      // setLoggedUser(updatedUser)
       setIsEditMode(false)
       toast.success(dictionaryList[locale]['UpdatedSuccessfully'])
+    }
+    if (
+      error ||
+      data?.resultCode == ResultCode.Error ||
+      data?.resultCode == ResultCode.Invalid ||
+      data?.resultCode == ResultCode.Unknown ||
+      data?.resultCode == ResultCode.UnAuthorized
+    ) {
+      toast.error(dictionaryList[locale]['Error'])
     }
   }, [data])
 
@@ -190,7 +192,10 @@ const UserProfile: React.FC = () => {
     ) {
       toast.success(dictionaryList[locale]['UpdatedSuccessfully'])
     }
-  }, [updateAvatarStatus.data])
+    if (updateAvatarStatus.data?.resultCode == ResultCode.Invalid) {
+      toast.error(dictionaryList[locale]['Error'])
+    }
+  }, [updateAvatarStatus])
 
   return (
     <>

@@ -52,9 +52,36 @@ const AdminGameNav: React.FC = () => {
                     }`}
                     href={`/admin/${gameUrl}/players`}
                   >
-                    <i className='bi bi-person-x nav-icon'></i>
+                    <i className='bi bi-people nav-icon'></i>
                     <VNTranslation>Người chơi</VNTranslation>
                     <ENTranslation>Player</ENTranslation>
+                  </a>
+                </li>
+                <li className='nav-item'>
+                  <a
+                    className={`nav-link ${
+                      pathName.indexOf(`/admin/${gameUrl}/bannedPlayers`) != -1
+                        ? 'active'
+                        : ''
+                    }`}
+                    href={`/admin/${gameUrl}/bannedPlayers`}
+                  >
+                    <i className='bi bi-person-x nav-icon'></i>
+                    Banned player
+                  </a>
+                </li>
+                <li className='nav-item'>
+                  <a
+                    className={`nav-link ${
+                      pathName.indexOf(`/admin/${gameUrl}/items`) != -1
+                        ? 'active'
+                        : ''
+                    }`}
+                    href={`/admin/${gameUrl}/items`}
+                  >
+                    <i className='bi bi-list-stars nav-icon'></i>
+                    <VNTranslation>Vật phẩm</VNTranslation>
+                    <ENTranslation>Items</ENTranslation>
                   </a>
                 </li>
                 <li className='nav-item'>
@@ -68,20 +95,6 @@ const AdminGameNav: React.FC = () => {
                   >
                     <i className='bi bi-bucket nav-icon'></i>
                     Player Items
-                  </a>
-                </li>
-
-                <li className='nav-item'>
-                  <a
-                    className={`nav-link ${
-                      pathName.indexOf(`/admin/${gameUrl}/bannedplayers`) != -1
-                        ? 'active'
-                        : ''
-                    }`}
-                    href={`/admin/${gameUrl}/bannedplayers`}
-                  >
-                    <i className='bi bi-people-fill nav-icon'></i>
-                    Banned player
                   </a>
                 </li>
 
@@ -103,21 +116,6 @@ const AdminGameNav: React.FC = () => {
                 <li className='nav-item'>
                   <a
                     className={`nav-link ${
-                      pathName.indexOf(`/admin/${gameUrl}/items`) != -1
-                        ? 'active'
-                        : ''
-                    }`}
-                    href={`/admin/${gameUrl}/items`}
-                  >
-                    <i className='bi bi-list-stars nav-icon'></i>
-                    <VNTranslation>Vật phẩm</VNTranslation>
-                    <ENTranslation>Items</ENTranslation>
-                  </a>
-                </li>
-
-                <li className='nav-item'>
-                  <a
-                    className={`nav-link ${
                       pathName.indexOf(`/admin/${gameUrl}/battleEvent`) != -1
                         ? 'active'
                         : ''
@@ -127,6 +125,20 @@ const AdminGameNav: React.FC = () => {
                     <i className='bi bi-list-stars nav-icon'></i>
                     <VNTranslation>Sự kiện chiến tranh</VNTranslation>
                     <ENTranslation>Event Battle</ENTranslation>
+                  </a>
+                </li>
+
+                <li className='nav-item'>
+                  <a
+                    className={`nav-link ${
+                      pathName.indexOf(`/admin/${gameUrl}/gacha`) != -1
+                        ? 'active'
+                        : ''
+                    }`}
+                    href={`/admin/${gameUrl}/bannedplayers`}
+                  >
+                    <i className='bi bi-person-x nav-icon'></i>
+                    Gacha
                   </a>
                 </li>
               </ul>

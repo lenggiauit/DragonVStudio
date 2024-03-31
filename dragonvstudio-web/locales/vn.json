@@ -136,8 +136,11 @@
   "ResetPassword_des": "Nhập mật khẩu mới của bạn.",
   "welcometo_title": "Chào mừng đến với",
   "welcometo_desc": "Nơi có rất nhiều câu chuyện mang lại cho bạn năng lượng tích cực và những chia sẻ chân thật của Na về nhiều khía cạnh từ công việc cho đến cuộc sống.",
-  "welcome_home": "Nhà Của Na.",
+  "welcome_home": "Dragon V Studio",
   "welcome_uplifting_place": "Nơi với những điều tích cực.",
   "welcome_communal_place": "Nơi để chia sẻ.",
-  "welcometo_aboutme": "Về Dragon V Studio"
+  "welcometo_aboutme": "Về Dragon V Studio",
+  "AddedSuccessfully": "Added successfully",
+  "UpdatedSuccessfully": "Updated successfully",
+  "DeletedSuccessfully": "Deleted successfully"
 }
