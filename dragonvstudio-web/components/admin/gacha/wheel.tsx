@@ -1,3 +1,4 @@
+'use client'
 import { EventPlayer } from '@/services/models/adminGame/eventPlayer'
 import { GachaItem } from '@/services/models/adminGame/gachaItem'
 import { GetRandomBgColor } from '@/utils/functions'
