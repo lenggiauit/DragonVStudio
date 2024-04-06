@@ -33,7 +33,7 @@ import FormControl from '@mui/material/FormControl'
 import InputLabel from '@mui/material/InputLabel'
 import { toast } from 'react-toastify'
 
-const ITEM_HEIGHT = 500
+const ITEM_HEIGHT = 250
 const ITEM_PADDING_TOP = 8
 
 type FormAddPlayer = {
