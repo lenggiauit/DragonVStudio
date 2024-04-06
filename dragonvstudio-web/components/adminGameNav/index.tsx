@@ -135,10 +135,24 @@ const AdminGameNav: React.FC = () => {
                         ? 'active'
                         : ''
                     }`}
-                    href={`/admin/${gameUrl}/bannedplayers`}
+                    href={`/admin/${gameUrl}/gacha`}
                   >
-                    <i className='bi bi-person-x nav-icon'></i>
+                    <i className='bi bi-gift nav-icon'></i>
                     Gacha
+                  </a>
+                </li>
+
+                <li className='nav-item'>
+                  <a
+                    className={`nav-link ${
+                      pathName.indexOf(`/admin/${gameUrl}/gachaItems`) != -1
+                        ? 'active'
+                        : ''
+                    }`}
+                    href={`/admin/${gameUrl}/gachaItems`}
+                  >
+                    <i className='bi bi-gift nav-icon'></i>
+                    Gacha Items
                   </a>
                 </li>
               </ul>

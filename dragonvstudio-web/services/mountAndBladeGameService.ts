@@ -19,12 +19,13 @@ import { UserResource } from './resources/userResource'
 import { FileSharing } from './models/admin/fileSharing'
 import { FeedbackResource } from './resources/feedbackResource'
 import { getSession } from 'next-auth/react'
-import { Player } from './models/adminGame/player'
+import { Player, UserGameItems } from './models/adminGame/player'
 import { Log } from './models/adminGame/log'
 import { GameServer } from './models/adminGame/gameServerStatus'
 import { EventPlayer } from './models/adminGame/eventPlayer'
 import { BannedPlayer } from './models/adminGame/bannedPlayer'
 import { GameItem } from './models/adminGame/gameItem'
+import { GachaItem } from './models/adminGame/gachaItem'
 
 let appSetting: AppSetting = require('../appSetting.json')
 
@@ -229,6 +230,70 @@ export const MountAndBladeGameService = createApi({
         return response
       },
     }),
+    GetGachaItems: builder.mutation<
+      ApiResponse<GachaItem[]>,
+      ApiGameRequest<{ keywords: any }>
+    >({
+      query: (payload) => ({
+        url: 'AdminGameMaB/GetGachaItems',
+        method: 'post',
+        body: payload,
+      }),
+      transformResponse(response: ApiResponse<GachaItem[]>) {
+        return response
+      },
+    }),
+
+    GetGachaItemsForEvent: builder.mutation<
+      ApiResponse<GachaItem[]>,
+      ApiGameRequest<{ keywords: any }>
+    >({
+      query: (payload) => ({
+        url: 'AdminGameMaB/GetGachaItemsForEvent',
+        method: 'post',
+        body: payload,
+      }),
+      transformResponse(response: ApiResponse<GachaItem[]>) {
+        return response
+      },
+    }),
+
+    AddEditGachaItem: builder.mutation<
+      ApiResponse<ResultCode>,
+      ApiGameRequest<{
+        id: any
+        name: any
+        code: any
+        quantity: any
+        isActive: any
+      }>
+    >({
+      query: (payload) => ({
+        url: 'AdminGameMaB/AddEditGachaItem',
+        method: 'post',
+        body: payload,
+      }),
+      transformResponse(response: ApiResponse<ResultCode>) {
+        return response
+      },
+    }),
+
+    DeleteGachaItem: builder.mutation<
+      ApiResponse<ResultCode>,
+      ApiGameRequest<{
+        id: any
+      }>
+    >({
+      query: (payload) => ({
+        url: 'AdminGameMaB/DeleteGachaItem',
+        method: 'post',
+        body: payload,
+      }),
+      transformResponse(response: ApiResponse<ResultCode>) {
+        return response
+      },
+    }),
+
     GetGameItems: builder.mutation<
       ApiResponse<GameItem[]>,
       ApiGameRequest<{ keywords: any }>
@@ -255,8 +320,10 @@ export const MountAndBladeGameService = createApi({
         images: any
         stock: any
         price: any
+        duration: any
         isActive: any
         isFavorite: any
+        isInGameCash: any
       }>
     >({
       query: (payload) => ({
@@ -284,6 +351,121 @@ export const MountAndBladeGameService = createApi({
         return response
       },
     }),
+    DeletePLayerGameItem: builder.mutation<
+      ApiResponse<ResultCode>,
+      ApiGameRequest<{
+        id: any
+      }>
+    >({
+      query: (payload) => ({
+        url: 'AdminGameMaB/DeletePLayerGameItem',
+        method: 'post',
+        body: payload,
+      }),
+      transformResponse(response: ApiResponse<ResultCode>) {
+        return response
+      },
+    }),
+    AssignItemToPlayer: builder.mutation<
+      ApiResponse<ResultCode>,
+      ApiGameRequest<{
+        id: any
+      }>
+    >({
+      query: (payload) => ({
+        url: 'AdminGameMaB/AssignItemToPlayer',
+        method: 'post',
+        body: payload,
+      }),
+      transformResponse(response: ApiResponse<ResultCode>) {
+        return response
+      },
+    }),
+    GetPlayerInfo: builder.mutation<
+      ApiResponse<Player>,
+      ApiGameRequest<{ userId: any }>
+    >({
+      query: (payload) => ({
+        url: 'GameMaB/GetPlayerInfo',
+        method: 'post',
+        body: payload,
+      }),
+      transformResponse(response: ApiResponse<Player>) {
+        return response
+      },
+    }),
+
+    GetShopGameItems: builder.mutation<
+      ApiResponse<GameItem[]>,
+      ApiGameRequest<{ keywords: any }>
+    >({
+      query: (payload) => ({
+        url: 'GameMaB/GetShopGameItems',
+        method: 'post',
+        body: payload,
+      }),
+      transformResponse(response: ApiResponse<GameItem[]>) {
+        return response
+      },
+    }),
+
+    PlayerBuyGameItem: builder.mutation<
+      ApiResponse<ResultCode>,
+      ApiGameRequest<{ itemId: any }>
+    >({
+      query: (payload) => ({
+        url: 'GameMaB/PlayerBuyGameItem',
+        method: 'post',
+        body: payload,
+      }),
+      transformResponse(response: ApiResponse<ResultCode>) {
+        return response
+      },
+    }),
+    GetPlayerGameItems: builder.mutation<
+      ApiResponse<UserGameItems[]>,
+      ApiGameRequest<{ keywords: any }>
+    >({
+      query: (payload) => ({
+        url: 'GameMaB/GetPlayerGameItems',
+        method: 'post',
+        body: payload,
+      }),
+      transformResponse(response: ApiResponse<UserGameItems[]>) {
+        return response
+      },
+    }),
+    PLayerDeleteGameItem: builder.mutation<
+      ApiResponse<ResultCode>,
+      ApiGameRequest<{
+        userItemId: any
+      }>
+    >({
+      query: (payload) => ({
+        url: 'GameMaB/PlayerDeleteItem',
+        method: 'post',
+        body: payload,
+      }),
+      transformResponse(response: ApiResponse<ResultCode>) {
+        return response
+      },
+    }),
+
+    PlayerEquipItem: builder.mutation<
+      ApiResponse<ResultCode>,
+      ApiGameRequest<{
+        userItemId: any
+      }>
+    >({
+      query: (payload) => ({
+        url: 'GameMaB/PlayerEquipItem',
+        method: 'post',
+        body: payload,
+      }),
+      transformResponse(response: ApiResponse<ResultCode>) {
+        return response
+      },
+    }),
   }),
 })
 
@@ -300,8 +482,20 @@ export const {
   useBanPlayerMutation,
   useAssignPlayerToPrisonMutation,
   useUnbanPlayerMutation,
+  useGetGachaItemsMutation,
+  useAddEditGachaItemMutation,
+  useDeleteGachaItemMutation,
   useGetGameItemsMutation,
   useAddEditGameItemMutation,
   useDeleteGameItemMutation,
   useGetPlayersHasItemMutation,
+  useDeletePLayerGameItemMutation,
+  useAssignItemToPlayerMutation,
+  useGetPlayerInfoMutation,
+  useGetShopGameItemsMutation,
+  usePlayerBuyGameItemMutation,
+  useGetPlayerGameItemsMutation,
+  usePLayerDeleteGameItemMutation,
+  usePlayerEquipItemMutation,
+  useGetGachaItemsForEventMutation,
 } = MountAndBladeGameService

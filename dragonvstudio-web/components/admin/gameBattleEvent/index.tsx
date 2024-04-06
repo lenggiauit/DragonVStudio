@@ -382,10 +382,10 @@ const AdminGameBattleEvent: React.FC = (): ReactElement => {
                           }}
                         >
                           <MenuItem key='1' value='1'>
-                            Team 1
+                            Blue Team
                           </MenuItem>
                           <MenuItem key='2' value='2'>
-                            Team 2
+                            Red Team
                           </MenuItem>
                         </Select>
 
@@ -402,7 +402,7 @@ const AdminGameBattleEvent: React.FC = (): ReactElement => {
           <div className='card-body'>
             <div className='row'>
               <div className='col-md-6 text-center'>
-                <h3 className='text-primary'>Battle Team 1</h3>
+                <h3 className='text-primary'>Blue Team</h3>
                 <div className='row'>
                   <div className='col-md-12'>
                     <DataTable
@@ -413,7 +413,7 @@ const AdminGameBattleEvent: React.FC = (): ReactElement => {
                 </div>
               </div>
               <div className='col-md-6 text-center'>
-                <h3 className='text-danger'>Battle Team 2</h3>
+                <h3 className='text-danger'>Red Team</h3>
                 <div className='row'>
                   <div className='col-md-12'>
                     <DataTable

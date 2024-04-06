@@ -41,10 +41,10 @@ const AdminGameLayout: React.FC<Props> = ({ children }): ReactElement => {
           style={{ zIndex: 99 }}
         >
           <div className='row'>
-            <div className='col-md-3'>
+            <div className='col-md-2'>
               <AdminGameNav />
             </div>
-            <div className='col-md-9'>{children}</div>
+            <div className='col-md-10'>{children}</div>
           </div>
         </div>
 

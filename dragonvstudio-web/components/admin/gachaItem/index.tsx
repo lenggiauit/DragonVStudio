@@ -1,4 +1,5 @@
 'use client'
+'use client'
 import { ReactElement, useEffect, useState } from 'react'
 import { ENTranslation, VNTranslation } from '../../translation'
 import { useParams } from 'next/navigation'
@@ -8,8 +9,8 @@ import { GameItem } from '@/services/models/adminGame/gameItem'
 import { AppSetting, FormKeyword, MetaData, Paging } from '@/types/type'
 import * as Yup from 'yup'
 import {
-  useDeleteGameItemMutation,
-  useGetGameItemsMutation,
+  useDeleteGachaItemMutation,
+  useGetGachaItemsMutation,
 } from '@/services/mountAndBladeGameService'
 import AddEditGameItemModal from '../addEditGameItem'
 import { GlobalKeys } from '@/utils/constants'
@@ -19,10 +20,11 @@ import { toast } from 'react-toastify'
 import showConfirmModal from '@/components/modal'
 import { ResultCode } from '@/utils/enums'
 import PageLoading from '@/components/pageLoading'
+import { GachaItem } from '@/services/models/adminGame/gachaItem'
+import AddEditGachaItemModal from '../addEditGachaItem'
 
 let appSetting: AppSetting = require('../../../appSetting.json')
-
-const AdminGameItems: React.FC = (): ReactElement => {
+const GachaItemComponent: React.FC = () => {
   const { gameUrl } = useParams()
   const { locale, setLocale } = useAppContext()
 
@@ -45,9 +47,10 @@ const AdminGameItems: React.FC = (): ReactElement => {
   }
 
   // get list
-  const [getItemList, getItemListStatus] = useGetGameItemsMutation()
+  const [getItemList, getItemListStatus] = useGetGachaItemsMutation()
+
   //
-  const [DeleteItem, DeleteItemStatus] = useDeleteGameItemMutation()
+  const [DeleteItem, DeleteItemStatus] = useDeleteGachaItemMutation()
 
   const [metaData, setMetaData] = useState<MetaData>({
     paging: { index: 1, size: appSetting.PageSize },
@@ -58,9 +61,9 @@ const AdminGameItems: React.FC = (): ReactElement => {
   })
   const [totalRows, setTotalRows] = useState<number>(0)
 
-  const [ItemList, setItemList] = useState<GameItem[]>([])
+  const [ItemList, setItemList] = useState<GachaItem[]>([])
 
-  const [selectedItem, setSelectedItem] = useState<GameItem | null>(null)
+  const [selectedItem, setSelectedItem] = useState<GachaItem | null>(null)
 
   const [isShowEditModal, setIsShowEditModal] = useState<boolean>(false)
 
@@ -120,7 +123,7 @@ const AdminGameItems: React.FC = (): ReactElement => {
   }, [DeleteItemStatus])
 
   // Data grid columns
-  const columns: TableColumn<GameItem>[] = [
+  const columns: TableColumn<GachaItem>[] = [
     {
       id: 'name',
       name: 'Name',
@@ -128,59 +131,17 @@ const AdminGameItems: React.FC = (): ReactElement => {
       selector: (row: any) => row.name,
       sortable: true,
     },
-
     {
-      id: 'class',
-      name: 'Class',
+      id: 'code',
+      name: 'Code | Id',
 
-      selector: (row: any) => row.class,
+      selector: (row: any) => row.code,
       sortable: true,
     },
     {
-      id: 'type',
-      name: 'Type',
-
-      selector: (row: any) => row.type,
-      sortable: true,
-    },
-    {
-      id: 'images',
-      name: 'Image',
-      cell: (row: any) => (
-        <img
-          className='avatar'
-          src={row.images == null ? GlobalKeys.NoImageUrl : row.images}
-          alt='image'
-        />
-      ),
-      sortable: true,
-    },
-    {
-      id: 'stock',
-      name: 'Stock',
-
-      selector: (row: any) => row.stock,
-      sortable: true,
-    },
-    {
-      id: 'price',
-      name: 'price',
-
-      selector: (row: any) => row.price,
-      sortable: true,
-    },
-    {
-      id: 'duration',
-      name: 'Duration',
-
-      selector: (row: any) => row.duration + ' days',
-      sortable: true,
-    },
-    {
-      id: 'isInGameCash',
-      name: 'InGameCash',
-      width: '125px',
-      cell: (row: any) => (row.isInGameCash ? 'true' : 'false'),
+      id: 'quantity',
+      name: 'Quantity',
+      selector: (row: any) => row.quantity,
       sortable: true,
     },
     {
@@ -230,7 +191,7 @@ const AdminGameItems: React.FC = (): ReactElement => {
       {(getItemListStatus.isLoading || DeleteItemStatus.isLoading) && (
         <PageLoading />
       )}
-      <AddEditGameItemModal
+      <AddEditGachaItemModal
         isShow={isShowEditModal}
         onClose={() => {
           setSelectedItem(null)
@@ -326,4 +287,4 @@ const AdminGameItems: React.FC = (): ReactElement => {
   )
 }
 
-export default AdminGameItems
+export default GachaItemComponent

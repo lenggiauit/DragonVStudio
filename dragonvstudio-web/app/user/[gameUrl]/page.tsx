@@ -27,7 +27,7 @@ export async function generateMetadata(
       images: appSetting.SiteUrl + '/assets/images/Logo.png',
       title: 'Dragon V Studio',
       description: 'User Profile - Dragon V Studio',
-      url: appSetting.SiteUrl + '/user/security',
+      url: appSetting.SiteUrl + '/user/' + params,
     },
   }
 }

@@ -8,6 +8,8 @@ export type GameItem = {
   images: any
   stock: any
   price: any
-  isActive: any
-  isFavorite: any
+  duration: any
+  isActive: boolean
+  isFavorite: boolean
+  isInGameCash: boolean
 }

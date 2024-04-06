@@ -23,14 +23,19 @@ export type Player = {
   customName: any
   faction: Faction
   userId: any
-  items: UserGameItems
+  items: UserGameItems[]
 }
 
 export type UserGameItems = {
+  id: any
   userId: any
   playerId: any
   gameItemId: any
   receivedDate: any
   expiredDate: any
   itemInfo: GameItem
+  isTaken: boolean
+  lastTakenTime: any
+  timeRemaining: any
+  equipped: boolean
 }

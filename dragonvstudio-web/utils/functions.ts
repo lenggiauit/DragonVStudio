@@ -28,7 +28,7 @@ const bgColors = [
 ]
 
 export function GetRandomBgColor() {
-  return bgColors[Math.floor(Math.random() * bgColors.length)]
+  return '#' + Math.floor(Math.random() * 16777215).toString(16)
 }
 
 let appSetting: AppSetting = require('../appSetting.json')
@@ -119,5 +119,32 @@ export function hasPermissions(session: Session, per: string[]) {
     )
   } else {
     return false
+  }
+}
+
+export function GetTypeNameOfItem(item: string) {
+  switch (item.toLowerCase()) {
+    case 'horse':
+      return 'Horse'
+    case 'equipment_0':
+      return 'Weapon'
+    case 'equipment_1':
+      return 'Shield'
+    case 'equipment_2':
+      return 'Weapon'
+    case 'equipment_3':
+      return 'Shield'
+    case 'armor_head':
+      return 'Armor Head'
+    case 'armor_body':
+      return 'Armor Body'
+    case 'armor_leg':
+      return 'Armor Leg'
+    case 'armor_gloves':
+      return 'Armor Gloves'
+    case 'armor_cape':
+      return 'Armor Cape'
+    default:
+      return item
   }
 }

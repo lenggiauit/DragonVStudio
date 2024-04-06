@@ -36,8 +36,10 @@ export type GameItemFormValues = {
   images: any
   stock: any
   price: any
+  duration: any
   isActive: boolean
   isFavorite: boolean
+  isInGameCash: boolean
 }
 
 const AddEditGameItemModal: React.FC<Props> = ({
@@ -55,12 +57,14 @@ const AddEditGameItemModal: React.FC<Props> = ({
     code: currentItem == null ? '' : currentItem?.code,
     class: currentItem == null ? '' : currentItem?.class,
     type: currentItem == null ? '' : currentItem?.type,
+    duration: currentItem == null ? '' : currentItem?.duration,
     description: currentItem == null ? '' : currentItem?.description,
     images: currentItem == null ? '' : currentItem?.images,
     stock: currentItem == null ? 0 : currentItem?.stock,
     price: currentItem == null ? 0 : currentItem?.price,
     isActive: currentItem == null ? false : currentItem?.isActive,
     isFavorite: currentItem == null ? false : currentItem?.isFavorite,
+    isInGameCash: currentItem == null ? false : currentItem?.isInGameCash,
   }
 
   //
@@ -84,6 +88,7 @@ const AddEditGameItemModal: React.FC<Props> = ({
       ),
       stock: Yup.number().required(dictionaryList[locale]['RequiredField']),
       price: Yup.number().required(dictionaryList[locale]['RequiredField']),
+      duration: Yup.number().required(dictionaryList[locale]['RequiredField']),
     })
   }
   const handleOnSubmit = (
@@ -101,7 +106,9 @@ const AddEditGameItemModal: React.FC<Props> = ({
         images: currentImage,
         stock: values.stock,
         price: values.price,
+        duration: values.duration,
         isFavorite: values.isFavorite,
+        isInGameCash: values.isInGameCash,
         isActive: values.isActive,
       },
       gameUrl: gameUrl,
@@ -169,7 +176,6 @@ const AddEditGameItemModal: React.FC<Props> = ({
             <div className='modal-header'>
               <h5 className='modal-title text-dark'>
                 {currentItem == null ? 'Add Item' : 'Edit Item'}
-                {currentItem?.class}
               </h5>
               <button
                 type='button'
@@ -188,7 +194,13 @@ const AddEditGameItemModal: React.FC<Props> = ({
                 enableReinitialize={true}
                 validationSchema={validationSchema}
               >
-                {({ values, setFieldValue, errors, touched }) => (
+                {({
+                  values,
+                  setFieldValue,
+                  getFieldHelpers,
+                  errors,
+                  touched,
+                }) => (
                   <Form
                     autoComplete={'off'}
                     className={
@@ -205,10 +217,7 @@ const AddEditGameItemModal: React.FC<Props> = ({
                     }
                   >
                     <div className='form-group text-center'>
-                      <img
-                        src={currentImage}
-                        className='avatar rounded-circle'
-                      />
+                      <img src={currentImage} className='avatar' />
                       <br />
                       <a href='#' onClick={handleUploadFile}>
                         Edit Image
@@ -227,13 +236,13 @@ const AddEditGameItemModal: React.FC<Props> = ({
                         />
                       </div>
                     </div>
-                    <div className='form-group mt-2'>
+                    <div className='form-group  '>
                       <input type='hidden' name='id' value={currentItem?.id} />
+                      <label className='form-label'>Name</label>
                       <Field
                         type='text'
-                        className='form-control'
+                        className='form-control form-control-sm'
                         name='name'
-                        placeholder='name'
                         required
                       />
                       <ErrorMessage
@@ -244,11 +253,11 @@ const AddEditGameItemModal: React.FC<Props> = ({
                     </div>
 
                     <div className='form-group mt-2'>
+                      <label className='form-label'>Item Id</label>
                       <Field
                         type='text'
-                        className='form-control'
+                        className='form-control  form-control-sm'
                         name='code'
-                        placeholder='code | item id'
                         required
                       />
                       <ErrorMessage
@@ -259,8 +268,9 @@ const AddEditGameItemModal: React.FC<Props> = ({
                     </div>
 
                     <div className='form-group mt-2'>
+                      <label className='form-label'>Class</label>
                       <select
-                        className='form-select'
+                        className='form-select  form-select-sm'
                         name='class'
                         value={values.class || ''}
                         required
@@ -315,8 +325,9 @@ const AddEditGameItemModal: React.FC<Props> = ({
                     </div>
 
                     <div className='form-group mt-2'>
+                      <label className='form-label'>Type</label>
                       <select
-                        className='form-select'
+                        className='form-select  form-select-sm'
                         name='type'
                         required
                         value={values.type || ''}
@@ -365,12 +376,12 @@ const AddEditGameItemModal: React.FC<Props> = ({
                     </div>
 
                     <div className='form-group mt-2'>
+                      <label className='form-label'>Description</label>
                       <Field
                         type='textarea'
                         as='textarea'
                         className='form-control'
                         name='description'
-                        placeholder='Description'
                         required
                       />
                       <ErrorMessage
@@ -380,9 +391,10 @@ const AddEditGameItemModal: React.FC<Props> = ({
                       />
                     </div>
                     <div className='form-group mt-2'>
+                      <label className='form-label'>In Stock</label>
                       <Field
                         type='number'
-                        className='form-control'
+                        className='form-control  form-control-sm'
                         name='stock'
                         placeholder='stock'
                         required
@@ -395,9 +407,10 @@ const AddEditGameItemModal: React.FC<Props> = ({
                       />
                     </div>
                     <div className='form-group mt-2'>
+                      <label className='form-label'>Price</label>
                       <Field
                         type='number'
-                        className='form-control'
+                        className='form-control  form-control-sm'
                         name='price'
                         placeholder='price'
                         required
@@ -409,20 +422,42 @@ const AddEditGameItemModal: React.FC<Props> = ({
                       />
                     </div>
                     <div className='form-group mt-2'>
-                      <div className='row'>
-                        <div className='col-md-6'>
-                          <input
+                      <label className='form-label'>Duration (day)</label>
+                      <Field
+                        type='number'
+                        className='form-control  form-control-sm'
+                        name='duration'
+                        required
+                      />
+                      <ErrorMessage
+                        name='price'
+                        component='span'
+                        className='invalid-feedback'
+                      />
+                    </div>
+                    <div className='form-group mt-2'>
+                      <div className='row mb-1'>
+                        <div className='col-md-4'>
+                          <Field
+                            type='checkbox'
+                            className='form-check-input'
+                            name='isInGameCash'
+                            id='isInGameCash'
+                          />
+                          <label
+                            className='form-check-label ms-2'
+                            htmlFor='isInGameCash'
+                          >
+                            In-Game Cash
+                          </label>
+                        </div>
+
+                        <div className='col-md-4'>
+                          <Field
                             type='checkbox'
                             className='form-check-input'
                             name='isActive'
-                            value={values.isActive ? 'on' : 'off'}
                             id='isActive'
-                            onChange={(e) => {
-                              setFieldValue(
-                                'isActive',
-                                e.target.value == 'on' ? true : false
-                              )
-                            }}
                           />
                           <label
                             className='form-check-label ms-2'
@@ -431,25 +466,18 @@ const AddEditGameItemModal: React.FC<Props> = ({
                             Is Active
                           </label>
                         </div>
-                        <div className='col-md-6'>
-                          <input
+                        <div className='col-md-4'>
+                          <Field
                             type='checkbox'
                             className='form-check-input'
                             name='isFavorite'
-                            value={values.isFavorite ? 'on' : 'off'}
                             id='isFavorite'
-                            onChange={(e) => {
-                              setFieldValue(
-                                'isFavorite',
-                                e.target.value == 'on' ? true : false
-                              )
-                            }}
                           />
                           <label
                             className='form-check-label ms-2'
                             htmlFor='isFavorite'
                           >
-                            Is Favorite
+                            Favorite
                           </label>
                         </div>
                       </div>
