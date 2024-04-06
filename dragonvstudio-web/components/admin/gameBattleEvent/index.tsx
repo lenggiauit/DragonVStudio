@@ -33,7 +33,7 @@ import FormControl from '@mui/material/FormControl'
 import InputLabel from '@mui/material/InputLabel'
 import { toast } from 'react-toastify'
 
-const ITEM_HEIGHT = 250
+const ITEM_HEIGHT = 32
 const ITEM_PADDING_TOP = 8
 
 type FormAddPlayer = {
@@ -378,7 +378,7 @@ const AdminGameBattleEvent: React.FC = (): ReactElement => {
                     <Form autoComplete='off'>
                       <div className='input-group mb-3'>
                         <Select
-                          sx={{ width: '350px' }}
+                          sx={{ width: '350px', height: '350px' }}
                           name='players'
                           multiple
                           value={selectedPlayersId}
