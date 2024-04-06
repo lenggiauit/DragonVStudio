@@ -25,6 +25,7 @@ import { ResultCode } from '@/utils/enums'
 import showDialogModal from '../modal/showModal'
 import dayjs from 'dayjs'
 import { GetTypeNameOfItem } from '@/utils/functions'
+import { v4 } from 'uuid'
 let appSetting: AppSetting = require('../../appSetting.json')
 
 const UserGame: React.FC = (): ReactElement => {
@@ -277,7 +278,7 @@ const UserGame: React.FC = (): ReactElement => {
                 <h4>Your items (You can only equip an item one time a day)</h4>
                 <div className='row row-cols-1 row-cols-md-3 g-2 mt-5'>
                   {PlayerItemList.map((pitem) => (
-                    <div className='col'>
+                    <div key={v4()} className='col'>
                       <div className='card h-100'>
                         <div className='text-center mt-2  '>
                           <img
@@ -350,7 +351,7 @@ const UserGame: React.FC = (): ReactElement => {
                 <h4>HighShop items</h4>
                 <div className='row row-cols-1 row-cols-md-3 g-2 mt-5'>
                   {ShopItemList.map((sitem) => (
-                    <div className='col'>
+                    <div key={v4()} className='col'>
                       <div className='card h-100'>
                         <div className='text-center mt-2  '>
                           <img
