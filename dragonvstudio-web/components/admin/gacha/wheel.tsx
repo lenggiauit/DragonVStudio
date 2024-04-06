@@ -7,7 +7,6 @@ import React, {
   useImperativeHandle,
   useState,
 } from 'react'
-import { number } from 'yup'
 
 type Props = {
   gachaItems: GachaItem[]
