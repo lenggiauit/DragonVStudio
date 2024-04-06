@@ -335,7 +335,7 @@ const GachaComponent: React.FC = () => {
                     </thead>
                     <tbody>
                       {PlayersAndAwardList.map((item) => (
-                        <tr>
+                        <tr key={v4()}>
                           <td>{item.round}</td>
                           <td>{item.player.name}</td>
                           <td>{item.gachaItem.name}</td>
