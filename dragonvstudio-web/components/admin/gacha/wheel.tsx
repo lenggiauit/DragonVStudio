@@ -299,5 +299,6 @@ const WheelSpin = forwardRef<CanReDraw, Props>(
     )
   }
 )
+WheelSpin.displayName = 'WheelSpin'
 
 export default WheelSpin
