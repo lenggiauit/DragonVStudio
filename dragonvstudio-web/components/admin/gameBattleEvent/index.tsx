@@ -135,7 +135,7 @@ const AdminGameBattleEvent: React.FC = (): ReactElement => {
   const MenuProps = {
     PaperProps: {
       style: {
-        maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+        maxHeight: 250,
         width: 250,
       },
     },
@@ -378,7 +378,7 @@ const AdminGameBattleEvent: React.FC = (): ReactElement => {
                     <Form autoComplete='off'>
                       <div className='input-group mb-3'>
                         <Select
-                          sx={{ width: '350px', height: '350px' }}
+                          sx={{ width: '350px' }}
                           name='players'
                           multiple
                           value={selectedPlayersId}
