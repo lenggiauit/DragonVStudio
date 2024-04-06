@@ -135,7 +135,7 @@ const AdminGameBattleEvent: React.FC = (): ReactElement => {
   const MenuProps = {
     PaperProps: {
       style: {
-        maxHeight: 250,
+        maxHeight: 450,
         width: 250,
       },
     },
