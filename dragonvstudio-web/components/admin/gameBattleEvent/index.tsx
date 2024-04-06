@@ -316,9 +316,9 @@ const AdminGameBattleEvent: React.FC = (): ReactElement => {
             className='me-2'
             href='#'
             title='Change team'
-            onClick={() => {
+            onClick={(e) => {
+              e.preventDefault()
               let newList = [...selectedPlayers]
-
               newList = newList.map((i) => {
                 if (i.playerId == row.playerId) {
                   return { ...i, team: i.team == 1 ? 2 : 1 }
@@ -326,7 +326,6 @@ const AdminGameBattleEvent: React.FC = (): ReactElement => {
                   return i
                 }
               })
-
               setSelectedPlayers(newList)
             }}
           >
@@ -335,7 +334,8 @@ const AdminGameBattleEvent: React.FC = (): ReactElement => {
           <a
             href='#'
             title='Remove'
-            onClick={() => {
+            onClick={(e) => {
+              e.preventDefault()
               let newList = selectedPlayers.filter(
                 (p) => p.playerId != row.playerId
               )
