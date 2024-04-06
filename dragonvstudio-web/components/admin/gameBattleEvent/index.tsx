@@ -33,7 +33,7 @@ import FormControl from '@mui/material/FormControl'
 import InputLabel from '@mui/material/InputLabel'
 import { toast } from 'react-toastify'
 
-const ITEM_HEIGHT = 32
+const ITEM_HEIGHT = 500
 const ITEM_PADDING_TOP = 8
 
 type FormAddPlayer = {
@@ -127,6 +127,7 @@ const AdminGameBattleEvent: React.FC = (): ReactElement => {
       getSavedPlayerListForEventStatus.data.resultCode == ResultCode.Success &&
       getSavedPlayerListForEventStatus.data.resource.length > 0
     ) {
+      console.log(getSavedPlayerListForEventStatus.data.resource)
       setSelectedPlayers(getSavedPlayerListForEventStatus.data.resource)
     }
   }, [getSavedPlayerListForEventStatus])
@@ -248,8 +249,61 @@ const AdminGameBattleEvent: React.FC = (): ReactElement => {
     {
       id: 'class',
       name: 'Class',
+      cell: (row: any) => (
+        <>
+          <select
+            className='form-select form-select-sm'
+            onChange={(e) => {
+              let newList = [...selectedPlayers]
+              newList = newList.map((i) => {
+                if (i.playerId === row.playerId) {
+                  return { ...i, class: e.target.value }
+                } else {
+                  return i
+                }
+              })
+              setSelectedPlayers(newList)
+            }}
+          >
+            <option
+              selected={row.class == 'pe_sergeant'}
+              key='pe_sergeant'
+              value='pe_sergeant'
+            >
+              Sergeant
+            </option>
+            <option
+              key='pe_manatarms'
+              selected={row.class == 'pe_manatarms'}
+              value='pe_manatarms'
+            >
+              Man At Arms
+            </option>
+            <option
+              key='pe_master_archer'
+              selected={row.class == 'pe_master_archer'}
+              value='pe_master_archer'
+            >
+              Master Archer
+            </option>
 
-      selector: (row: any) => row.class,
+            <option
+              key='pe_master_crossbowman'
+              selected={row.class == 'pe_master_crossbowman'}
+              value='pe_master_crossbowman'
+            >
+              Master Crossbowman
+            </option>
+            <option
+              key='pe_doctor'
+              selected={row.class == 'pe_doctor'}
+              value='pe_doctor'
+            >
+              Doctor
+            </option>
+          </select>
+        </>
+      ),
       sortable: true,
     },
     {
@@ -257,17 +311,40 @@ const AdminGameBattleEvent: React.FC = (): ReactElement => {
       name: 'Action',
       width: '95px',
       cell: (row: any) => (
-        <a
-          href='#'
-          onClick={() => {
-            let newList = selectedPlayers.filter(
-              (p) => p.playerId != row.playerId
-            )
-            setSelectedPlayers(newList)
-          }}
-        >
-          <i className='bi bi-x' style={{ fontSize: 32 }} />
-        </a>
+        <>
+          <a
+            className='me-2'
+            href='#'
+            title='Change team'
+            onClick={() => {
+              let newList = [...selectedPlayers]
+
+              newList = newList.map((i) => {
+                if (i.playerId == row.playerId) {
+                  return { ...i, team: i.team == 1 ? 2 : 1 }
+                } else {
+                  return i
+                }
+              })
+
+              setSelectedPlayers(newList)
+            }}
+          >
+            <i className='bi bi-arrow-left-right' style={{ fontSize: 24 }} />
+          </a>
+          <a
+            href='#'
+            title='Remove'
+            onClick={() => {
+              let newList = selectedPlayers.filter(
+                (p) => p.playerId != row.playerId
+              )
+              setSelectedPlayers(newList)
+            }}
+          >
+            <i className='bi bi-x' style={{ fontSize: 32 }} />
+          </a>
+        </>
       ),
       sortable: true,
     },
@@ -301,7 +378,7 @@ const AdminGameBattleEvent: React.FC = (): ReactElement => {
                     <Form autoComplete='off'>
                       <div className='input-group mb-3'>
                         <Select
-                          sx={{ width: '300px' }}
+                          sx={{ width: '350px' }}
                           name='players'
                           multiple
                           value={selectedPlayersId}
@@ -369,9 +446,9 @@ const AdminGameBattleEvent: React.FC = (): ReactElement => {
                           >
                             Master Crossbowman
                           </MenuItem>
-                          {/* <MenuItem key='pe_crossbowman' value='pe_crossbowman'>
-                            Crossbowman
-                          </MenuItem> */}
+                          <MenuItem key='pe_doctor' value='pe_doctor'>
+                            Doctor
+                          </MenuItem>
                         </Select>
 
                         <Select
