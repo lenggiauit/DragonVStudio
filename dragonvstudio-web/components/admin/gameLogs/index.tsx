@@ -105,24 +105,18 @@ const AdminGameLogs: React.FC = (): ReactElement => {
       selector: (row: any) => row.id,
       sortable: true,
     },
-    {
-      id: 'createdAt',
-      name: 'Created At',
-      width: '180px',
-      selector: (row: any) => row.createdAt,
-      sortable: true,
-    },
+
     {
       id: 'issuerPlayerId',
-      name: 'IssuerPlayerId',
-      width: '195px',
+      name: 'Player Id',
+      width: '165px',
       selector: (row: any) => row.issuerPlayerId,
       sortable: true,
     },
     {
       id: 'issuerPlayerName',
-      name: 'IssuerPlayerName',
-      width: '170px',
+      name: 'Player Name',
+      width: '180px',
       selector: (row) => row.issuerPlayerName,
       sortable: true,
     },
@@ -134,8 +128,16 @@ const AdminGameLogs: React.FC = (): ReactElement => {
       sortable: true,
     },
     {
+      id: 'createdAt',
+      name: 'Created At',
+      width: '180px',
+      selector: (row: any) => row.createdAt,
+      sortable: true,
+    },
+    {
       id: 'logMessage',
       name: 'logMessage',
+      width: '950px',
       cell: (row) => (
         <>
           <a
@@ -161,6 +163,7 @@ const AdminGameLogs: React.FC = (): ReactElement => {
     {
       id: 'affectedPlayers',
       name: 'affectedPlayers',
+      width: '650px',
       cell: (row) => (
         <>
           <a
