@@ -152,8 +152,8 @@ const AdminGameLogs: React.FC = (): ReactElement => {
               })
             }}
           >
-            {row.logMessage.toString().length > 50
-              ? row.logMessage.substring(0, 50)
+            {row.logMessage.toString().length > 300
+              ? row.logMessage.substring(0, 300)
               : row.logMessage}
           </a>
         </>
