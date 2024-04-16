@@ -466,6 +466,23 @@ export const MountAndBladeGameService = createApi({
         return response
       },
     }),
+
+    ChangePlayerName: builder.mutation<
+      ApiResponse<ResultCode>,
+      ApiGameRequest<{
+        playerId: any
+        name: any
+      }>
+    >({
+      query: (payload) => ({
+        url: 'AdminGameMaB/ChangePlayerName',
+        method: 'post',
+        body: payload,
+      }),
+      transformResponse(response: ApiResponse<ResultCode>) {
+        return response
+      },
+    }),
   }),
 })
 
@@ -498,4 +515,5 @@ export const {
   usePLayerDeleteGameItemMutation,
   usePlayerEquipItemMutation,
   useGetGachaItemsForEventMutation,
+  useChangePlayerNameMutation,
 } = MountAndBladeGameService

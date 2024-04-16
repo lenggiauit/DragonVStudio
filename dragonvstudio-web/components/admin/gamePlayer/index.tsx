@@ -18,6 +18,7 @@ import showConfirmModal from '@/components/modal'
 import { ResultCode } from '@/utils/enums'
 import showDialogModal from '@/components/modal/showModal'
 import { toast } from 'react-toastify'
+import ChangePlayerNameModal from '../changePlayerNameModal/inde'
 const AdminGamePlayer: React.FC = (): ReactElement => {
   const { gameUrl } = useParams()
 
@@ -60,6 +61,9 @@ const AdminGamePlayer: React.FC = (): ReactElement => {
   const [selectedPlayer, setSelectedPlayer] = useState<Player | null>(null)
 
   const [isShowBanModal, setIsShowBanModal] = useState<boolean>(false)
+
+  const [isShowChangeNameModal, setIsShowChangeNameModal] =
+    useState<boolean>(false)
 
   const pagingChangeEvent: any = (p: Paging) => {
     let mp: Paging = {
@@ -160,10 +164,20 @@ const AdminGamePlayer: React.FC = (): ReactElement => {
     {
       id: 'actions',
       name: 'Actions',
-      width: '350px',
+      width: '450px',
       cell: (row) => (
         <div className='align-items-center'>
-          <button type='button' className='btn btn-danger btn-sm'>
+          <button
+            type='button'
+            className='btn btn-danger btn-sm'
+            onClick={() => {
+              setSelectedPlayer(row)
+              setIsShowChangeNameModal(true)
+            }}
+          >
+            Change Name
+          </button>
+          <button type='button' className='btn btn-danger btn-sm ms-2'>
             Kick
           </button>
           <button
@@ -220,6 +234,26 @@ const AdminGamePlayer: React.FC = (): ReactElement => {
         }}
         onClose={() => {
           setIsShowBanModal(false)
+        }}
+      />
+      <ChangePlayerNameModal
+        isShow={isShowChangeNameModal}
+        currentPlayer={selectedPlayer!}
+        onSubmit={(result) => {
+          if (result) {
+            toast.success('Changed Player Name!')
+            getPlayerList({
+              payload: { keywords: keyWords },
+              metaData: metaData,
+              gameUrl: gameUrl,
+            })
+            setIsShowChangeNameModal(false)
+          } else {
+            toast.error('Error, please try again!')
+          }
+        }}
+        onClose={() => {
+          setIsShowChangeNameModal(false)
         }}
       />
       {(getPlayerListStatus.isLoading ||
