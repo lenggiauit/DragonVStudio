@@ -177,9 +177,9 @@ const AdminGamePlayer: React.FC = (): ReactElement => {
           >
             Change Name
           </button>
-          <button type='button' className='btn btn-danger btn-sm ms-2'>
+          {/* <button type='button' className='btn btn-danger btn-sm ms-2'>
             Kick
-          </button>
+          </button> */}
           <button
             type='button'
             className='btn btn-danger btn-sm ms-2'

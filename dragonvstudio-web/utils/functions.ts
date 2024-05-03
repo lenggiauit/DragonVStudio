@@ -98,7 +98,7 @@ export function getMockInterviewEnumStatusName(value: string) {
 export function hasPermission(session: Session, per: string) {
   if (session?.user != null) {
     return (
-      session?.user.permissions.filter(
+      session?.user.permissions?.filter(
         (p) => p.code.toLocaleUpperCase() === per.toLocaleUpperCase()
       ).length > 0
     )
@@ -110,7 +110,7 @@ export function hasPermission(session: Session, per: string) {
 export function hasPermissions(session: Session, per: string[]) {
   if (session?.user != null) {
     return (
-      session?.user.permissions.filter(
+      session?.user.permissions?.filter(
         (p) =>
           per.findIndex(
             (pe) => p.code.toLocaleUpperCase() === pe.toLocaleUpperCase()

@@ -12,7 +12,7 @@ const ServerLocations = () => {
             <div className='subtitle fadeInUp mb-3'>Server locations</div>
           </div>
           <div className='col-lg-6 offset-lg-3 text-center'>
-            <h2 className='fadeInUp1 mb20'>02 servers worldwide.</h2>
+            <h2 className='fadeInUp1 mb20'>03 servers worldwide.</h2>
           </div>
 
           <div className='spacer-10'></div>
@@ -25,6 +25,15 @@ const ServerLocations = () => {
                   style={{ top: '23%', left: '18%' }}
                 >
                   <span>Canada</span>
+                  <div className='de-circle-1'></div>
+                  <div className='de-circle-2'></div>
+                </div>
+
+                <div
+                  className='de-spot fadeIn'
+                  style={{ top: '35%', left: '50%' }}
+                >
+                  <span>Europe</span>
                   <div className='de-circle-1'></div>
                   <div className='de-circle-2'></div>
                 </div>
