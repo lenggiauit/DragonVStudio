@@ -483,6 +483,43 @@ export const MountAndBladeGameService = createApi({
         return response
       },
     }),
+    TakePlayerMoney: builder.mutation<
+      ApiResponse<ResultCode>,
+      ApiGameRequest<{
+        userId: any
+        playerId: any
+        discordId: any
+        amount: any
+      }>
+    >({
+      query: (payload) => ({
+        url: 'AdminGameMaB/TakePlayerMoney',
+        method: 'post',
+        body: payload,
+      }),
+      transformResponse(response: ApiResponse<ResultCode>) {
+        return response
+      },
+    }),
+
+    GivePlayerMoney: builder.mutation<
+      ApiResponse<ResultCode>,
+      ApiGameRequest<{
+        userId: any
+        playerId: any
+        discordId: any
+        amount: any
+      }>
+    >({
+      query: (payload) => ({
+        url: 'AdminGameMaB/GivePlayerMoney',
+        method: 'post',
+        body: payload,
+      }),
+      transformResponse(response: ApiResponse<ResultCode>) {
+        return response
+      },
+    }),
   }),
 })
 
@@ -516,4 +553,6 @@ export const {
   usePlayerEquipItemMutation,
   useGetGachaItemsForEventMutation,
   useChangePlayerNameMutation,
+  useGivePlayerMoneyMutation,
+  useTakePlayerMoneyMutation,
 } = MountAndBladeGameService

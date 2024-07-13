@@ -19,6 +19,7 @@ import { ResultCode } from '@/utils/enums'
 import showDialogModal from '@/components/modal/showModal'
 import { toast } from 'react-toastify'
 import ChangePlayerNameModal from '../changePlayerNameModal/inde'
+import PlayerBankMoneyModal from '../moneyModal'
 const AdminGamePlayer: React.FC = (): ReactElement => {
   const { gameUrl } = useParams()
 
@@ -61,6 +62,10 @@ const AdminGamePlayer: React.FC = (): ReactElement => {
   const [selectedPlayer, setSelectedPlayer] = useState<Player | null>(null)
 
   const [isShowBanModal, setIsShowBanModal] = useState<boolean>(false)
+
+  const [isShowMoneyModal, setIsShowMoneyModal] = useState<boolean>(false)
+
+  const [isTakeMoney, setIsTakeMoney] = useState<boolean>(false)
 
   const [isShowChangeNameModal, setIsShowChangeNameModal] =
     useState<boolean>(false)
@@ -164,7 +169,7 @@ const AdminGamePlayer: React.FC = (): ReactElement => {
     {
       id: 'actions',
       name: 'Actions',
-      width: '450px',
+      width: 'auto',
       cell: (row) => (
         <div className='align-items-center'>
           <button
@@ -177,9 +182,7 @@ const AdminGamePlayer: React.FC = (): ReactElement => {
           >
             Change Name
           </button>
-          {/* <button type='button' className='btn btn-danger btn-sm ms-2'>
-            Kick
-          </button> */}
+
           <button
             type='button'
             className='btn btn-danger btn-sm ms-2'
@@ -190,6 +193,30 @@ const AdminGamePlayer: React.FC = (): ReactElement => {
           >
             Ban
           </button>
+
+          <button
+            type='button'
+            className='btn btn-danger btn-sm ms-2'
+            onClick={() => {
+              setSelectedPlayer(row)
+              setIsTakeMoney(true)
+              setIsShowMoneyModal(true)
+            }}
+          >
+            Take Money
+          </button>
+          <button
+            type='button'
+            className='btn btn-danger btn-sm ms-2'
+            onClick={() => {
+              setSelectedPlayer(row)
+              setIsTakeMoney(false)
+              setIsShowMoneyModal(true)
+            }}
+          >
+            Give Money
+          </button>
+
           <button
             type='button'
             className='btn btn-danger btn-sm ms-2'
@@ -234,6 +261,31 @@ const AdminGamePlayer: React.FC = (): ReactElement => {
         }}
         onClose={() => {
           setIsShowBanModal(false)
+        }}
+      />
+      <PlayerBankMoneyModal
+        isShow={isShowMoneyModal}
+        takeMoney={isTakeMoney}
+        currentPlayer={selectedPlayer!}
+        onSubmit={(result) => {
+          if (result) {
+            if (isTakeMoney) {
+              toast.success('Taken player money!')
+            } else {
+              toast.success('Given player money!')
+            }
+            getPlayerList({
+              payload: { keywords: keyWords },
+              metaData: metaData,
+              gameUrl: gameUrl,
+            })
+            setIsShowMoneyModal(false)
+          } else {
+            toast.error('Error, please try again!')
+          }
+        }}
+        onClose={() => {
+          setIsShowMoneyModal(false)
         }}
       />
       <ChangePlayerNameModal

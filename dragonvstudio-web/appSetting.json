@@ -1,6 +1,6 @@
 {
   "SiteUrl": "https://dragonvstudio.com/",
-  "APIUrl": "https://api.dragonvstudio.com/",
+  "APIUrl": "https://api.dragonvstudio.local/",
   "GoogleClientId": "1075286664742-righjavc1rvvb1ba5mdk674gv3gis7v3.apps.googleusercontent.com",
   "PageSize": 10
 }
