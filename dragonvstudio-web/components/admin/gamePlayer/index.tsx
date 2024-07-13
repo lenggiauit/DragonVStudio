@@ -174,7 +174,7 @@ const AdminGamePlayer: React.FC = (): ReactElement => {
         <div className='align-items-center'>
           <button
             type='button'
-            className='btn btn-danger btn-sm'
+            className='btn btn-danger btn-sm btn-sm-2'
             onClick={() => {
               setSelectedPlayer(row)
               setIsShowChangeNameModal(true)
@@ -185,7 +185,7 @@ const AdminGamePlayer: React.FC = (): ReactElement => {
 
           <button
             type='button'
-            className='btn btn-danger btn-sm ms-2'
+            className='btn btn-primary btn-sm btn-sm-2 ms-2'
             onClick={() => {
               setSelectedPlayer(row)
               setIsShowBanModal(true)
@@ -196,7 +196,7 @@ const AdminGamePlayer: React.FC = (): ReactElement => {
 
           <button
             type='button'
-            className='btn btn-danger btn-sm ms-2'
+            className='btn btn-secondary btn-sm btn-sm-2 ms-2'
             onClick={() => {
               setSelectedPlayer(row)
               setIsTakeMoney(true)
@@ -207,7 +207,7 @@ const AdminGamePlayer: React.FC = (): ReactElement => {
           </button>
           <button
             type='button'
-            className='btn btn-danger btn-sm ms-2'
+            className='btn btn-success btn-sm btn-sm-2 ms-2'
             onClick={() => {
               setSelectedPlayer(row)
               setIsTakeMoney(false)
@@ -219,7 +219,7 @@ const AdminGamePlayer: React.FC = (): ReactElement => {
 
           <button
             type='button'
-            className='btn btn-danger btn-sm ms-2'
+            className='btn btn-danger btn-sm btn-sm-2 ms-2'
             onClick={() => {
               showConfirmModal({
                 message: `Confirm, Assign player: ${row.name} to Prison`,
@@ -236,7 +236,7 @@ const AdminGamePlayer: React.FC = (): ReactElement => {
           </button>
           <a
             href={`/admin/${gameUrl}/logs?keywords=${row.playerId}`}
-            className='btn btn-warning btn-sm ms-2'
+            className='btn btn-warning btn-sm btn-sm-2 ms-2'
           >
             Log
           </a>
