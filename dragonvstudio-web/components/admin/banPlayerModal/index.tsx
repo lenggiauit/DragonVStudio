@@ -175,6 +175,8 @@ const BanPlayerModal: React.FC<Props> = ({
                     <div className='form-group  mt-4'>
                       <Field
                         type='number'
+                        min='0'
+                        step='1'
                         className='form-control'
                         name='punishmentTime'
                         placeholder='days'
