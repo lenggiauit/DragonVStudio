@@ -33,7 +33,7 @@ export type BanPlayerFormValues = {
   playerId: string
   discordId: string
   reason: string
-  punishmentTime: Date
+  punishmentTime: number
 }
 
 const BanPlayerModal: React.FC<Props> = ({
@@ -49,7 +49,7 @@ const BanPlayerModal: React.FC<Props> = ({
     playerId: currentPlayer?.playerId,
     discordId: currentPlayer?.discordId,
     reason: '',
-    punishmentTime: new Date(),
+    punishmentTime: 1,
   }
 
   //
@@ -62,7 +62,7 @@ const BanPlayerModal: React.FC<Props> = ({
   const validationSchema = () => {
     return Yup.object().shape({
       reason: Yup.string().required(dictionaryList[locale]['RequiredField']),
-      punishmentTime: Yup.date().required(
+      punishmentTime: Yup.number().required(
         dictionaryList[locale]['RequiredField']
       ),
     })
@@ -78,7 +78,7 @@ const BanPlayerModal: React.FC<Props> = ({
         discordId: currentPlayer?.discordId,
         name: currentPlayer?.name,
         reason: values.reason,
-        punishmentTime: selectedPunishmentTime,
+        punishmentTime: values.punishmentTime,
       },
       gameUrl: gameUrl,
     })
@@ -173,13 +173,13 @@ const BanPlayerModal: React.FC<Props> = ({
                     </div>
 
                     <div className='form-group  mt-4'>
-                      <LocalizationProvider dateAdapter={AdapterDayjs}>
-                        <DateTimePicker
-                          sx={{ width: 190 }}
-                          label='Punishment Time'
-                          onChange={(value) => setSelectedPunishmentTime(value)}
-                        />
-                      </LocalizationProvider>
+                      <Field
+                        type='number'
+                        className='form-control'
+                        name='punishmentTime'
+                        placeholder='days'
+                        required
+                      />
                       <ErrorMessage
                         name='punishmentTime'
                         component='span'

@@ -129,7 +129,7 @@ const AdminBannedPlayer: React.FC = (): ReactElement => {
     },
     {
       id: 'punishmentTime',
-      name: 'PunishmentTime',
+      name: 'Punishment Time (UTC)',
       width: '200px',
       selector: (row) =>
         dayjs(row.punishmentTime).format('DD/MM/YYYY - hh:mm:ss A'),
@@ -138,7 +138,6 @@ const AdminBannedPlayer: React.FC = (): ReactElement => {
     {
       id: 'reason',
       name: 'Reason',
-      width: '130px',
       cell: (row) => (
         <>
           <a
@@ -164,6 +163,7 @@ const AdminBannedPlayer: React.FC = (): ReactElement => {
     {
       id: 'actions',
       name: 'Actions',
+      width: '150px',
       cell: (row) => (
         <div className='align-items-center'>
           <button
