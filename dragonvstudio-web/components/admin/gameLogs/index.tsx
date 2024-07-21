@@ -16,6 +16,14 @@ import showDialogModal from '@/components/modal/showModal'
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider/LocalizationProvider'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import PageLoading from '@/components/pageLoading'
+import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker'
+import dayjs, { Dayjs } from 'dayjs'
+import utc from 'dayjs/plugin/utc'
+import timezone from 'dayjs/plugin/timezone'
+
+dayjs.extend(utc)
+dayjs.extend(timezone)
+dayjs.tz.setDefault('UTC')
 
 type FormKeywordActionType = FormKeyword & { actionType: any }
 
@@ -195,13 +203,13 @@ const AdminGameLogs: React.FC = (): ReactElement => {
         <div className='card'>
           <div className='card-header border-bottom'>
             <div className='row'>
-              <div className='col-lg-6'>
+              <div className='col-lg-3'>
                 <h4 className='card-header-title text-dark'>
                   <VNTranslation>Logs</VNTranslation>
                   <ENTranslation>Logs</ENTranslation>
                 </h4>
               </div>
-              <div className='col-lg-6'>
+              <div className='col-lg-9'>
                 <Formik
                   initialValues={initialFormKeyword}
                   onSubmit={handleOnSubmit}
@@ -355,10 +363,11 @@ const AdminGameLogs: React.FC = (): ReactElement => {
                         </Field>
                         <div>
                           <LocalizationProvider dateAdapter={AdapterDayjs}>
-                            <DatePicker
-                              sx={{ width: 190 }}
-                              onChange={(date) => {
-                                setCreatedAt(date?.toISOString())
+                            <DateTimePicker
+                              sx={{ width: 250 }}
+                              timezone='UTC'
+                              onChange={(datetime) => {
+                                setCreatedAt(datetime?.toJSON())
                               }}
                             />
                           </LocalizationProvider>
