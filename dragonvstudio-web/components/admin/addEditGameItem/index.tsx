@@ -14,8 +14,11 @@ import MenuItem from '@mui/material/MenuItem'
 import Select, { SelectChangeEvent } from '@mui/material/Select'
 import { useAddEditGameItemMutation } from '@/services/mountAndBladeGameService'
 import { useUploadImageMutation } from '@/services/fileService'
-import { GlobalKeys } from '@/utils/constants'
+import { DiscordRole, GlobalKeys } from '@/utils/constants'
 import { v4, NIL } from 'uuid'
+import OutlinedInput from '@mui/material/OutlinedInput'
+import ListItemText from '@mui/material/ListItemText'
+import Checkbox from '@mui/material/Checkbox'
 
 const appSetting: AppSetting = require('../../../appSetting.json')
 
@@ -40,6 +43,7 @@ export type GameItemFormValues = {
   isActive: boolean
   isFavorite: boolean
   isInGameCash: boolean
+  discordRole: any
 }
 
 const AddEditGameItemModal: React.FC<Props> = ({
@@ -65,6 +69,8 @@ const AddEditGameItemModal: React.FC<Props> = ({
     isActive: currentItem == null ? false : currentItem?.isActive,
     isFavorite: currentItem == null ? false : currentItem?.isFavorite,
     isInGameCash: currentItem == null ? false : currentItem?.isInGameCash,
+    discordRole:
+      currentItem == null ? '1217724646846365747' : currentItem?.discordRole,
   }
 
   //
@@ -76,6 +82,10 @@ const AddEditGameItemModal: React.FC<Props> = ({
   const [currentImage, setcurrentImage] = useState<string>(
     currentItem != null ? currentItem?.images : GlobalKeys.NoImageUrl
   )
+
+  const [selectedDiscordRoleIds, setSelectedDiscordRoleIds] = useState<
+    string[]
+  >([])
 
   const validationSchema = () => {
     return Yup.object().shape({
@@ -108,8 +118,9 @@ const AddEditGameItemModal: React.FC<Props> = ({
         price: values.price,
         duration: values.duration,
         isFavorite: values.isFavorite,
-        isInGameCash: values.isInGameCash,
+        isInGameCash: true,
         isActive: values.isActive,
+        discordRole: selectedDiscordRoleIds.toString(),
       },
       gameUrl: gameUrl,
     })
@@ -158,6 +169,31 @@ const AddEditGameItemModal: React.FC<Props> = ({
       setcurrentImage(uploadData.data.resource.url)
     }
   }, [uploadData.data])
+
+  const [selectedDiscordRoleId, setSelectedDiscordRoleId] = useState<string[]>(
+    []
+  )
+
+  const MenuProps = {
+    PaperProps: {
+      style: {
+        maxHeight: 450,
+        width: 250,
+      },
+    },
+  }
+
+  const handleSelectedDiscordRoleIds = (
+    event: SelectChangeEvent<typeof selectedDiscordRoleId>
+  ) => {
+    const {
+      target: { value },
+    } = event
+
+    setSelectedDiscordRoleIds(
+      typeof value === 'string' ? value.split(',') : value
+    )
+  }
 
   return (
     <>
@@ -211,7 +247,8 @@ const AddEditGameItemModal: React.FC<Props> = ({
                       touched.images ||
                       touched.price ||
                       touched.stock ||
-                      touched.type
+                      touched.type ||
+                      touched.discordRole
                         ? 'was-validated'
                         : ''
                     }
@@ -435,23 +472,51 @@ const AddEditGameItemModal: React.FC<Props> = ({
                         className='invalid-feedback'
                       />
                     </div>
+
+                    <div className='form-group mt-2'>
+                      <label className='form-label'>Discord Role: </label>
+                      <br />
+                      <Select
+                        sx={{ width: '100%', height: '35px' }}
+                        name='discordRole'
+                        multiple
+                        value={selectedDiscordRoleIds}
+                        onChange={(e) => {
+                          handleSelectedDiscordRoleIds(e)
+                        }}
+                        input={<OutlinedInput label='Tag' />}
+                        renderValue={(selected) => selected.join(', ')}
+                        MenuProps={MenuProps}
+                        label='Discord Role'
+                      >
+                        {Object.values(DiscordRole).map((dr) => (
+                          <MenuItem key={v4()} value={dr.toString()}>
+                            <Checkbox
+                              checked={
+                                selectedDiscordRoleIds.indexOf(dr.toString()) >
+                                -1
+                              }
+                            />
+                            <ListItemText
+                              primary={
+                                Object.keys(DiscordRole)[
+                                  Object.values(DiscordRole).indexOf(dr)
+                                ]
+                              }
+                            />
+                          </MenuItem>
+                        ))}
+                      </Select>
+
+                      <ErrorMessage
+                        name='discordrole'
+                        component='span'
+                        className='invalid-feedback'
+                      />
+                    </div>
+
                     <div className='form-group mt-2'>
                       <div className='row mb-1'>
-                        <div className='col-md-4'>
-                          <Field
-                            type='checkbox'
-                            className='form-check-input'
-                            name='isInGameCash'
-                            id='isInGameCash'
-                          />
-                          <label
-                            className='form-check-label ms-2'
-                            htmlFor='isInGameCash'
-                          >
-                            In-Game Cash
-                          </label>
-                        </div>
-
                         <div className='col-md-4'>
                           <Field
                             type='checkbox'

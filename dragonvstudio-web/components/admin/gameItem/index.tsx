@@ -12,7 +12,7 @@ import {
   useGetGameItemsMutation,
 } from '@/services/mountAndBladeGameService'
 import AddEditGameItemModal from '../addEditGameItem'
-import { GlobalKeys } from '@/utils/constants'
+import { DiscordRole, GlobalKeys } from '@/utils/constants'
 import { dictionaryList } from '@/locales'
 import { useAppContext } from '@/contexts/appContext'
 import { toast } from 'react-toastify'
@@ -177,10 +177,18 @@ const AdminGameItems: React.FC = (): ReactElement => {
       sortable: true,
     },
     {
-      id: 'isInGameCash',
-      name: 'InGameCash',
+      id: 'discordrole',
+      name: 'Discord Role',
       width: '125px',
-      cell: (row: any) => (row.isInGameCash ? 'true' : 'false'),
+      cell: (row: any) => (
+        <>
+          {
+            Object.keys(DiscordRole)[
+              Object.values(DiscordRole).indexOf(row.discordRole)
+            ]
+          }
+        </>
+      ),
       sortable: true,
     },
     {

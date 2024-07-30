@@ -12,4 +12,5 @@ export type GameItem = {
   isActive: boolean
   isFavorite: boolean
   isInGameCash: boolean
+  discordRole: any
 }

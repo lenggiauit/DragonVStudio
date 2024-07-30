@@ -324,6 +324,7 @@ export const MountAndBladeGameService = createApi({
         isActive: any
         isFavorite: any
         isInGameCash: any
+        discordRole: any
       }>
     >({
       query: (payload) => ({

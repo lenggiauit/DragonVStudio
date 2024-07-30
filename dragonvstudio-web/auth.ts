@@ -70,6 +70,8 @@ export const authConfig = {
     Discord({
       clientId: process.env.DISCORD_CLIENT_ID,
       clientSecret: process.env.DISCORD_CLIENT_SECRET,
+      authorization:
+        'https://discord.com/oauth2/authorize?scope=identify+email+guilds+guilds.members.read',
     }),
     Credentials({
       credentials: {
