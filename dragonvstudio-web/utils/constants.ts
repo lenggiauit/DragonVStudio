@@ -24,6 +24,26 @@ export enum PermissionKeys {
   RemovePrivateTalk = 'RemovePrivateTalk',
 }
 
+export enum PrivateTalkEnumStatus {
+  Submitted = 'Chờ Email xác nhận',
+  RequestPay = 'Chờ thanh toán',
+  Paid = 'Đã thanh toán',
+  Confirmed = 'Đã xác nhận lịch hẹn',
+  Completed = 'Hoàn thành',
+  Canceled = 'Đã hủy',
+  Pending = 'Chờ xác nhận',
+}
+
+export enum MockInterviewEnumStatus {
+  Submitted = 'Chờ Email xác nhận',
+  RequestPay = 'Chờ thanh toán',
+  Paid = 'Đã thanh toán',
+  Confirmed = 'Đã xác nhận lịch hẹn',
+  Completed = 'Hoàn thành',
+  Canceled = 'Đã hủy',
+  Pending = 'Chờ xác nhận',
+}
+
 export enum DiscordRole {
   BlueWhaleDonor = '1217724646846365747' as any,
   Landlord = '1260911526790037564' as any,
