@@ -177,21 +177,6 @@ const AdminGameItems: React.FC = (): ReactElement => {
       sortable: true,
     },
     {
-      id: 'discordrole',
-      name: 'Discord Role',
-      width: '125px',
-      cell: (row: any) => (
-        <>
-          {
-            Object.keys(DiscordRole)[
-              Object.values(DiscordRole).indexOf(row.discordRole)
-            ]
-          }
-        </>
-      ),
-      sortable: true,
-    },
-    {
       id: 'isActive',
       name: 'Active',
       cell: (row: any) => (row.isActive ? 'true' : 'false'),

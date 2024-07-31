@@ -149,6 +149,10 @@ const UserGame: React.FC = (): ReactElement => {
       })
       toast.success('Buy successfully!')
     } else if (
+      PlayerBuyGameItemStatus.data?.resultCode == ResultCode.ExistingItem
+    ) {
+      toast.error('Existing Item, Please buy another item!')
+    } else if (
       PlayerBuyGameItemStatus.isError ||
       PlayerBuyGameItemStatus.data?.resultCode == ResultCode.Error ||
       PlayerBuyGameItemStatus.data?.resultCode == ResultCode.Invalid ||
@@ -275,7 +279,9 @@ const UserGame: React.FC = (): ReactElement => {
           <div className='card-body'>
             <div className='row'>
               <div className='col-md-12'>
-                <h4>Your items (You can only equip an item one time a day)</h4>
+                <h4>
+                  Your items (You can only equip each item one time a day)
+                </h4>
                 <div className='row row-cols-1 row-cols-md-3 g-2 mt-5'>
                   {PlayerItemList.map((pitem) => (
                     <div key={v4()} className='col'>
