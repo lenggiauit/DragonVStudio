@@ -101,6 +101,21 @@ const AdminGameNav: React.FC = () => {
                 <li className='nav-item'>
                   <a
                     className={`nav-link ${
+                      pathName.indexOf(`/admin/${gameUrl}/personalProperty`) !=
+                      -1
+                        ? 'active'
+                        : ''
+                    }`}
+                    href={`/admin/${gameUrl}/personalProperty`}
+                  >
+                    <i className='bi bi-house nav-icon'></i>
+                    Personal Property
+                  </a>
+                </li>
+
+                <li className='nav-item'>
+                  <a
+                    className={`nav-link ${
                       pathName.indexOf(`/admin/${gameUrl}/logs`) != -1
                         ? 'active'
                         : ''

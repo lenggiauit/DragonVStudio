@@ -26,6 +26,7 @@ import { EventPlayer } from './models/adminGame/eventPlayer'
 import { BannedPlayer } from './models/adminGame/bannedPlayer'
 import { GameItem } from './models/adminGame/gameItem'
 import { GachaItem } from './models/adminGame/gachaItem'
+import { PersonalProperty } from './models/adminGame/personalProperty'
 
 let appSetting: AppSetting = require('../appSetting.json')
 
@@ -521,6 +522,39 @@ export const MountAndBladeGameService = createApi({
         return response
       },
     }),
+
+    GetPersonalProperty: builder.mutation<
+      ApiResponse<PersonalProperty[]>,
+      ApiGameRequest<{}>
+    >({
+      query: (payload) => ({
+        url: 'AdminGameMaB/GetPersonalProperty',
+        method: 'post',
+      }),
+      transformResponse(response: ApiResponse<PersonalProperty[]>) {
+        return response
+      },
+    }),
+
+    UpdatePersonalProperty: builder.mutation<
+      ApiResponse<ResultCode>,
+      ApiGameRequest<{
+        id: any
+        propertyIndex: any
+        propertyName: any
+        propertyBanner: any
+        ownerId: any
+      }>
+    >({
+      query: (payload) => ({
+        url: 'AdminGameMaB/UpdatePersonalProperty',
+        method: 'post',
+        body: payload,
+      }),
+      transformResponse(response: ApiResponse<ResultCode>) {
+        return response
+      },
+    }),
   }),
 })
 
@@ -556,4 +590,6 @@ export const {
   useChangePlayerNameMutation,
   useGivePlayerMoneyMutation,
   useTakePlayerMoneyMutation,
+  useGetPersonalPropertyMutation,
+  useUpdatePersonalPropertyMutation,
 } = MountAndBladeGameService

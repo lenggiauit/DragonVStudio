@@ -360,6 +360,9 @@ const AdminGameLogs: React.FC = (): ReactElement => {
                           <option value='PlayerWithdrawToBank'>
                             PlayerWithdrawToBank
                           </option>
+                          <option value='AdminStockfiller'>
+                            AdminStockfiller
+                          </option>
                         </Field>
                         <div>
                           <LocalizationProvider dateAdapter={AdapterDayjs}>
