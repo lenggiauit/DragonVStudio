@@ -62,13 +62,12 @@ const UpdatePersonalPropertyModal: React.FC<Props> = ({
 
   const validationSchema = () => {
     return Yup.object().shape({
-      propertyName: Yup.number().required(
+      propertyName: Yup.string().required(
         dictionaryList[locale]['RequiredField']
       ),
-      propertyBanner: Yup.number().required(
+      propertyBanner: Yup.string().required(
         dictionaryList[locale]['RequiredField']
       ),
-      ownerId: Yup.number().required(dictionaryList[locale]['RequiredField']),
     })
   }
   const handleOnSubmit = (
@@ -214,7 +213,6 @@ const UpdatePersonalPropertyModal: React.FC<Props> = ({
                         className='form-control'
                         name='ownerId'
                         placeholder='ownerId'
-                        required
                       />
                       <ErrorMessage
                         name='ownerId'
