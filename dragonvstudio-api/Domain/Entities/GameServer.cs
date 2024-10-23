@@ -10,12 +10,14 @@ namespace DragonVStudio.API.Domain.Entities
     {
         [MaxLength(250)]
         public string GameUrl { get; set; }
-
+         
         [MaxLength(250)]
         public string Name { get; set; }
 
         [MaxLength(500)]
         public string Description { get; set; }
+
+       // public string DevelopmentPhase { get; set; }
 
         public int Season { get; set; }
 
@@ -35,10 +37,7 @@ namespace DragonVStudio.API.Domain.Entities
 
         [AllowNull]
         public DateTime OpenDate { get; set; }
-
-        [AllowNull]
-        public DateTime CloseDate { get; set; } 
-
+         
         [MaxLength(250)]
         public string DiscordUrl { get; set; }
 

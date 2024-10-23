@@ -7,5 +7,7 @@
         public string Name { get; set; } 
         public string Class { get; set; }
         public int Team { get; set; }
+        public string PreviousClass { get; set; }
+        public int PreviousFactionIndex { get; set; } 
     }
 }

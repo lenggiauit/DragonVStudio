@@ -40,14 +40,21 @@ namespace DragonVStudio.API.Domain.Entities
         public virtual DbSet<Feedback> Feedback { get; set; }
 
         public virtual DbSet<GameServer> GameServer { get; set; }
-        public virtual DbSet<GameItems> GameItems { get; set; }
+        public virtual DbSet<GameServerList> GameServerLists { get; set; }
+        public virtual DbSet<GameItem> GameItems { get; set; }
         public virtual DbSet<UserGameItems> UserGameItems { get; set; }
 
-        public virtual DbSet<BattleEventPlayer> BattleEventPlayer { get; set; } 
+        public virtual DbSet<BattleEventPlayer> BattleEventPlayer { get; set; }
+        public virtual DbSet<BannedPlayer> BannedPlayer { get; set; }
+
+        public virtual DbSet<UserInGame> UserInGame { get; set; }
+
+        public virtual DbSet<GachaItem> GachaItems { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseLoggerFactory(loggerFactory); 
+            optionsBuilder.UseLoggerFactory(loggerFactory);
+            
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -187,13 +194,44 @@ namespace DragonVStudio.API.Domain.Entities
 
             });
 
-            modelBuilder.Entity<GameItems>(entity =>
+            modelBuilder.Entity<GameServerList>(entity =>
+            {
+                entity.Property(e => e.Id).ValueGeneratedNever(); 
+            });
+
+
+            modelBuilder.Entity<GameItem>(entity =>
             {
                 entity.Property(e => e.Id).ValueGeneratedNever();
 
             });
 
             modelBuilder.Entity<UserGameItems>(entity =>
+            {
+                entity.Property(e => e.Id).ValueGeneratedNever();
+
+            });
+
+
+            modelBuilder.Entity<BattleEventPlayer>(entity =>
+            {
+                entity.Property(e => e.Id).ValueGeneratedNever();
+
+            });
+
+            modelBuilder.Entity<BannedPlayer>(entity =>
+            {
+                entity.Property(e => e.Id).ValueGeneratedNever();
+
+            });
+
+            modelBuilder.Entity<UserInGame>(entity =>
+            {
+                entity.Property(e => e.Id).ValueGeneratedNever();
+
+            });
+
+            modelBuilder.Entity<GachaItem>(entity =>
             {
                 entity.Property(e => e.Id).ValueGeneratedNever();
 

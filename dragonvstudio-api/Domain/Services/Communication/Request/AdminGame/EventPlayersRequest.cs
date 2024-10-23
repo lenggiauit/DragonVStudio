@@ -5,6 +5,7 @@ namespace DragonVStudio.API.Domain.Services.Communication.Request.AdminGame
     public class EventPlayersRequest
     { 
         public EventPlayerModel[] Players { get; set; }    
+        public string EquipmentId { get; set; } 
     } 
 
     public class EventPlayerModel  

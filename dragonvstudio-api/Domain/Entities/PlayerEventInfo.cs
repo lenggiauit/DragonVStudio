@@ -1,8 +1,7 @@
 ﻿namespace DragonVStudio.API.Domain.Entities
 {
-    public class PlayerEventInfo
-    {
-        public int Id { get; set; }
+    public class PlayerEventInfo : BaseEntity
+    { 
         public string GameUrl { get; set; }
         public string PlayerId { get; set; }
         public string DiscordId { get; set; }

@@ -1,4 +1,5 @@
 ﻿using DragonVStudio.API.Domain.GameEntities;
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace DragonVStudio.API.Resources.Game
@@ -25,5 +26,6 @@ namespace DragonVStudio.API.Resources.Game
         public string Class { get; set; } 
         public string CustomName { get; set; } 
         public FactionResource Faction { get; set; }
+        public Guid UserId { get; set; }
     }
 }

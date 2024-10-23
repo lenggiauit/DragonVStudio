@@ -21,7 +21,8 @@ namespace DragonVStudio.API.Resources
         public string Address { get; set; }
         public bool IsActive { get; set; }
         public List<PermissionResource> Permissions { get; set; }
-         
+        public List<string> DiscordRoles { get; set; }
+
 
     }
 }

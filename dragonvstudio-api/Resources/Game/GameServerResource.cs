@@ -8,6 +8,8 @@ namespace DragonVStudio.API.Resources.Game
     {
         public Guid Id { get; set; }
         public string GameUrl { get; set; }
+        public string GameIpAddress { get; set; }
+        public string GameRegion { get; set; }
         public string Name { get; set; } 
         public string Description { get; set; } 
         public int Season { get; set; } 

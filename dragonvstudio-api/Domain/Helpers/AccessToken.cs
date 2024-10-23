@@ -20,6 +20,7 @@ namespace DragonVStudio.API.Domain.Helpers
 			userdata.Id = user.Id;
 			userdata.Permissions = user.Permissions.Select( p => new PermissionToken() { Code = p.Code }).ToList();
 			userdata.Email = user.Email;
+			userdata.DiscordRoles = user.DiscordRoles;
 			 
 			var tokenHandler = new JwtSecurityTokenHandler();
 			var key = Encoding.ASCII.GetBytes(secretKey);
@@ -30,7 +31,7 @@ namespace DragonVStudio.API.Domain.Helpers
 					 new Claim(ClaimTypes.Name, userdata.Id.ToString()),
 					 new Claim(ClaimTypes.UserData, JsonConvert.SerializeObject(userdata)),
 				}),
-				Expires = DateTime.UtcNow.AddYears(10),
+				Expires = DateTime.UtcNow.AddDays(5),
 				SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
 			};
 			var token = tokenHandler.CreateToken(tokenDescriptor);
@@ -43,8 +44,9 @@ namespace DragonVStudio.API.Domain.Helpers
 			public Guid Id { get; set; } 
 			public string Email { get; set; }   
 			public List<PermissionToken> Permissions { get; set; }
+            public List<string> DiscordRoles { get; set; }
 
-		}
+        }
 		public class PermissionToken
 		{
 			public string Code { get; set; }

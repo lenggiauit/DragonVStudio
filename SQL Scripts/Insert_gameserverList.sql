@@ -1,0 +1,24 @@
+INSERT INTO `dragonvstudio_1`.`gameserverlists`
+(`Id`,
+`GameServerId`,
+`GameServerName`,
+`GameRegion`,
+`GameIpAddress`,
+`ServerStatus`,
+`IsActive`,
+`CreatedBy`,
+`CreatedDate`,
+`UpdatedDate`,
+`UpdatedBy`)
+VALUES
+(UUID(),
+'bf3065db-35cc-11ef-9f06-581122de5f18',
+'Camelot',
+'NA',
+'127.0.0.1',
+'Developing',
+1,
+null,
+null,
+null,
+null);

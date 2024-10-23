@@ -87,6 +87,12 @@ namespace DragonVStudio.API.Controllers
                     var user = await _accountServices.LoginWithDiscord(discordApiResponse["id"].ToString());
                     if (user != null)
                     {
+                        var disguild = _httpClientFactoryService.GetBearerAuthorizeAsync(_appSettings.DiscordGuildApi, access_token).Result;
+                        if(disguild != null)
+                        {
+                            user.DiscordRoles = disguild["roles"].Values<string>().ToList();
+                        }
+
                         var resources = _mapper.Map<User, UserResource>(user);
                         AccessToken accessToken = new AccessToken();
                         resources.AccessToken = accessToken.GenerateToken(user, _appSettings.Secret);

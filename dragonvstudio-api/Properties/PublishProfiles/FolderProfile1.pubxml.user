@@ -5,7 +5,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
 <Project>
   <PropertyGroup>
     <_PublishTargetUrl>D:\Github Projects\DragonVStudio\dragonvstudio-api\bin\Release\net8.0\publish\</_PublishTargetUrl>
-    <History>True|2024-03-25T17:50:03.5418535Z;</History>
+    <History>True|2024-04-17T20:59:11.6759454Z;True|2024-04-17T16:01:31.4334925-04:00;True|2024-04-17T15:41:36.5288238-04:00;True|2024-04-17T15:41:13.2098617-04:00;True|2024-04-17T15:40:02.3177911-04:00;True|2024-04-17T15:25:46.9135840-04:00;True|2024-04-17T10:05:31.7330133-04:00;True|2024-04-16T23:07:46.7228040-04:00;True|2024-04-16T23:06:55.8618605-04:00;True|2024-04-16T23:06:42.6551525-04:00;True|2024-04-16T22:56:44.3876382-04:00;True|2024-03-31T18:24:36.9159947-04:00;True|2024-03-25T13:50:03.5418535-04:00;</History>
     <LastFailureDetails />
   </PropertyGroup>
 </Project>

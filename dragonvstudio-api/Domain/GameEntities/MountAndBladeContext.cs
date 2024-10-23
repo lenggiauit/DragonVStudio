@@ -15,7 +15,10 @@ namespace DragonVStudio.API.Domain.GameEntities
 
         public virtual DbSet<Player> Players { get; set; }
         public virtual DbSet<Faction> Factions { get; set; }
-        public virtual DbSet<Log> Logs { get; set; }
+        public virtual DbSet<Log> Logs { get; set; } 
+        public virtual DbSet<BanRecords> BanRecords { get; set; }
+
+        public virtual DbSet<PersonalProperties> PersonalProperties { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

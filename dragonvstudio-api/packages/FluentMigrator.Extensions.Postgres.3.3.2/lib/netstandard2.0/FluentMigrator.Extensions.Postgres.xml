@@ -1,0 +1,534 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>FluentMigrator.Extensions.Postgres</name>
+    </assembly>
+    <members>
+        <member name="T:FluentMigrator.Builder.Create.Index.ICreateIndexNonKeyColumnSyntax">
+            <summary>
+            The interface to add a column to a non-key column index
+            </summary>
+        </member>
+        <member name="M:FluentMigrator.Builder.Create.Index.ICreateIndexNonKeyColumnSyntax.Include(System.String)">
+            <summary>
+            Define the column to add to the non-key column index
+            </summary>
+            <param name="columnName">The column name</param>
+            <returns>The next step</returns>
+        </member>
+        <member name="M:FluentMigrator.Builder.Create.Index.AbstractCreateIndexMethodOptionsSyntax.Unique">
+            <inheritdoc />
+        </member>
+        <member name="M:FluentMigrator.Builder.Create.Index.AbstractCreateIndexMethodOptionsSyntax.NonClustered">
+            <inheritdoc />
+        </member>
+        <member name="M:FluentMigrator.Builder.Create.Index.AbstractCreateIndexMethodOptionsSyntax.Clustered">
+            <inheritdoc />
+        </member>
+        <member name="M:FluentMigrator.Builder.Create.Index.AbstractCreateIndexMethodOptionsSyntax.Fillfactor(System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:FluentMigrator.Builder.Create.Index.CreateBrinIndexOptionsSyntax.#ctor(FluentMigrator.Builders.Create.Index.ICreateIndexOptionsSyntax)">
+            <inheritdoc />
+        </member>
+        <member name="M:FluentMigrator.Builder.Create.Index.CreateBrinIndexOptionsSyntax.Fillfactor(System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:FluentMigrator.Builder.Create.Index.CreateBrinIndexOptionsSyntax.PagesPerRange(System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:FluentMigrator.Builder.Create.Index.CreateBrinIndexOptionsSyntax.Autosummarize">
+            <inheritdoc />
+        </member>
+        <member name="M:FluentMigrator.Builder.Create.Index.CreateBrinIndexOptionsSyntax.DisableAutosummarize">
+            <inheritdoc />
+        </member>
+        <member name="M:FluentMigrator.Builder.Create.Index.CreateBrinIndexOptionsSyntax.Autosummarize(System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:FluentMigrator.Builder.Create.Index.CreateBTreeIndexOptionsSyntax.#ctor(FluentMigrator.Builders.Create.Index.ICreateIndexOptionsSyntax)">
+            <inheritdoc />
+        </member>
+        <member name="M:FluentMigrator.Builder.Create.Index.CreateBTreeIndexOptionsSyntax.Fillfactor(System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:FluentMigrator.Builder.Create.Index.CreateBTreeIndexOptionsSyntax.VacuumCleanupIndexScaleFactor(System.Single)">
+            <inheritdoc />
+        </member>
+        <member name="M:FluentMigrator.Builder.Create.Index.CreateGinIndexOptionsSyntax.#ctor(FluentMigrator.Builders.Create.Index.ICreateIndexOptionsSyntax)">
+            <inheritdoc />
+        </member>
+        <member name="M:FluentMigrator.Builder.Create.Index.CreateGinIndexOptionsSyntax.Fillfactor(System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:FluentMigrator.Builder.Create.Index.CreateGinIndexOptionsSyntax.FastUpdate">
+            <inheritdoc />
+        </member>
+        <member name="M:FluentMigrator.Builder.Create.Index.CreateGinIndexOptionsSyntax.DisableFastUpdate">
+            <inheritdoc />
+        </member>
+        <member name="M:FluentMigrator.Builder.Create.Index.CreateGinIndexOptionsSyntax.FastUpdate(System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:FluentMigrator.Builder.Create.Index.CreateGinIndexOptionsSyntax.PendingListLimit(System.Int64)">
+            <inheritdoc />
+        </member>
+        <member name="M:FluentMigrator.Builder.Create.Index.CreateGistIndexOptionsSyntax.#ctor(FluentMigrator.Builders.Create.Index.ICreateIndexOptionsSyntax)">
+            <inheritdoc />
+        </member>
+        <member name="M:FluentMigrator.Builder.Create.Index.CreateGistIndexOptionsSyntax.Fillfactor(System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:FluentMigrator.Builder.Create.Index.CreateGistIndexOptionsSyntax.Buffering(FluentMigrator.Builder.Create.Index.GistBuffering)">
+            <inheritdoc />
+        </member>
+        <member name="M:FluentMigrator.Builder.Create.Index.CreateHashIndexOptionSyntax.#ctor(FluentMigrator.Builders.Create.Index.ICreateIndexOptionsSyntax)">
+            <inheritdoc />
+        </member>
+        <member name="M:FluentMigrator.Builder.Create.Index.CreateHashIndexOptionSyntax.Fillfactor(System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:FluentMigrator.Builder.Create.Index.CreateSpgistIndexOptionsSyntax.#ctor(FluentMigrator.Builders.Create.Index.ICreateIndexOptionsSyntax)">
+            <inheritdoc />
+        </member>
+        <member name="M:FluentMigrator.Builder.Create.Index.CreateSpgistIndexOptionsSyntax.Fillfactor(System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="T:FluentMigrator.Builder.Create.Index.GistBuffering">
+            <summary>
+            The buffering options
+            </summary>
+        </member>
+        <member name="F:FluentMigrator.Builder.Create.Index.GistBuffering.Auto">
+            <summary>
+            It is initially disabled, but turned on on-the-fly.
+            </summary>
+        </member>
+        <member name="F:FluentMigrator.Builder.Create.Index.GistBuffering.On">
+            <summary>
+            Enabled buffering
+            </summary>
+        </member>
+        <member name="F:FluentMigrator.Builder.Create.Index.GistBuffering.Off">
+            <summary>
+            Disabled buffering
+            </summary>
+        </member>
+        <member name="T:FluentMigrator.Builder.Create.Index.ICreateBrinIndexOptionsSyntax">
+            <summary>
+            BRIN index options
+            </summary>
+        </member>
+        <member name="M:FluentMigrator.Builder.Create.Index.ICreateBrinIndexOptionsSyntax.Fillfactor(System.Int32)">
+            <inheritdoc cref="M:FluentMigrator.Builder.Create.Index.ICreateIndexMethodOptionsSyntax.Fillfactor(System.Int32)"/>
+        </member>
+        <member name="M:FluentMigrator.Builder.Create.Index.ICreateBrinIndexOptionsSyntax.PagesPerRange(System.Int32)">
+            <summary>
+            Defines the number of table blocks that make up one block range for each entry of a BRIN index.
+            For more information about it see: https://www.postgresql.org/docs/current/brin-intro.html
+            </summary>
+            <param name="range">The page per range</param>
+            <returns>The next step</returns>
+        </member>
+        <member name="M:FluentMigrator.Builder.Create.Index.ICreateBrinIndexOptionsSyntax.Autosummarize">
+            <summary>
+            Defines whether a summarization run is invoked for the previous page range whenever an insertion is detected on the next one.
+            </summary>
+            <returns>The next step</returns>
+        </member>
+        <member name="M:FluentMigrator.Builder.Create.Index.ICreateBrinIndexOptionsSyntax.DisableAutosummarize">
+            <summary>
+            Disable the a summarization that run is invoked for the previous page range whenever an insertion is detected on the next one.
+            </summary>
+            <returns>The next step</returns>
+        </member>
+        <member name="M:FluentMigrator.Builder.Create.Index.ICreateBrinIndexOptionsSyntax.Autosummarize(System.Boolean)">
+            <summary>
+            Defines whether a summarization run is invoked for the previous page range whenever an insertion is detected on the next one.
+            </summary>
+            <param name="autosummarize">True to enable fast autosummarize or false to disable.</param>
+            <returns>The next step</returns>
+        </member>
+        <member name="T:FluentMigrator.Builder.Create.Index.ICreateBTreeIndexOptionsSyntax">
+            <summary>
+            B-tree index options
+            </summary>
+        </member>
+        <member name="M:FluentMigrator.Builder.Create.Index.ICreateBTreeIndexOptionsSyntax.Fillfactor(System.Int32)">
+            <inheritdoc cref="M:FluentMigrator.Builder.Create.Index.ICreateIndexMethodOptionsSyntax.Fillfactor(System.Int32)"/>
+        </member>
+        <member name="M:FluentMigrator.Builder.Create.Index.ICreateBTreeIndexOptionsSyntax.VacuumCleanupIndexScaleFactor(System.Single)">
+            <summary>
+            Specifies the fraction of the total number of heap tuples counted in the previous statistics collection that can be inserted without incurring an index scan at the VACUUM cleanup stage. This setting currently applies to B-tree indexes only.
+            For more information about it see: https://www.postgresql.org/docs/current/runtime-config-client.html#GUC-VACUUM-CLEANUP-INDEX-SCALE-FACTOR
+            </summary>
+            <param name="point">The value can range from 0 to 10000000000. When vacuum_cleanup_index_scale_factor is set to 0, index scans are never skipped during VACUUM cleanup. The default value is 0.1</param>
+            <returns>The next step</returns>
+        </member>
+        <member name="T:FluentMigrator.Builder.Create.Index.ICreateGinIndexOptionsSyntax">
+            <summary>
+            Gin index options
+            </summary>
+        </member>
+        <member name="M:FluentMigrator.Builder.Create.Index.ICreateGinIndexOptionsSyntax.Fillfactor(System.Int32)">
+            <inheritdoc cref="M:FluentMigrator.Builder.Create.Index.ICreateIndexMethodOptionsSyntax.Fillfactor(System.Int32)"/>
+        </member>
+        <member name="M:FluentMigrator.Builder.Create.Index.ICreateGinIndexOptionsSyntax.FastUpdate">
+            <summary>
+            Enable fast update. Updating a GIN index tends to be slow because of the intrinsic nature of inverted indexes: inserting or updating one heap row can cause many inserts into the index (one for each key extracted from the indexed item).
+            For more information about it see: https://www.postgresql.org/docs/current/gin-implementation.html#GIN-FAST-UPDATE
+            </summary>
+            <param name="fastUpdate">True to enable fast update or false to disable.</param>
+            <returns>The next step</returns>
+        </member>
+        <member name="M:FluentMigrator.Builder.Create.Index.ICreateGinIndexOptionsSyntax.DisableFastUpdate">
+            <summary>
+            Disable fast update. Updating a GIN index tends to be slow because of the intrinsic nature of inverted indexes: inserting or updating one heap row can cause many inserts into the index (one for each key extracted from the indexed item).
+            For more information about it see: https://www.postgresql.org/docs/current/gin-implementation.html#GIN-FAST-UPDATE
+            </summary>
+            <param name="fastUpdate">True to enable fast update or false to disable.</param>
+            <returns>The next step</returns>
+        </member>
+        <member name="M:FluentMigrator.Builder.Create.Index.ICreateGinIndexOptionsSyntax.FastUpdate(System.Boolean)">
+            <summary>
+            Updating a GIN index tends to be slow because of the intrinsic nature of inverted indexes: inserting or updating one heap row can cause many inserts into the index (one for each key extracted from the indexed item).
+            For more information about it see: https://www.postgresql.org/docs/current/gin-implementation.html#GIN-FAST-UPDATE
+            </summary>
+            <param name="fastUpdate">True to enable fast update or false to disable.</param>
+            <returns>The next step</returns>
+        </member>
+        <member name="M:FluentMigrator.Builder.Create.Index.ICreateGinIndexOptionsSyntax.PendingListLimit(System.Int64)">
+            <summary>
+            Sets the maximum size of a GIN index's pending list, which is used when fastupdate is enabled. If the list grows larger than this maximum size, it is cleaned up by moving the entries in it to the index's main GIN data structure in bulk. If this value is specified without units, it is taken as kilobytes.
+            For more information about it see: https://www.postgresql.org/docs/current/runtime-config-client.html#GUC-GIN-PENDING-LIST-LIMIT
+            </summary>
+            <param name="limit">The list limit in kilobytes.</param>
+            <returns>The next step</returns>
+        </member>
+        <member name="T:FluentMigrator.Builder.Create.Index.ICreateGiSTIndexOptionsSyntax">
+            <summary>
+            GiST index options
+            </summary>
+        </member>
+        <member name="M:FluentMigrator.Builder.Create.Index.ICreateGiSTIndexOptionsSyntax.Fillfactor(System.Int32)">
+            <inheritdoc cref="M:FluentMigrator.Builder.Create.Index.ICreateIndexMethodOptionsSyntax.Fillfactor(System.Int32)"/>
+        </member>
+        <member name="M:FluentMigrator.Builder.Create.Index.ICreateGiSTIndexOptionsSyntax.Buffering(FluentMigrator.Builder.Create.Index.GistBuffering)">
+            <summary>
+            Building large GiST indexes by simply inserting all the tuples tends to be slow, because if the index
+            tuples are scattered across the index and the index is large enough to not fit in cache, the insertions need
+            to perform a lot of random I/O.
+            For more information about it see: https://www.postgresql.org/docs/current/gist-implementation.html#GIST-BUFFERING-BUILD
+            </summary>
+            <param name="buffering">The <see cref="T:FluentMigrator.Builder.Create.Index.GistBuffering"/> value.</param>
+            <returns>The next step</returns>
+        </member>
+        <member name="T:FluentMigrator.Builder.Create.Index.ICreateHashIndexOptionSyntax">
+            <summary>
+            B-tree index options
+            </summary>
+        </member>
+        <member name="M:FluentMigrator.Builder.Create.Index.ICreateHashIndexOptionSyntax.Fillfactor(System.Int32)">
+            <inheritdoc cref="M:FluentMigrator.Builder.Create.Index.ICreateIndexMethodOptionsSyntax.Fillfactor(System.Int32)"/>
+        </member>
+        <member name="T:FluentMigrator.Builder.Create.Index.ICreateIndexMethodOptionsSyntax">
+            <summary>
+            B-tree index options
+            </summary>
+        </member>
+        <member name="M:FluentMigrator.Builder.Create.Index.ICreateIndexMethodOptionsSyntax.Fillfactor(System.Int32)">
+            <summary>
+            The fillfactor for an index is a percentage that determines how full the index method will try to pack index pages.
+            </summary>
+            <param name="fillfactor">The fillfactor value from 10 to 100 can be selected</param>
+            <returns>The next step</returns>
+            <remarks>
+            For B-trees, leaf pages are filled to this percentage during initial index build, and also when extending
+            the index at the right (adding new largest key values). If pages subsequently become completely full,
+            they will be split, leading to gradual degradation in the index's efficiency.
+            B-trees use a default fillfactor of 90, but any integer value from 10 to 100 can be selected.
+            If the table is static then fillfactor 100 is best to minimize the index's physical size,
+            but for heavily updated tables a smaller fillfactor is better to minimize the need for page splits.
+            The other index methods use fillfactor in different but roughly analogous ways; the default fillfactor varies between methods.
+            </remarks>
+        </member>
+        <member name="T:FluentMigrator.Builder.Create.Index.ICreateSpgistIndexOptionsSyntax">
+            <summary>
+            Spgist index options
+            </summary>
+        </member>
+        <member name="M:FluentMigrator.Builder.Create.Index.ICreateSpgistIndexOptionsSyntax.Fillfactor(System.Int32)">
+            <inheritdoc cref="M:FluentMigrator.Builder.Create.Index.ICreateIndexMethodOptionsSyntax.Fillfactor(System.Int32)"/>
+        </member>
+        <member name="T:FluentMigrator.PostgresGenerationType">
+            <summary>
+            Default value generation strategy (Identity) types. The clauses ALWAYS and BY DEFAULT determine how the sequence value is given precedence over a user-specified value in an INSERT statement.
+            </summary>
+        </member>
+        <member name="F:FluentMigrator.PostgresGenerationType.Always">
+            <summary>
+            A user-specified value is only accepted if the INSERT statement specifies OVERRIDING SYSTEM VALUE.
+            </summary>
+        </member>
+        <member name="F:FluentMigrator.PostgresGenerationType.ByDefault">
+            <summary>
+            The user-specified value takes precedence.
+            </summary>
+        </member>
+        <member name="T:FluentMigrator.PostgresIdentityModificationType">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:FluentMigrator.PostgresIdentityModificationType.Add">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:FluentMigrator.PostgresIdentityModificationType.Set">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:FluentMigrator.PostgresIdentityModificationType.Drop">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:FluentMigrator.PostgresIdentityModificationType.DropIfExists">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:FluentMigrator.PostgresOverridingIdentityValuesType">
+            <summary>
+            Determines if the system-generated values or the user-supplied values are applied for identity columns
+            </summary>
+        </member>
+        <member name="F:FluentMigrator.PostgresOverridingIdentityValuesType.System">
+            <summary>
+            Overrides the system-generated values with user-supplied values for identity columns
+            </summary>
+        </member>
+        <member name="F:FluentMigrator.PostgresOverridingIdentityValuesType.User">
+            <summary>
+            Ignores the user-supplied values and applies the system-generated values for identity columns
+            </summary>
+        </member>
+        <member name="T:FluentMigrator.Postgres.PostgresExtensions">
+             <summary>
+             Feature extensions for PostgreSQL
+             </summary>
+             <remarks> Given:
+             MigrationBase m = null;
+            
+             These are valid calls:
+             m.Alter.Column("").OnTable("").AsInt16().AddIdentity(PostgresGenerationType.Always);
+             m.Alter.Column("").OnTable("").AsInt16().SetIdentity(PostgresGenerationType.Always);
+             m.Alter.Column("").OnTable("").AsInt16().DropIdentity(true);
+             m.Alter.Column("").OnTable("").AsInt16().Identity();
+             m.Alter.Column("").OnTable("").AsInt16().Identity(PostgresGenerationType.Always);  //Ideally would like to stop this, forcing use of AddIdentity instead, but can't
+             m.Alter.Table("").AddColumn("").AsInt16().Identity(PostgresGenerationType.Always);
+             m.Alter.Table("").AlterColumn("").AsInt16().Identity(PostgresGenerationType.Always);
+            
+             These are not possible:
+             m.Alter.Table("").AddColumn("").AsInt16().AddIdentity(PostgresGenerationType.Always);
+             m.Alter.Table("").AddColumn("").AsInt16().SetIdentity(PostgresGenerationType.Always);
+             m.Alter.Table("").AddColumn("").AsInt16().DropIdentity(PostgresGenerationType.Always);
+             m.Alter.Table("").AlterColumn("").AsInt16().AddIdentity(PostgresGenerationType.Always);  //Ideally would like to have these 3, but can't distinguish between return type AddColumn and AlterColumn at compiletime
+             m.Alter.Table("").AlterColumn("").AsInt16().SetIdentity(PostgresGenerationType.Always);
+             m.Alter.Table("").AlterColumn("").AsInt16().DropIdentity(false);
+             </remarks>
+        </member>
+        <member name="M:FluentMigrator.Postgres.PostgresExtensions.AsConcurrently(FluentMigrator.Builders.Create.Index.ICreateIndexOptionsSyntax)">
+            <summary>
+            When this option is used, PostgreSQL will build the index without taking any locks that prevent concurrent inserts, updates, or deletes on the table
+            Whereas a standard index build locks out writes (but not reads) on the table until it's done.
+            There are several caveats to be aware of when using this option
+            </summary>
+            <param name="expression"></param>
+            <returns>The next step</returns>
+            <remarks>
+            To use this feature is necessary mark the migration to not use transaction.
+            sample:
+            [Migration(1, TransactionBehavior.None)]
+            public class SomeMigration : Migration
+            </remarks>
+        </member>
+        <member name="M:FluentMigrator.Postgres.PostgresExtensions.AsConcurrently(FluentMigrator.Builders.Create.Index.ICreateIndexOptionsSyntax,System.Boolean)">
+            <summary>
+            When this option is used, PostgreSQL will build the index without taking any locks that prevent concurrent inserts, updates, or deletes on the table
+            Whereas a standard index build locks out writes (but not reads) on the table until it's done.
+            There are several caveats to be aware of when using this option
+            </summary>
+            <param name="expression"></param>
+            <param name="isConcurrently">if should or shouldn't be concurrently</param>
+            <returns>The next step</returns>
+            <remarks>
+            To use this feature is necessary mark the migration to not use transaction.
+            sample:
+            [Migration(1, TransactionBehavior.None)]
+            public class SomeMigration : Migration
+            </remarks>
+        </member>
+        <member name="P:FluentMigrator.Postgres.PostgresExtensions.IdentityGeneration">
+            <summary>
+            Column identity generation ability for PostgreSQL 10 and above
+            </summary>
+        </member>
+        <member name="P:FluentMigrator.Postgres.PostgresExtensions.IdentityModificationType">
+            <summary>
+            Column identity modification type for PostgreSQL 10 and above
+            </summary>
+        </member>
+        <member name="M:FluentMigrator.Postgres.PostgresExtensions.Identity``2(FluentMigrator.Builders.IColumnOptionSyntax{``0,``1},FluentMigrator.PostgresGenerationType)">
+            <summary>
+            Sets the column's identity generation attribute.  To change or remove an existing one, use Alter.Column instead of Alter.Table.AlterColumn
+            </summary>
+            <typeparam name="TNext"></typeparam>
+            <typeparam name="TNextFk"></typeparam>
+            <param name="expression"></param>
+            <param name="generation"></param>
+            <returns>The next step</returns>
+        </member>
+        <member name="M:FluentMigrator.Postgres.PostgresExtensions.DropIdentity(FluentMigrator.Builders.Alter.Column.IAlterColumnOptionSyntax,System.Boolean)">
+            <summary>
+            Drops an existing identity on the column
+            </summary>
+            <param name="expression"></param>
+            <param name="ifExists">If true and the column is not an identity column, no error is thrown.  In this case a notice is issued instead.</param>
+            <returns>The next step</returns>
+            <remarks>Deliberate choice to extend IAlterColumnOptionSyntax rather than IColumnOptionSyntax&lt;TNext, TNextFk&gt;
+            in order to prevent using these methods when adding a column to the table, since it makes no sense.  It does mean
+            the syntax migration.Alter.Table("tableName").AlterColumn("columnName") cannot be used since no distinction is made
+            between the the return types of AddColumn or AlterColumn on the IAlterTableColumnAsTypeSyntax interface which is inconvenient
+            but helps prevent misuse.
+            </remarks>
+        </member>
+        <member name="M:FluentMigrator.Postgres.PostgresExtensions.AddIdentity(FluentMigrator.Builders.Alter.Column.IAlterColumnOptionSyntax,FluentMigrator.PostgresGenerationType)">
+            <summary>
+            Adds a generated identity to the column
+            </summary>
+            <param name="expression"></param>
+            <param name="generation"></param>
+            <returns>The next step</returns>
+            <remarks>This is an equivalent to Alter.Table.AlterColumn.Identity(PostgresGenerationType)
+            Deliberate choice to extend IAlterColumnOptionSyntax rather than IColumnOptionSyntax&lt;TNext, TNextFk&gt;
+            in order to prevent using these methods when adding a column to the table, since it makes no sense.  It does mean
+            the syntax migration.Alter.Table("tableName").AlterColumn("columnName") cannot be used since no distinction is made
+            between the the return types of AddColumn or AlterColumn on the IAlterTableColumnAsTypeSyntax interface which is inconvenient
+            but helps prevent misuse.
+            </remarks>
+        </member>
+        <member name="M:FluentMigrator.Postgres.PostgresExtensions.SetIdentity(FluentMigrator.Builders.Alter.Column.IAlterColumnOptionSyntax,FluentMigrator.PostgresGenerationType)">
+            <summary>
+            Alters the strategy for an existing generated identity on the column
+            </summary>
+            <param name="expression"></param>
+            <param name="generation"></param>
+            <returns>The next step</returns>
+            <remarks>Deliberate choice to extend IAlterColumnOptionSyntax rather than IColumnOptionSyntax&lt;TNext, TNextFk&gt;
+            in order to prevent using these methods when adding a column to the table, since it makes no sense.  It does mean
+            the syntax migration.Alter.Table("tableName").AlterColumn("columnName") cannot be used since no distinction is made
+            between the the return types of AddColumn or AlterColumn on the IAlterTableColumnAsTypeSyntax interface which is inconvenient
+            but helps prevent misuse.
+            </remarks>
+        </member>
+        <member name="M:FluentMigrator.Postgres.PostgresExtensions.Filter(FluentMigrator.Builders.Create.Index.ICreateIndexOptionsSyntax,System.String)">
+            <summary>
+            The constraint expression for a partial index.
+            For more information about partial index see: https://www.postgresql.org/docs/current/indexes-partial.html
+            </summary>
+            <param name="expression"></param>
+            <param name="filter">The constraint expression</param>
+            <returns>The next step</returns>
+        </member>
+        <member name="M:FluentMigrator.Postgres.PostgresExtensions.Fillfactor(FluentMigrator.Builders.Create.Index.ICreateIndexOptionsSyntax,System.Int32)">
+            <summary>
+            The fillfactor for an index is a percentage that determines how full the index method will try to pack index pages.
+            </summary>
+            <param name="expression"></param>
+            <param name="fillfactor">The fillfactor value from 10 to 100 can be selected</param>
+            <returns>The next step</returns>
+            <remarks>
+            For B-trees, leaf pages are filled to this percentage during initial index build, and also when extending
+            the index at the right (adding new largest key values). If pages subsequently become completely full,
+            they will be split, leading to gradual degradation in the index's efficiency.
+            B-trees use a default fillfactor of 90, but any integer value from 10 to 100 can be selected.
+            If the table is static then fillfactor 100 is best to minimize the index's physical size,
+            but for heavily updated tables a smaller fillfactor is better to minimize the need for page splits.
+            The other index methods use fillfactor in different but roughly analogous ways; the default fillfactor varies between methods.
+            </remarks>
+        </member>
+        <member name="M:FluentMigrator.Postgres.PostgresExtensions.NullsFirst(FluentMigrator.Builders.Create.Index.ICreateIndexMoreColumnOptionsSyntax)">
+            <summary>
+            Specifies that nulls sort before non-nulls. This is the default when DESC is specified.
+            </summary>
+            <param name="expression">The <see cref="T:FluentMigrator.Builders.Create.Index.ICreateIndexMoreColumnOptionsSyntax"/></param>
+            <returns>The <see cref="T:FluentMigrator.Builders.Create.Index.ICreateIndexMoreColumnOptionsSyntax"/></returns>
+        </member>
+        <member name="M:FluentMigrator.Postgres.PostgresExtensions.NullsLast(FluentMigrator.Builders.Create.Index.ICreateIndexMoreColumnOptionsSyntax)">
+            <summary>
+            Specifies that nulls sort after non-nulls. This is the default when DESC is not specified.
+            </summary>
+            <param name="expression">The <see cref="T:FluentMigrator.Builders.Create.Index.ICreateIndexMoreColumnOptionsSyntax"/></param>
+            <returns>The <see cref="T:FluentMigrator.Builders.Create.Index.ICreateIndexMoreColumnOptionsSyntax"/></returns>
+        </member>
+        <member name="M:FluentMigrator.Postgres.PostgresExtensions.Nulls(FluentMigrator.Builders.Create.Index.ICreateIndexMoreColumnOptionsSyntax,FluentMigrator.Model.NullSort)">
+            <summary>
+            Specifies that nulls sort before non-nulls.
+            </summary>
+            <param name="expression">The <see cref="T:FluentMigrator.Builders.Create.Index.ICreateIndexMoreColumnOptionsSyntax"/></param>
+            <param name="sort">The <see cref="F:FluentMigrator.Postgres.PostgresExtensions.NullsSort"/>.</param>
+            <returns>The <see cref="T:FluentMigrator.Builders.Create.Index.ICreateIndexMoreColumnOptionsSyntax"/></returns>
+        </member>
+        <member name="M:FluentMigrator.Postgres.PostgresExtensions.AsOnly(FluentMigrator.Builders.Create.Index.ICreateIndexOptionsSyntax)">
+            <summary>
+            Indicates not to recurse creating indexes on partitions, if the table is partitioned.
+            </summary>
+            <param name="expression"></param>
+            <returns>The next step</returns>
+        </member>
+        <member name="M:FluentMigrator.Postgres.PostgresExtensions.AsOnly(FluentMigrator.Builders.Create.Index.ICreateIndexOptionsSyntax,System.Boolean)">
+            <summary>
+            Indicates not to recurse creating indexes on partitions, if the table is partitioned.
+            </summary>
+            <param name="expression"></param>
+            <param name="isOnly">if should or shouldn't be only</param>
+            <returns>The next step</returns>
+        </member>
+        <member name="M:FluentMigrator.Postgres.PostgresExtensions.WithOverridingSystemValue(FluentMigrator.Builders.Insert.IInsertDataSyntax)">
+            <summary>
+            Adds an OVERRIDING SYSTEM VALUE clause in the current <see cref="T:FluentMigrator.Builders.Insert.IInsertDataSyntax"/> expression.
+            This enables the system-generated values to be overriden with the user-specified explicit values (other than <c>DEFAULT</c>)
+            for identity columns defined as <c>GENERATED ALWAYS</c>
+            </summary>
+            <param name="expression">The current <see cref="T:FluentMigrator.Builders.Insert.IInsertDataSyntax"/> expression</param>
+            <returns>The current <see cref="T:FluentMigrator.Builders.Insert.IInsertDataSyntax"/> expression</returns>
+        </member>
+        <member name="M:FluentMigrator.Postgres.PostgresExtensions.WithOverridingUserValue(FluentMigrator.Builders.Insert.IInsertDataSyntax)">
+            <summary>
+            Adds an OVERRIDING USER VALUE clause in the current <see cref="T:FluentMigrator.Builders.Insert.IInsertDataSyntax"/> expression.
+            Any user-specified values will be ignored and the system-generated values will be applied
+            for identity columns defined as <c>GENERATED BY DEFAULT</c>
+            </summary>
+            <param name="expression">The current <see cref="T:FluentMigrator.Builders.Insert.IInsertDataSyntax"/> expression</param>
+            <returns>The current <see cref="T:FluentMigrator.Builders.Insert.IInsertDataSyntax"/> expression</returns>
+        </member>
+        <member name="M:FluentMigrator.Postgres.PostgresExtensions.SetOverridingIdentityValues(FluentMigrator.Builders.Insert.IInsertDataSyntax,FluentMigrator.PostgresOverridingIdentityValuesType,System.String)">
+            <summary>
+            Set the additional feature for overriding identity values with the specified <see cref="T:FluentMigrator.PostgresOverridingIdentityValuesType"/>
+            on the provided <see cref="T:FluentMigrator.Builders.Insert.IInsertDataSyntax"/> expression
+            </summary>
+            <exception cref="T:System.InvalidOperationException"></exception>
+        </member>
+        <member name="M:FluentMigrator.Postgres.PostgresExtensions.Tablespace(FluentMigrator.Builders.Create.Index.ICreateIndexOptionsSyntax,System.String)">
+            <summary>
+            The tablespace in which to create the index. If not specified, default_tablespace is consulted, or temp_tablespaces for indexes on temporary tables.
+            </summary>
+            <param name="expression"></param>
+            <param name="tablespace">The tablespace</param>
+            <returns>The next step</returns>
+        </member>
+    </members>
+</doc>

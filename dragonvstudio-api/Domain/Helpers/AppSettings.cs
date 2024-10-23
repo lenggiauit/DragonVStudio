@@ -19,7 +19,9 @@ namespace DragonVStudio.API.Domain.Helpers
         public string MailDefaultContent { get; set; }
         public string GoogleApisUrl { get; set; }
 
-        public string DiscordApisUrl { get; set; }
+        public string DiscordApisUrl { get; set; } 
+        public string DiscordGuildApi {  get; set; }    
+
         public string FacebookApisUrl { get; set; }
         public string MailForgotPasswordSubject { get; set; }
         public string MailForgotPasswordContent { get; set; } 
@@ -61,7 +63,16 @@ namespace DragonVStudio.API.Domain.Helpers
         public string ConnectWithDiscordRedirectUrl {  get; set; }
 
         public string ConnectWithDiscordClientRedirectUrl { get; set; }
-
+         
+        public List<DiscordRole> DiscordGuildRoles { get; set; } 
 
     }
+
+
+    public class DiscordRole
+    {
+        public string Id { get; set; }
+        public string Name { get; set; }
+    }
+
 }

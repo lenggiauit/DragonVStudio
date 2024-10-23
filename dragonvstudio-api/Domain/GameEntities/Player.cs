@@ -1,4 +1,6 @@
-﻿using System;
+﻿using DragonVStudio.API.Domain.Entities;
+using DragonVStudio.API.Resources.Game;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -63,12 +65,19 @@ namespace DragonVStudio.API.Domain.GameEntities
         public string Class { get; set; }
 
         [MaxLength(255)]
-        public string CustomName { get; set; }
-         
+        public string CustomName { get; set; } 
         
         public int FactionIndex { get; set; }
-        
+        public float PosX { get; set; }
+        public float PosY { get; set; }
+        public float PosZ { get; set; }
+
         [NotMapped]
-        public virtual Faction Faction {  get; set; }    
+        public virtual Faction Faction {  get; set; }
+
+        [NotMapped]
+        public Guid UserId { get; set; }
+        [NotMapped]
+        public UserGameItems[] Items { get; set; }
     }
 }

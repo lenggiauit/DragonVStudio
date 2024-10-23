@@ -20,12 +20,15 @@ namespace DragonVStudio.API.Domain.Entities
         public Guid RoleId { get; set; }
         public string FullName { get; set; }
         public string Phone { get; set; } 
-        public string Address { get; set; }
-
+        public string Address { get; set; } 
+        public decimal Cash {  get; set; }   
         public virtual Role Role { get; set; } 
         [NotMapped]
         public virtual List<Permission> Permissions { get; set; }
         
+        [NotMapped]
+        public List<string> DiscordRoles { get; set; }
+
 
     }
 }

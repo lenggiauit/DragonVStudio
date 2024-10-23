@@ -38,9 +38,9 @@ namespace DragonVStudio_API
             services.AddHttpContextAccessor();
             services.AddMvc(options =>
             {
-               // options.Filters.Add(typeof(DelayFilter));
-            })
-            .AddNewtonsoftJson();
+                // options.Filters.Add(typeof(DelayFilter));
+            }) 
+           .AddNewtonsoftJson();
             // Use microsoft DistributedMemoryCache
             services.AddDistributedMemoryCache();
             // if you want to use Redis cache
@@ -59,11 +59,7 @@ namespace DragonVStudio_API
             var maBGameSettingsSection = Configuration.GetSection("MaBGameSettings");
             var maBGameSettings = maBGameSettingsSection.Get<MaBGameSettings>();
             services.Configure<MaBGameSettings>(maBGameSettingsSection);
-
-
-         
-            
-
+              
             services.AddCustomSwagger();
             services.AddControllers();
             services.AddControllers().ConfigureApiBehaviorOptions(options =>
@@ -119,10 +115,18 @@ namespace DragonVStudio_API
             // games
             services.AddScoped<IAdminGameServerService, AdminGameServerService>();
             services.AddScoped<IAdminGameServerRepository, AdminGameServerRepository>();
+
+            services.AddScoped<IDragonVStudioGamesService, DragonVStudioGamesService>();
+            services.AddScoped<IDragonVStudioGamesRepository, DragonVStudioGamesRepository>();
+
             //
 
             services.AddScoped<IAdminGameMaBService, AdminGameMaBService>();
             services.AddScoped<IAdminGameMaBRepository, AdminGameMaBRepository>();
+
+            services.AddScoped<IGameMaBService, GameMaBService>();
+            services.AddScoped<IGameMaBRepository, GameMaBRepository>();
+            //
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             // File Service

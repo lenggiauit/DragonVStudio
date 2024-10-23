@@ -2,7 +2,8 @@
 
 namespace DragonVStudio.API.Domain.Services.Communication.Request.AdminGame
 {
-    public class BaseGameRequest<T>
+   
+    public class BaseGameRequest<T> where T : class
     {
         public RequestMetaData MetaData { get; set; }
         [Required]

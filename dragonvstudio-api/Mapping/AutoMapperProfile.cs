@@ -44,9 +44,16 @@ namespace DragonVStudio.API.Mapping
             CreateMap<Player, PlayerEventResource>();
             CreateMap<Log, LogResource>(); 
             CreateMap<GameServer, GameServerResource>();
+            CreateMap<GameServerList, GameServerListResource>();
             CreateMap<BattleEventPlayer, PlayerEventResource>();
+            CreateMap<BannedPlayer, BannedPlayerResource>();
+            CreateMap<GameItem, GameItemResource>();
+            CreateMap<Player, PlayerHasItemsResource>();
+            CreateMap<UserGameItems, UserGameItemsResource>(); 
+            CreateMap<GachaItem, GachaItemsResource>();
 
-
+            CreateMap<PersonalProperties, PersonalPropertyResource>();
+            
 
         }
     }

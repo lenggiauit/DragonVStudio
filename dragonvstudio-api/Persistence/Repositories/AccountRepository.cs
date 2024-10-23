@@ -484,7 +484,7 @@ namespace DragonVStudio.API.Persistence.Repositories
         public async Task<User> LoginWithDiscord(string discordId)
         {
             try
-            {
+            { 
                 return await _context.User.AsNoTracking()
                     .Where(a => a.DiscordId.Equals(discordId))
                 .Select(acc => new User()

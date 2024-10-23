@@ -21,6 +21,7 @@ namespace DragonVStudio.API.Domain.Helpers
         Expired = 6,
         DoNotPermission = 7,
         BookingDateIsInvalid = 8,
+        ExistingItem = 91,
 
     }
      
