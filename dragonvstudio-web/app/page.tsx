@@ -18,6 +18,20 @@ const Home: NextPage = async () => {
 
   return (
     <AppProvider session={session}>
+      <div className='homepage-container'>
+        <img
+          className='homepage-logo'
+          src='assets\images\Dragon V Logo.png'
+          alt='Dragon V Studio'
+        />
+        <a
+          className='btn-main'
+          target='_blank'
+          href='https://discord.gg/tGyd6GSR'
+        >
+          Join Our Discord
+        </a>
+      </div>
       {/* <Navigation />
       <section className='no-padding'>
         <HomeVideo />
